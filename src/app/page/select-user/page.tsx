@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Typography, Input, Button } from '@mui/material';
 import data from "../../../afiliados.json";
-import Redirector from '../../Component/RedirectorUser';
+import Redirector from '../../api/RedirectorUser';
 
 const SelectUser = () => {
   const [selectedType, setSelectedType] = useState('');
@@ -26,10 +26,23 @@ const SelectUser = () => {
     setSelectedUser(user);
   };
 
-  const handleConfirmClick = () => {
-    setRedirect(true);
-  };
 
+
+  const handleConfirmClick = () => {
+    switch (selectedType) {
+      case 'AFILIADOS':
+        window.location.href = '/page/dashboard/afiliado';
+        break;
+      case 'OPERADORES':
+        window.location.href = '/page/dashboard/operador';
+        break;
+      case 'PRESTADORES':
+        window.location.href = '/page/dashboard/prestador';
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <div className="w-80 max-w-screen-lg mx-auto p-8 bg-white rounded-lg shadow-md">
       <Typography className="text-lg item font-normal text-center">
@@ -79,11 +92,8 @@ const SelectUser = () => {
           )}
         </div>
       )}
-
-      {redirect && <Redirector selectedType={selectedType} />}
     </div>
   );
 };
 
 export default SelectUser;
-
