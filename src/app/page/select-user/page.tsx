@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Typography, Input, Button } from '@mui/material';
 import data from "../../../afiliados.json";
-import Redirector from '../../api/RedirectorUser';
 
 const SelectUser = () => {
   const [selectedType, setSelectedType] = useState('');
@@ -28,21 +27,39 @@ const SelectUser = () => {
 
 
 
-  const handleConfirmClick = () => {
-    switch (selectedType) {
-      case 'AFILIADOS':
-        window.location.href = '/page/dashboard/afiliado';
-        break;
-      case 'OPERADORES':
-        window.location.href = '/page/dashboard/operador';
-        break;
-      case 'PRESTADORES':
-        window.location.href = '/page/dashboard/prestador';
-        break;
-      default:
-        break;
+  const handleConfirmClick = async () => {
+    try {
+      const response = await fetch('/api/getafiliado', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedUser), // Envía los datos del usuario seleccionado
+      });
+  
+      if (response.ok) {
+        // Si la solicitud fue exitosa, redirige al usuario a la página de dashboard correspondiente
+        switch (selectedType) {
+          case 'AFILIADOS':
+            window.location.href = '/page/dashboard/afiliado';
+            break;
+          case 'OPERADORES':
+            window.location.href = '/page/dashboard/operador';
+            break;
+          case 'PRESTADORES':
+            window.location.href = '/page/dashboard/prestador';
+            break;
+          default:
+            break;
+        }
+      } else {
+        console.error('Error al enviar datos a la API');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
     }
   };
+  
   return (
     <div className="w-80 max-w-screen-lg mx-auto p-8 bg-white rounded-lg shadow-md">
       <Typography className="text-lg item font-normal text-center">
