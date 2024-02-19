@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -33,4 +34,3 @@ const Redirector = ({ selectedType }) => {
 };
 
 export default Redirector;
-
