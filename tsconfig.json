@@ -1,0 +1,37 @@
+
+
+
+
+
+{
+  "compilerOptions": {
+    "target": "es6", // or a more recent ecmascript version
+    "experimentalDecorators": true,
+     "emitDecoratorMetadata": true,
+    "lib": ["dom", "dom.iterable", "esnext","es6"],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/libs/Db.ts", "src/app/api/requests/route.ts", "src/app/models/Afiliado.ts"],
+  "exclude": ["node_modules"]
+}
