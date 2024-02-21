@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import 'react-toastify/dist/ReactToastify.css';
 import { ClerkProvider } from '@clerk/nextjs'
 
 
@@ -19,11 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-    <html lang="en">
-     <body className={`${inter.className} bg-cover bg-center bg-fixed`}>
-        {children}
-      </body>
-    </html>
+      <html lang="en">
+
+        <body className={`${inter.className} bg-cover bg-center bg-fixed`}>
+          {children}
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

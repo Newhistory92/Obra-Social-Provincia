@@ -1,15 +1,18 @@
 "use client"
+
 import React, { useState } from 'react';
 import { Typography, Input, Button } from '@mui/material';
 import data from "../../../afiliados.json";
 import dataprest from "../../../prestor.json";
 import dataopera from "../../../operador.json";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ConfirmButton from "../../Component/confirmButton"
 
 const SelectUser = () => {
   const [selectedType, setSelectedType] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [selectedUser, setSelectedUser] = useState(null);
-  const [redirect, setRedirect] = useState(false);
 
   const handleTypeChange = (type) => {
     setSelectedType(type);
@@ -41,7 +44,7 @@ const SelectUser = () => {
         user = data.find(afiliado => afiliado.dni === sanitizedValue);
         break;
       case 'OPERADORES':
-        user = dataopera.find(operador => operador.numero === sanitizedValue);
+        user = dataopera.find(operador => operador.operador === sanitizedValue);
         break;
       case 'PRESTADORES':
         user = dataprest.find(prestador => prestador.matricula === sanitizedValue);
@@ -50,78 +53,6 @@ const SelectUser = () => {
         break;
     }
     setSelectedUser(user);
-  };
-
-  const handleConfirmClick = async () => {
-    try {
-      let additionalFields = {};
-
-      switch (selectedType) {
-        case 'AFILIADOS':
-          additionalFields = { dni: inputValue };
-          break;
-        case 'OPERADORES':
-          additionalFields = { numeroOperario: inputValue };
-          break;
-        case 'PRESTADORES':
-          additionalFields = { 
-            numeroMatricula: selectedUser.matricula,
-            especialidad: selectedUser.especialidad 
-          };
-          break;
-        default:
-          break;
-      }
-
-      if (Object.keys(additionalFields).length === 0) {
-        console.error('Tipo de usuario no válido');
-        return;
-      }
-      
-      const getApiRoute = (selectedType) => {
-        switch (selectedType) {
-          case 'AFILIADOS':
-            return '/api/handlerafiliado';
-          case 'OPERADORES':
-            return '/api/handleroperario';
-          case 'PRESTADORES':
-            return '/api/handlerprestador';
-          default:
-            throw new Error('Tipo de usuario no válido');
-        }
-      };
-
-      const userWithAdditionalFields = { ...selectedUser, ...additionalFields };
-
-      const response = await fetch(getApiRoute(selectedType), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userWithAdditionalFields), // Envía los datos del usuario seleccionado con los campos adicionales
-      });
-
-      if (response.ok) {
-        // Si la solicitud fue exitosa, redirige al usuario a la página de dashboard correspondiente
-        switch (selectedType) {
-          case 'AFILIADOS':
-            window.location.href = '/page/dashboard/afiliado';
-            break;
-          case 'OPERADORES':
-            window.location.href = '/page/dashboard/operador';
-            break;
-          case 'PRESTADORES':
-            window.location.href = '/page/dashboard/prestador';
-            break;
-          default:
-            break;
-        }
-      } else {
-        console.error('Error al enviar datos a la API');
-      }
-    } catch (error) {
-      console.error('Error de red:', error);
-    }
   };
 
   return (
@@ -159,20 +90,47 @@ const SelectUser = () => {
 
           {selectedUser && (
             <div className="mt-4">
-              <Typography>Nombre: {selectedType === 'OPERADORES' ? selectedUser.name : selectedUser.name}</Typography>
-              <Typography>{selectedType === 'PRESTADORES' ? 'Especialidad' : 'Dependencia'}: {selectedType === 'PRESTADORES' ? selectedUser.especialidad : selectedUser.dependencia}</Typography>
-              <Button
-                className="mt-2"
-                fullWidth
-                onClick={handleConfirmClick}
-                disabled={!inputValue}
-              >
-                Confirmar
-              </Button>
+             <Typography>Nombre: {selectedUser ? (selectedType === 'OPERADORES' ? selectedUser.name : selectedUser.name) : 'Nombre no encontrado'}</Typography>
+            <Typography>{selectedType === 'PRESTADORES' ? 'Especialidad' : (selectedType === 'OPERADORES' ? null : 'Dependencia')} {selectedUser ? (selectedType === 'PRESTADORES' ? selectedUser.especialidad : (selectedType === 'OPERADORES' ? null : selectedUser.dependencia)) : 'Información no disponible'}</Typography>
+
+
+            <ConfirmButton
+      selectedUser={selectedUser}
+      selectedType={selectedType}
+      inputValue={inputValue}
+      onClick={() => {
+        switch (selectedType) {
+          case 'AFILIADOS':
+            window.location.href = '/page/dashboard/afiliado';
+            break;
+          case 'OPERADORES':
+            window.location.href = '/page/dashboard/operador';
+            break;
+          case 'PRESTADORES':
+            window.location.href = '/page/dashboard/prestador';
+            break;
+          default:
+            break;
+        }
+      }}
+    />
+    {!inputValue || !selectedUser ? null : (
+      <Button
+        className="mt-2"
+        fullWidth
+        onClick={() => {
+          setInputValue('');
+          setSelectedUser(null);
+        }}
+      >
+        Volver
+      </Button>
+              )}
             </div>
           )}
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };
@@ -180,13 +138,11 @@ const SelectUser = () => {
 export default SelectUser;
 
 
-
-
 // import React, { useState } from 'react';
 // import { Typography, Input, Button } from '@mui/material';
 // import data from "../../../afiliados.json";
-// import dataprest from "../../../prestor.json"
-// import dataopera from "../../../operador.json"
+// import dataprest from "../../../prestor.json";
+// import dataopera from "../../../operador.json";
 
 // const SelectUser = () => {
 //   const [selectedType, setSelectedType] = useState('');
@@ -202,50 +158,111 @@ export default SelectUser;
 
 //   const handleInputChange = (value) => {
 //     // Limitar el input a solo números y una longitud máxima
-//     const maxLength = selectedType === 'AFILIADOS' ? 8 : 5;
+//     let maxLength;
+//     switch (selectedType) {
+//       case 'AFILIADOS':
+//         maxLength = 8;
+//         break;
+//       case 'OPERADORES':
+//       case 'PRESTADORES':
+//         maxLength = 5;
+//         break;
+//       default:
+//         maxLength = 8; // Valor por defecto para otros tipos
+//         break;
+//     }
 //     const sanitizedValue = value.replace(/\D/g, '').slice(0, maxLength);
 //     setInputValue(sanitizedValue);
 
-//     const user = data.find(afiliado => afiliado.dni === sanitizedValue);
+//     let user;
+//     switch (selectedType) {
+//       case 'AFILIADOS':
+//         user = data.find(afiliado => afiliado.dni === sanitizedValue);
+//         break;
+//       case 'OPERADORES':
+//         user = dataopera.find(operador => operador.operador === sanitizedValue);
+//         break;
+//       case 'PRESTADORES':
+//         user = dataprest.find(prestador => prestador.matricula === sanitizedValue);
+//         break;
+//       default:
+//         break;
+//     }
 //     setSelectedUser(user);
 //   };
 
-
 //   const handleConfirmClick = async () => {
 //     try {
-//         const userWithDNI = { ...selectedUser, dni: inputValue }; // Agregar el campo dni al objeto de usuario seleccionado
-//         const response = await fetch('/api/handlerafiliado', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify(userWithDNI), // Envía los datos del usuario seleccionado con el dni
-//         });
+//       let additionalFields = {};
 
-//         if (response.ok) {
-//             // Si la solicitud fue exitosa, redirige al usuario a la página de dashboard correspondiente
-//             switch (selectedType) {
-//                 case 'AFILIADOS':
-//                     window.location.href = '/page/dashboard/afiliado';
-//                     break;
-//                 case 'OPERADORES':
-//                     window.location.href = '/page/dashboard/operador';
-//                     break;
-//                 case 'PRESTADORES':
-//                     window.location.href = '/page/dashboard/prestador';
-//                     break;
-//                 default:
-//                     break;
-//             }
-//         } else {
-//             console.error('Error al enviar datos a la API');
+//       switch (selectedType) {
+//         case 'AFILIADOS':
+//           additionalFields = { dni: inputValue };
+//           break;
+//         case 'OPERADORES':
+//           additionalFields = { numeroOperario: inputValue };
+//           break;
+//         case 'PRESTADORES':
+//           additionalFields = { 
+//             numeroMatricula: selectedUser.matricula,
+//             especialidad: selectedUser.especialidad 
+//           };
+//           break;
+//         default:
+//           break;
+//       }
+
+//       if (Object.keys(additionalFields).length === 0) {
+//         console.error('Tipo de usuario no válido');
+//         return;
+//       }
+      
+//       const getApiRoute = (selectedType) => {
+//         switch (selectedType) {
+//           case 'AFILIADOS':
+//             return '/api/handlerafiliado';
+//           case 'OPERADORES':
+//             return '/api/handleroperario';
+//           case 'PRESTADORES':
+//             return '/api/handlerprestador';
+//           default:
+//             throw new Error('Tipo de usuario no válido');
 //         }
-//     } catch (error) {
-//         console.error('Error de red:', error);
-//     }
-// };
+//       };
 
-  
+//       const userWithAdditionalFields = { ...selectedUser, ...additionalFields };
+
+//       const response = await fetch(getApiRoute(selectedType), {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(userWithAdditionalFields), // Envía los datos del usuario seleccionado con los campos adicionales
+//       });
+
+//       if (response.ok) {
+//         // Si la solicitud fue exitosa, redirige al usuario a la página de dashboard correspondiente
+//         switch (selectedType) {
+//           case 'AFILIADOS':
+//             window.location.href = '/page/dashboard/afiliado';
+//             break;
+//           case 'OPERADORES':
+//             window.location.href = '/page/dashboard/operador';
+//             break;
+//           case 'PRESTADORES':
+//             window.location.href = '/page/dashboard/prestador';
+//             break;
+//           default:
+//             break;
+//         }
+//       } else {
+//         console.error('Error al enviar datos a la API');
+//       }
+//     } catch (error) {
+//       console.error('Error de red:', error);
+//     }
+//   };
+
 //   return (
 //     <div className="w-80 max-w-screen-lg mx-auto p-8 bg-white rounded-lg shadow-md">
 //       <Typography className="text-lg item font-normal text-center">
@@ -281,13 +298,15 @@ export default SelectUser;
 
 //           {selectedUser && (
 //             <div className="mt-4">
-//               <Typography>Nombre: {selectedUser.name}</Typography>
-//               <Typography>Dependencia: {selectedUser.dependencia}</Typography>
+//              <Typography>Nombre: {selectedUser ? (selectedType === 'OPERADORES' ? selectedUser.name : selectedUser.name) : 'Nombre no encontrado'}</Typography>
+//             <Typography>{selectedType === 'PRESTADORES' ? 'Especialidad' : (selectedType === 'OPERADORES' ? null : 'Dependencia')} {selectedUser ? (selectedType === 'PRESTADORES' ? selectedUser.especialidad : (selectedType === 'OPERADORES' ? null : selectedUser.dependencia)) : 'Información no disponible'}</Typography>
+
+
 //               <Button
 //                 className="mt-2"
 //                 fullWidth
 //                 onClick={handleConfirmClick}
-//                 disabled={!inputValue}
+//                 disabled={!inputValue || !selectedUser}
 //               >
 //                 Confirmar
 //               </Button>
@@ -300,3 +319,5 @@ export default SelectUser;
 // };
 
 // export default SelectUser;
+
+
