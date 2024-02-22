@@ -14,11 +14,13 @@ export async function POST(request) {
 
         console.log("Usuario autenticado:", user);
 
-        // Extraer el DNI del cuerpo de la solicitud
+        // Extraer el DNI y el email del cuerpo de la solicitud
         const { dni } = request.body;
+        const email = user.emailAddresses[0].emailAddress;
 
         // Verificar si el DNI ya está asociado a este correo electrónico en la base de datos
-        const existingUserWithEmail = await database.query("SELECT * FROM afiliado WHERE dni = ? AND email = ?", [dni, user.emailAddresses[0].emailAddress]);
+        const existingUserWithEmail = await database.query("SELECT * FROM afiliado WHERE dni = ? AND email = ?", [dni, email]);
+
         if (existingUserWithEmail.length > 0) {
             console.log("El DNI ya está asociado a este correo electrónico en la base de datos.");
             return NextResponse.json({ status: 400, message: "El DNI ya está asociado a este correo electrónico en la base de datos." });
@@ -43,6 +45,7 @@ export async function POST(request) {
         return NextResponse.json({ status: 500, message: "Error en la función POST." });
     }
 }
+
 
 
 
