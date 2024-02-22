@@ -5,7 +5,8 @@ const ConfirmButton = ({ selectedUser, selectedType, inputValue, onClick }) => {
 
   const handleConfirmClick = async () => {
     try {
-      if (!selectedUser) {
+      if (!selectedUser || !inputValue) {
+        // Agregar manejo para cuando no hay usuario seleccionado o valor de entrada
         return;
       }
   
@@ -61,7 +62,7 @@ const ConfirmButton = ({ selectedUser, selectedType, inputValue, onClick }) => {
         onClick();
       } else {
         // Si hubo un error en la solicitud, muestra un mensaje de error en un toast
-        toast.error('Error al realizar la acción. Por favor, inténtalo de nuevo.');
+        toast.error(responseData.message);
       }
     } catch (error) {
       console.error('Error:', error);

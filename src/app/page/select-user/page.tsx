@@ -2,12 +2,7 @@
 
 import React, { useState } from 'react';
 import { Typography, Input, Button } from '@mui/material';
-import data from "../../../afiliados.json";
-import dataprest from "../../../prestor.json";
-import dataopera from "../../../operador.json";
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import ConfirmButton from "../../Component/confirmButton"
+import getAfiliado from "../../action/action"
 
 const SelectUser = () => {
   const [selectedType, setSelectedType] = useState('');
@@ -18,6 +13,11 @@ const SelectUser = () => {
     setSelectedType(type);
     setInputValue('');
     setSelectedUser(null);
+
+    // Llamar a getAfiliado si el tipo seleccionado es 'AFILIADOS'
+    if (type === 'AFILIADOS') {
+      getAfiliado(); // Asegúrate de pasar los parámetros necesarios si la función los requiere
+    }
   };
 
   const handleInputChange = (value) => {
@@ -38,21 +38,19 @@ const SelectUser = () => {
     const sanitizedValue = value.replace(/\D/g, '').slice(0, maxLength);
     setInputValue(sanitizedValue);
 
-    let user;
-    switch (selectedType) {
-      case 'AFILIADOS':
-        user = data.find(afiliado => afiliado.dni === sanitizedValue);
-        break;
-      case 'OPERADORES':
-        user = dataopera.find(operador => operador.operador === sanitizedValue);
-        break;
-      case 'PRESTADORES':
-        user = dataprest.find(prestador => prestador.matricula === sanitizedValue);
-        break;
-      default:
-        break;
+    // No necesitas buscar el usuario aquí, ya que se hará en getAfiliado
+  }; const handleConfirmClick = async () => {
+    // Aquí verificar si hay algún error
+    if (isError) {
+      return; // Bloquear la función si hay un error
     }
-    setSelectedUser(user);
+
+    // Si no hay error, continuar con la lógica de confirmación
+    try {
+      // Lógica de confirmación aquí...
+    } catch (error) {
+      console.error("Error en la función handleConfirmClick:", error);
+    }
   };
 
   return (
@@ -94,26 +92,14 @@ const SelectUser = () => {
             <Typography>{selectedType === 'PRESTADORES' ? 'Especialidad' : (selectedType === 'OPERADORES' ? null : 'Dependencia')} {selectedUser ? (selectedType === 'PRESTADORES' ? selectedUser.especialidad : (selectedType === 'OPERADORES' ? null : selectedUser.dependencia)) : 'Información no disponible'}</Typography>
 
 
-            <ConfirmButton
-      selectedUser={selectedUser}
-      selectedType={selectedType}
-      inputValue={inputValue}
-      onClick={() => {
-        switch (selectedType) {
-          case 'AFILIADOS':
-            window.location.href = '/page/dashboard/afiliado';
-            break;
-          case 'OPERADORES':
-            window.location.href = '/page/dashboard/operador';
-            break;
-          case 'PRESTADORES':
-            window.location.href = '/page/dashboard/prestador';
-            break;
-          default:
-            break;
-        }
-      }}
-    />
+            <Button
+        className="mt-2"
+        fullWidth
+        onClick={handleConfirmClick}
+        disabled={!inputValue || !selectedUser || isError}
+      >
+        Confirmar
+      </Button>
     {!inputValue || !selectedUser ? null : (
       <Button
         className="mt-2"
@@ -130,7 +116,7 @@ const SelectUser = () => {
           )}
         </div>
       )}
-      <ToastContainer />
+     
     </div>
   );
 };

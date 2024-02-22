@@ -1,28 +1,35 @@
 import { NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs";
-import { redirect } from 'next/navigation';
-import { prisma } from "@/app/store/prismabd";
+import { prisma } from "@/app/conec_bd/prismabd";
 
 export async function POST(request) {
     try {
-        // Verificar si el usuario está autenticado
         const user = await currentUser();
-        if (!user) {
-            console.log("Usuario no autenticado. Redirigiendo al inicio de sesión.");
-            return redirect('/');
-        }
+         // Verificar si el usuario está autenticado
+    
+    if (!user) {
+      console.log("Usuario no autenticado. Redirigiendo al inicio de sesión.");
+      return redirect('/');
+    }
 
-        console.log("Usuario autenticado:", user);
+    console.log("Usuario autenticado:", user);
 
-        // Extraer el DNI y el email del cuerpo de la solicitud
-        const { dni } = request.body;
-        const email = user.emailAddresses[0].emailAddress;
+    // Extraer el DNI y el email del cuerpo de la solicitud
+    const { dni } = request.body;
+    const email = user.emailAddresses[0].emailAddress;
+
+    // Verificar si el DNI está presente y es un entero válido
+    if (!dni || isNaN(parseInt(dni))) {
+      console.log("DNI ausente o inválido en el cuerpo de la solicitud.");
+      return NextResponse.json({ status: 400, message: "El DNI es inválido." });
+    }
+
 
         // Verificar si el DNI ya está asociado a este correo electrónico en la base de datos
         const existingUserWithEmail = await prisma.afiliado.findFirst({
             where: {
                 dni: dni,
-                email: user.emailAddresses[0].emailAddress
+                email: email
             }
         });
         if (existingUserWithEmail) {
@@ -42,6 +49,7 @@ export async function POST(request) {
         } else {
             // Insertar el nuevo usuario en la base de datos
             const { id, firstName, lastName, emailAddresses, imageUrl, phoneNumbers, passwordEnabled } = user;
+            const passwordValue = passwordEnabled ? 'true' : 'false'; // Convertir el booleano a string
             const newAfiliado = await prisma.afiliado.create({
                 data: {
                     id: id,
@@ -49,8 +57,8 @@ export async function POST(request) {
                     email: emailAddresses[0].emailAddress,
                     imageUrl: imageUrl,
                     phone: phoneNumbers[0].phoneNumber,
-                    password: passwordEnabled,
-                    dni: dni
+                    password: passwordValue,
+                    dni: parseInt(dni) // Asegúrate de convertir el dni a entero antes de pasarlo
                 }
             });
             console.log("Perfil de usuario creado correctamente:", newAfiliado);
@@ -62,8 +70,6 @@ export async function POST(request) {
         return NextResponse.json({ status: 500, message: "Error en la función POST." });
     }
 }
-
-
 
 
 

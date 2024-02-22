@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ClerkProvider } from '@clerk/nextjs'
-
+// import  Providers from "../../store/provider";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,10 +21,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-
+        {/* <Providers> */}
         <body className={`${inter.className} bg-cover bg-center bg-fixed`}>
           {children}
         </body>
+        {/* </Providers> */}
       </html>
     </ClerkProvider>
   );
