@@ -1,0 +1,54 @@
+// para ver los modelos despues de npx prisma studio- entrar a http://localhost:5555
+//npx prisma migrate dev --name init
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Afiliado {
+  id          String   @id
+  name        String   @db.VarChar(50)
+  email       String   @db.VarChar(200)
+  password    String   @db.VarChar(200)
+  imageUrl    String   @db.VarChar(800)
+  dni         Int
+  phone       String   @db.VarChar(13)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Operador {
+  id           String   @id
+  name         String   @db.VarChar(50)
+  email        String   @db.VarChar(200)
+  password     String   @db.VarChar(200)
+  imageUrl     String   @db.VarChar(800)
+  dni          Int
+  phone        String   @db.VarChar(13)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  dataTime     DateTime
+  area         String   @db.VarChar(150)
+  numeroOperador Int
+  privilegios  Json
+}
+
+model Prestador {
+  id           String   @id
+  name         String   @db.VarChar(50)
+  email        String   @db.VarChar(200)
+  password     String   @db.VarChar(200)
+  dni          Int
+  phone        String   @db.VarChar(13)
+  imageUrl     String   @db.VarChar(800)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  dataTime     DateTime
+  matricula    Int
+  especialidad String   @db.VarChar(150)
+  puntuacion   Int
+}
