@@ -18,13 +18,6 @@ export async function POST(request) {
     const { dni } = request.body;
     const email = user.emailAddresses[0].emailAddress;
 
-    // Verificar si el DNI está presente y es un entero válido
-    if (!dni || isNaN(parseInt(dni))) {
-      console.log("DNI ausente o inválido en el cuerpo de la solicitud.");
-      return NextResponse.json({ status: 400, message: "El DNI es inválido." });
-    }
-
-
         // Verificar si el DNI ya está asociado a este correo electrónico en la base de datos
         const existingUserWithEmail = await prisma.afiliado.findFirst({
             where: {
@@ -58,7 +51,7 @@ export async function POST(request) {
                     imageUrl: imageUrl,
                     phone: phoneNumbers[0].phoneNumber,
                     password: passwordValue,
-                    dni: parseInt(dni) // Asegúrate de convertir el dni a entero antes de pasarlo
+                    dni: dni
                 }
             });
             console.log("Perfil de usuario creado correctamente:", newAfiliado);

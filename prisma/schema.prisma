@@ -15,7 +15,7 @@ model Afiliado {
   email       String   @db.VarChar(200)
   password    String   @db.VarChar(200)
   imageUrl    String   @db.VarChar(800)
-  dni         Int
+  dni         String   @db.VarChar(8)
   phone       String   @db.VarChar(13)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -27,7 +27,7 @@ model Operador {
   email        String   @db.VarChar(200)
   password     String   @db.VarChar(200)
   imageUrl     String   @db.VarChar(800)
-  dni          Int
+  dni          String   @db.VarChar(8)
   phone        String   @db.VarChar(13)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -42,7 +42,7 @@ model Prestador {
   name         String   @db.VarChar(50)
   email        String   @db.VarChar(200)
   password     String   @db.VarChar(200)
-  dni          Int
+  dni          String   @db.VarChar(8)
   phone        String   @db.VarChar(13)
   imageUrl     String   @db.VarChar(800)
   createdAt    DateTime @default(now())
