@@ -1,4 +1,4 @@
-// File: C:\Users\Emiliano\Documents\Obra-Social-Provincia\src\app\page\dashboard\afiliado\page.tsx
+// File: D:\Users\user\Obra-Social-Provincia\src\app\page\dashboard\afiliado\page.tsx
 import * as entry from '../../../../../../src/app/page/dashboard/afiliado/page.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
