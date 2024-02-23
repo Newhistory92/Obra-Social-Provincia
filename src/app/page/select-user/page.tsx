@@ -8,16 +8,15 @@ import dataopera from "../../../operador.json";
 const SelectUser = () => {
   const [selectedType, setSelectedType] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [redirect, setRedirect] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<any>(null);;
 
-  const handleTypeChange = (type) => {
+  const handleTypeChange = (type: string) => {
     setSelectedType(type);
     setInputValue('');
     setSelectedUser(null);
   };
 
-  const handleInputChange = (value) => {
+  const handleInputChange = (value: string) => {
     // Limitar el input a solo números y una longitud máxima
     let maxLength;
     switch (selectedType) {
@@ -35,7 +34,7 @@ const SelectUser = () => {
     const sanitizedValue = value.replace(/\D/g, '').slice(0, maxLength);
     setInputValue(sanitizedValue);
 
-    let user;
+    let user: any = {};
     switch (selectedType) {
       case 'AFILIADOS':
         user = data.find(afiliado => afiliado.dni === sanitizedValue);
@@ -43,9 +42,12 @@ const SelectUser = () => {
       case 'OPERADORES':
         user = dataopera.find(operador => operador.operador === sanitizedValue);
         break;
-      case 'PRESTADORES':
-        user = dataprest.find(prestador => prestador.matricula === sanitizedValue);
-        break;
+        case 'PRESTADORES':
+          user = dataprest.find(prestador => prestador.matricula === sanitizedValue);
+          if (user) {
+            user.especialidad = user.especialidad;
+          }
+          break;
       default:
         break;
     }
@@ -63,25 +65,25 @@ const SelectUser = () => {
         case 'OPERADORES':
           additionalFields = { numeroOperario: inputValue };
           break;
-        case 'PRESTADORES':
-          additionalFields = { 
-            numeroMatricula: selectedUser.matricula,
-            especialidad: selectedUser.especialidad 
-          };
-          break;
+          case 'PRESTADORES':
+            additionalFields = { 
+              numeroMatricula: selectedUser.matricula,
+              especialidad: selectedUser.especialidad 
+            };
+            break;
         default:
           break;
       }
-
+  
       if (Object.keys(additionalFields).length === 0) {
         console.error('Tipo de usuario no válido');
         return;
       }
-      
-      const getApiRoute = (selectedType) => {
+      console.log('Datos enviados:', additionalFields);
+      const getApiRoute = (selectedType: string) => {
         switch (selectedType) {
           case 'AFILIADOS':
-            return '/api/handlerafiliado';
+            return 'http://localhost:3000/api/handlerafiliado';
           case 'OPERADORES':
             return '/api/handleroperario';
           case 'PRESTADORES':
@@ -93,20 +95,23 @@ const SelectUser = () => {
 
       const userWithAdditionalFields = { ...selectedUser, ...additionalFields };
 
+      console.log('Enviando solicitud POST a:', getApiRoute(selectedType));
+      
       const response = await fetch(getApiRoute(selectedType), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userWithAdditionalFields), // Envía los datos del usuario seleccionado con los campos adicionales
+        body: JSON.stringify(userWithAdditionalFields),
+         // Envía los datos del usuario seleccionado con los campos adicionales
       });
-
+      console.log('Datos enviados al backend:', userWithAdditionalFields);
       if (response.ok) {
         // Si la solicitud fue exitosa, redirige al usuario a la página de dashboard correspondiente
         switch (selectedType) {
-          case 'AFILIADOS':
-            window.location.href = '/page/dashboard/afiliado';
-            break;
+          // case 'AFILIADOS':
+          //   window.location.href = '/page/dashboard/afiliado';
+            // break;
           case 'OPERADORES':
             window.location.href = '/page/dashboard/operador';
             break;

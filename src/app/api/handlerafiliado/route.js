@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs";
 import { prisma } from "@/app/conec_bd/prismabd";
+import { redirect } from "next/navigation";
 
 export async function POST(request) {
     try {
@@ -13,11 +14,13 @@ export async function POST(request) {
     }
 
     console.log("Usuario autenticado:", user);
+   console.log(request)
+    const dni = request.body.dni;
 
-    // Extraer el DNI y el email del cuerpo de la solicitud
-    const { dni } = request.body;
     const email = user.emailAddresses[0].emailAddress;
 
+    console.log("llego el dni:", dni);
+    
         // Verificar si el DNI ya está asociado a este correo electrónico en la base de datos
         const existingUserWithEmail = await prisma.afiliado.findFirst({
             where: {
@@ -68,7 +71,17 @@ export async function POST(request) {
 
 
 
+// import { NextResponse } from "next/server";
 
+
+
+
+
+// export function GET (){
+//     return NextResponse.json("obteniendo afiliado")
+
+
+// }
 
 
 
