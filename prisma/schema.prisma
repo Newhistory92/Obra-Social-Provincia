@@ -27,13 +27,12 @@ model Operador {
   email        String   @db.VarChar(200)
   password     String   @db.VarChar(200)
   imageUrl     String   @db.VarChar(800)
-  dni          String   @db.VarChar(8)
   phone        String   @db.VarChar(13)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   dataTime     DateTime
   area         String   @db.VarChar(150)
-  numeroOperador Int
+  numeroOperador String @db.VarChar(5)
   privilegios  Json
 }
 
@@ -42,13 +41,12 @@ model Prestador {
   name         String   @db.VarChar(50)
   email        String   @db.VarChar(200)
   password     String   @db.VarChar(200)
-  dni          String   @db.VarChar(8)
   phone        String   @db.VarChar(13)
   imageUrl     String   @db.VarChar(800)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   dataTime     DateTime
-  matricula    Int
+  matricula    String   @db.VarChar(5)
   especialidad String   @db.VarChar(150)
   puntuacion   Int
 }

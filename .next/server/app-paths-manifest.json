@@ -1,5 +1,5 @@
 {
   "/not-found": "app/not-found.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page/select-user/page": "app/page/select-user/page.js"
+  "/page/select-user/page": "app/page/select-user/page.js",
+  "/api/handlerafiliado/route": "app/api/handlerafiliado/route.js"
 }
