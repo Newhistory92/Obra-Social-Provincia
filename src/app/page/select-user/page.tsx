@@ -19,10 +19,9 @@ const SelectUser = () => {
         variant="outlined"
         className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900"
       >
-        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900"
-        value="">Seleccionar...</MenuItem>
-        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900"
-         value="AFILIADO">Afiliado</MenuItem>
+        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" 
+        value="AFILIADO">Afiliado</MenuItem>
+        {/* Agregar otras opciones de usuario aquí si es necesario */}
       </Select>
       
       {/* Mostrar el componente TypeAfiliado si el tipo seleccionado es "AFILIADO" */}
