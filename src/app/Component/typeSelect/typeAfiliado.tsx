@@ -35,6 +35,7 @@ const TypeAfiliado = () => {
       });
 
       const responseData = await response.json();
+      console.log(responseData)
 
       if (response.ok) {
         toast.success('Afiliado confirmado correctamente');
@@ -42,11 +43,7 @@ const TypeAfiliado = () => {
         // window.location.href = '/page/dashboard/afiliado';
       } else {
         if (response.status === 400) {
-          if (responseData.message === "Este correo electrónico ya está asociado a un DNI en la base de datos.") {
-            setErrorMessage(responseData.message); // Establecer el mensaje de error
-          } else {
-            toast.error('El DNI ya está asociado a este correo electrónico');
-          }
+          setErrorMessage(responseData.message); // Establecer el mensaje de error
         } else {
           toast.error('Ocurrió un error al confirmar el afiliado');
         }
@@ -57,6 +54,10 @@ const TypeAfiliado = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handlePrev = () => {
+    setErrorMessage(null); // Limpiar el mensaje de error
   };
 
   return (
@@ -74,14 +75,24 @@ const TypeAfiliado = () => {
         <div className="mt-4">
           <Typography>Nombre: {selectedUser.name}</Typography>
           <Typography>Dependencia: {selectedUser.dependencia}</Typography>
-          <Button
-            variant="contained"
-            onClick={handleConfirm}
-            className="mt-2"
-            disabled={loading || errorMessage !== null} // Deshabilitar el botón si hay un mensaje de error
-          >
-            Confirmar
-          </Button>
+          {errorMessage ? (
+            <Button
+              variant="contained"
+              onClick={handlePrev}
+              className="mt-2"
+            >
+              Prev
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              onClick={handleConfirm}
+              className="mt-2"
+              disabled={loading} // Deshabilitar el botón si está en proceso de carga
+            >
+              Confirmar
+            </Button>
+          )}
           {errorMessage && <Typography className="text-red-500">{errorMessage}</Typography>} {/* Mostrar el mensaje de error si existe */}
         </div>
       )}
@@ -92,6 +103,7 @@ const TypeAfiliado = () => {
 };
 
 export default TypeAfiliado;
+
 
 
 

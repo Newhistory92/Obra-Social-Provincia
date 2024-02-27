@@ -7,62 +7,55 @@ import { redirect } from "next/navigation";
 export async function POST(request) {
     try {
         const user = await currentUser();
-        
-        // Verificar si el usuario está autenticado
-        if (!user) {
-            return redirect('/');
-        }
-  
         const body = await request.json();
         const dni = body.dni;
         const email = user.emailAddresses[0].emailAddress;
+        const userId = user.id;
     
-        // Verificar si el DNI ya está asociado a este correo electrónico en la base de datos
+        // Verificar si el DNI ya está asociado a un usuario en la base de datos
         const existingUserWithDNI = await prisma.afiliado.findFirst({
             where: {
-                dni: dni,
-                email: email // Verificar si el DNI está asociado a este correo electrónico
+                dni: dni
             }
         });
 
         if (existingUserWithDNI) {
-            console.log("El DNI ya está asociado a este correo electrónico en la base de datos.");
-            return NextResponse.json({ status: 400, message: "El DNI ya está asociado a este correo electrónico" });
+            console.log("El DNI ya está asociado a un usuario en la base de datos.");
+            return NextResponse.json({ status: 400, message: "El DNI ya está asociado a un usuario en la base de datos." });
         }
 
-        // Verificar si el correo electrónico ya está asociado a un DNI en la base de datos
+        // Verificar si el usuario ya existe en la base de datos por su email
         const existingUserWithEmail = await prisma.afiliado.findFirst({
             where: {
-                email: email,
-                dni: dni // Verificar si el correo electrónico está asociado a este DNI
+                email: email
             }
         });
 
         if (existingUserWithEmail) {
-            console.log("Este correo electrónico ya está asociado a un DNI en la base de datos.");
-            return NextResponse.json({ status: 400, message: "Este correo electrónico ya está asociado a un DNI en la base de datos." });
+            console.log("El usuario ya existe en la base de datos.");
+            return NextResponse.json({ status: 400, message: `El usuario ${existingUserWithEmail.name} ya existe en la base de datos.` });
         }
 
-        // Verificar si el usuario ya existe en la base de datos
-        const existingUser = await prisma.afiliado.findFirst({
+        // Verificar si el usuario ya existe en la base de datos por su ID
+        const existingUserWithId = await prisma.afiliado.findFirst({
             where: {
-                id: user.id
+                id: userId
             }
         });
 
-        if (existingUser) {
+        if (existingUserWithId) {
             console.log("El usuario ya existe en la base de datos.");
-            return NextResponse.json({ status: 400, message: "El usuario ya existe en la base de datos." });
+            return NextResponse.json({ status: 400, message: `El usuario ${existingUserWithId.name} ya existe en la base de datos.` });
         }
 
         // Insertar el nuevo usuario en la base de datos
-        const { id, firstName, lastName, emailAddresses, imageUrl, phoneNumbers, passwordEnabled } = user;
+        const { firstName, lastName, emailAddresses, imageUrl, phoneNumbers, passwordEnabled } = user;
         const passwordValue = passwordEnabled ? 'true' : 'false'; // Convertir el booleano a string
         const newAfiliado = await prisma.afiliado.create({
             data: {
-                id: id,
+                id: userId,
                 name: `${firstName} ${lastName}`,
-                email: email,
+                email: emailAddresses[0].emailAddress,
                 imageUrl: imageUrl,
                 phone: phoneNumbers[0].phoneNumber,
                 password: passwordValue,
@@ -74,9 +67,10 @@ export async function POST(request) {
 
         return NextResponse.json({ status: 201, message: "Perfil de usuario creado correctamente." });
     } catch (error) {
-        return NextResponse.json({ status: 500, message:error.message });
+        return NextResponse.json({ status: 500, message: `Error al crear el perfil de usuario: ${error.message}` });
     }
 }
+
 
 
 
