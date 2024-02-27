@@ -1,12 +1,13 @@
 "use client"
 import React, { useState } from 'react';
-import { Typography, Select, MenuItem } from '@mui/material';
+import { Typography, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import TypeAfiliado from '../../Component/typeSelect/typeAfiliado';
+import TypePrestador from '../../Component/typeSelect/typePrestador';
 
 const SelectUser = () => {
   const [selectedType, setSelectedType] = useState('');
 
-  const handleTypeChange = (event) => {
+  const handleTypeChange = (event: SelectChangeEvent<string>) => {
     setSelectedType(event.target.value);
   };
 
@@ -19,14 +20,16 @@ const SelectUser = () => {
         variant="outlined"
         className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900"
       >
-        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900"
-        value="">Seleccionar...</MenuItem>
-        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900"
-         value="AFILIADO">Afiliado</MenuItem>
+        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="">Seleccionar...</MenuItem>
+        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="AFILIADO">Afiliado</MenuItem>
+        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="PRESTADOR">Prestador</MenuItem>
+        {/* Agregar más opciones de tipo de usuario aquí */}
       </Select>
       
-      {/* Mostrar el componente TypeAfiliado si el tipo seleccionado es "AFILIADO" */}
+      {/* Mostrar el componente correspondiente al tipo seleccionado */}
       {selectedType === 'AFILIADO' && <TypeAfiliado />}
+      {selectedType === 'PRESTADOR' && <TypePrestador />}
+      {/* Agregar más condiciones para otros tipos de usuario */}
     </div>
   );
 };

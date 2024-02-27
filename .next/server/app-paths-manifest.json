@@ -1,7 +1,7 @@
 {
   "/not-found": "app/not-found.js",
-  "/page": "app/page.js",
   "/sign-up/[[...sign-up]]/page": "app/sign-up/[[...sign-up]]/page.js",
   "/page/select-user/page": "app/page/select-user/page.js",
+  "/api/handlerprestador/route": "app/api/handlerprestador/route.js",
   "/page/dashboard/afiliado/page": "app/page/dashboard/afiliado/page.js"
 }
