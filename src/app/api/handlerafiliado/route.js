@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs";
 import { prisma } from "@/app/conec_bd/prismabd";
+import { checkUserAuthentication } from "../checkUser/authUtils";
 
 export async function POST(request) {
     try {
@@ -10,7 +11,13 @@ export async function POST(request) {
         const dni = body.dni;
         const email = user.emailAddresses[0].emailAddress;
         const userId = user.id;
-    
+
+        // Verificar si el usuario ya está autenticado en alguna tabla
+        const isAuthenticated = await checkUserAuthentication(userId);
+        if (isAuthenticated) {
+            return NextResponse.json({ status: 400, message: `El usuario ya está asociado a un Afiliado.` });
+        }
+
         // Verificar si el DNI ya está asociado a un usuario en la base de datos
         const existingUserWithDNI = await prisma.afiliado.findFirst({
             where: {
@@ -19,22 +26,7 @@ export async function POST(request) {
         });
 
         if (existingUserWithDNI) {
-            // Verificar si el usuario ya existe en la base de datos por su ID
-            const existingUserWithId = await prisma.afiliado.findFirst({
-                where: {
-                    id: userId
-                }
-            });
-
-            if (existingUserWithId && existingUserWithId.id === existingUserWithDNI.id) {
-                return NextResponse.json({ status: 200, message: "El Afiliado se confirma correctamente." });
-            }
-        }
-
-        // Si el DNI no está asociado al usuario o no coincide con el ID, continuar con la lógica anterior
-
-        if (existingUserWithDNI) {
-            return NextResponse.json({ status: 400, message: `El DNI N°: ${existingUserWithDNI.dni} ya está asociado a un Afiliado`});
+            return NextResponse.json({ status: 400, message: `El DNI N°: ${existingUserWithDNI.dni} ya está asociado a un Afiliado` });
         }
 
         // Verificar si el usuario ya existe en la base de datos por su email
@@ -45,36 +37,7 @@ export async function POST(request) {
         });
 
         if (existingUserWithEmail) {
-            return NextResponse.json({ status: 400, message: `El Correo Electronico  ${existingUserWithEmail.email} ya está asociado a un Afiliado` });
-        }
-
-        // Verificar si el usuario ya existe en la base de datos por su ID
-        // Buscar en la tabla Afiliado
-        const existingAfiliado = await prisma.afiliado.findFirst({
-            where: {
-                id: userId
-            }
-        });
-
-        // Buscar en la tabla Prestador
-        const existingPrestador = await prisma.prestador.findFirst({
-            where: {
-                id: userId
-            }
-        });
-
-        // Buscar en la tabla Operador
-        const existingOperador = await prisma.operador.findFirst({
-            where: {
-                id: userId
-            }
-        });
-        if (existingAfiliado) {
-            return NextResponse.json({ status: 400, message: `El Afiliado ${existingAfiliado.name} ya tiene una cuenta asociada como Afiliado.` });
-        } else if (existingPrestador) {
-            return NextResponse.json({ status: 400, message: `El Prestador ${existingPrestador.name} ya tiene una cuenta asociada como Prestador.` });
-        } else if (existingOperador) {
-            return NextResponse.json({ status: 400, message: `El Operador ${existingOperador.name} ya tiene una cuenta asociada como Operador.` });
+            return NextResponse.json({ status: 400, message: `El Correo Electrónico ${existingUserWithEmail.email} ya está asociado a un Afiliado` });
         }
 
         // Insertar el nuevo usuario en la base de datos
@@ -96,6 +59,7 @@ export async function POST(request) {
 
         return NextResponse.json({ status: 200, message: "Perfil del Afiliado fue creado con éxito." });
     } catch (error) {
+        console.error("Error al crear el perfil del Afiliado:", error);
         return NextResponse.json({ status: 500, message: `Error al crear el perfil del Afiliado: ${error.message}` });
     }
 }
@@ -191,51 +155,18 @@ export async function GET(request) {
             const userId = user.id;
     
             // Verificar si el ID del usuario está en la base de datos
-            const isAuthenticatedAndInDatabase = await checkUserAuthentication(userId);
-            if (!isAuthenticatedAndInDatabase) {
+            const isAuthenticatedAndInDatabase = await checkUserAuthentication(userId, 'afiliado');
+            if (isAuthenticatedAndInDatabase.status === 200) {
+                return NextResponse.json({ status: 200, message: isAuthenticatedAndInDatabase.message });
+            } else {
                 return NextResponse.json ({ status: 402, message: "Afiliado no encontrado en la base de datos." });
             }
-    
-            return NextResponse.json({ status: 200,message: "El Afiliado se confirma correctamente." });
         } catch (error) {
             console.error("Error al verificar la autenticación del usuario:", error);
             return NextResponse.json({ status: 500, message: `Error al verificar la autenticación del usuario: ${error.message}` });
         }
     }
-    async function checkUserAuthentication(userId) {
-        try {
-            // Verificar si el ID del usuario está en la tabla Afiliado
-            const existingAfiliado = await prisma.afiliado.findFirst({
-                where: {
-                    id: userId
-                }
-            });
-    
-            // Verificar si el ID del usuario está en la tabla Prestador
-            const existingPrestador = await prisma.prestador.findFirst({
-                where: {
-                    id: userId
-                }
-            });
-    
-            // Verificar si el ID del usuario está en la tabla Operador
-            const existingOperador = await prisma.operador.findFirst({
-                where: {
-                    id: userId
-                }
-            });
-    
-            // Determinar si el usuario está autenticado en alguna tabla
-            if (existingAfiliado || existingPrestador || existingOperador) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (error) {
-            console.error("Error al verificar la autenticación del usuario:", error);
-            return false;
-        }
-    }
+
     
 
 

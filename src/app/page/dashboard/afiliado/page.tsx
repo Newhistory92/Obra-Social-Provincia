@@ -7,9 +7,15 @@ import { UserButton, useUser } from '@clerk/nextjs';
 const DashboardAfiliado: React.FC = () => {
   const [showChatBot, setShowChatBot] = useState(false);
   const [showPrestadorTable, setShowPrestadorTable] = useState(false);
+  const { isLoaded, user } = useUser();
+ 
+  if (!isLoaded) {
+    // Handle loading state however you like
+    return null;
+  }
+ 
+  if (!user) return null;
 
- const user = useUser()
- console.log(user)
 
 
 
@@ -32,7 +38,7 @@ const DashboardAfiliado: React.FC = () => {
         <div className="flex flex-col w-64">
           <div className="flex items-center justify-center h-16 bg-gray-200 p-4">
           <UserButton />
-            <h1 className= "ml-5">Bienvenido Nombre del Usuario</h1>
+            <h1 className= "ml-5">Bienvenido {user.fullName}</h1>
           </div>
             
           

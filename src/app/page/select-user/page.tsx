@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { Typography, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import TypeAfiliado from '../../Component/typeSelect/typeAfiliado';
 import TypePrestador from '../../Component/typeSelect/typePrestador';
+import TypeOperador from '@/app/Component/typeSelect/typeOperador';
+
+
 
 const SelectUser = () => {
   const [selectedType, setSelectedType] = useState('');
@@ -18,25 +21,22 @@ const SelectUser = () => {
         value={selectedType}
         onChange={handleTypeChange}
         variant="outlined"
-        className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900"
-      >
+        className="mt-2 border-t border-blue-gray-200 focus:border-t focus:border-gray-900  w-full h-10">
         <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="">Seleccionar...</MenuItem>
         <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="AFILIADO">Afiliado</MenuItem>
         <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="PRESTADOR">Prestador</MenuItem>
-        {/* Agregar más opciones de tipo de usuario aquí */}
+        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="OPERADOR">Operador</MenuItem>
+  
       </Select>
-      
-      {/* Mostrar el componente correspondiente al tipo seleccionado */}
       {selectedType === 'AFILIADO' && <TypeAfiliado />}
       {selectedType === 'PRESTADOR' && <TypePrestador />}
-      {/* Agregar más condiciones para otros tipos de usuario */}
+      {selectedType === 'OPERADOR' && <TypeOperador />}
+ 
     </div>
   );
 };
 
 export default SelectUser;
-
-
 
 
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Typography, Input, Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import afiliadosData from '../../../afiliados.json';
-
+import Link from 'next/link';
 
 const TypeAfiliado = () => {
 
@@ -22,12 +22,16 @@ const TypeAfiliado = () => {
           }
         });
         const data = await response.json();
+        console.log(data)
         if (response.ok) {
           if (data.status === 200) {
+            // El usuario está en la tabla Afiliado, redirigir al dashboard de Afiliado
             window.location.href = '/page/dashboard/afiliado';
+            console.log("redirige al /dashboard/afiliado")
           } else if (data.status === 401) {
+            // El usuario no está autenticado, redirigir al inicio de sesión
             window.location.href = '/page/signin';
-          } else if (data.status === 402) {
+          }else if (data.status === 402) {
             setLoading(false);
           }
         } else {
@@ -111,15 +115,17 @@ const TypeAfiliado = () => {
         <div className="mt-4">
           <Typography>Nombre: {selectedUser.name}</Typography>
           <Typography>Dependencia: {selectedUser.dependencia}</Typography>
+          <Link href="/">
           {errorMessage === 400 && (
-        <Button
-          variant="contained"
-           onClick={handlePrev}
-           className="mt-2"
+            <Button
+              variant="contained"
+              onClick={handlePrev}
+              className="mt-2"
+              
             >
-           Inicio
-        </Button>
-              )}
+              Inicio
+            </Button>
+          )}</Link>
           {!errorMessage && (
             <Button
               variant="contained"

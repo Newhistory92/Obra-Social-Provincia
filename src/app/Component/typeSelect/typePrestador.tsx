@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Typography, Input, Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import prestadoresData from '../../../prestor.json';
+import Link from 'next/link';
+
 
 const TypePrestador = () => {
   const [matricula, setMatricula] = useState('');
@@ -10,35 +12,40 @@ const TypePrestador = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
-//   useEffect(() => {
-//     const verifyUser = async () => {
-//       try {
-//         const response = await fetch('/api/handlerprestador', {
-//           method: 'GET',
-//           headers: {
-//             'Content-Type': 'application/json',
-//           }
-//         });
-//         const data = await response.json();
-//         if (response.ok) {
-//           if (data.status === 200) {
-//             window.location.href = '/page/dashboard/prestador';
-//           } else if (data.status === 401) {
-//             window.location.href = '/page/signin';
-//           } else if (data.status === 402) {
-//             setLoading(false);
-//           }
-//         } else {
-//           setLoading(false);
-//         }
-//       } catch (error) {
-//         console.error('Error al verificar el usuario:', error);
-//         setLoading(false);
-//       }
-//     };
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const response = await fetch('/api/handlerprestador', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+        const data = await response.json();
+        console.log(data)
+        if (response.ok) {
+          if (data.status === 200) {
+            // El usuario está en la tabla Afiliado, redirigir al dashboard de Afiliado
+            window.location.href = '/page/dashboard/prestador';
+            console.log("redirige al /dashboard/prestador")
+          } else if (data.status === 401) {
+            // El usuario no está autenticado, redirigir al inicio de sesión
+            window.location.href = '/page/signin';
+          }else if (data.status === 402) {
+            setLoading(false);
+          }
+        } else {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Error al verificar el usuario:', error);
+        setLoading(false);
+      }
+    };
 
-//     verifyUser();
-//   }, []);
+    verifyUser();
+  }, []);
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const sanitizedValue = event.target.value.replace(/\D/g, '').slice(0, 8);
@@ -73,6 +80,7 @@ const TypePrestador = () => {
       } else if (responseData.status === 400) {
         setErrorMessage(responseData.status);
         toast.error(responseData.message);
+        console.log(responseData.message)
       }
 
     } catch (error) {
@@ -105,15 +113,17 @@ const TypePrestador = () => {
         <div className="mt-4">
           <Typography>Nombre: {selectedPrestador.name}</Typography>
           <Typography>Especialidad: {selectedPrestador.especialidad}</Typography>
+          <Link href="/">
           {errorMessage === 400 && (
             <Button
               variant="contained"
               onClick={handlePrev}
               className="mt-2"
+              
             >
               Inicio
             </Button>
-          )}
+          )}</Link>
           {!errorMessage && (
             <Button
               variant="contained"
@@ -126,10 +136,10 @@ const TypePrestador = () => {
           )}
         </div>
       )}
-
       <ToastContainer />
     </div>
   );
 };
 
 export default TypePrestador;
+
