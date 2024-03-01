@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardBody, Typography, Avatar } from "@material-tailwind/react";
-import { getAllUsers } from "@/app/conec_bd/datos";
+
 
 export function Tables() {
   const [userType, setUserType] = useState('Operador');
   const [userData, setUserData] = useState([]);
-
   useEffect(() => {
-    obtenerUsuarios();
-  }, []);
-
-  async function obtenerUsuarios() {
+    fetchData();
+  }, [userType]);
+  
+  async function fetchData() {
     try {
-      console.log("Obteniendo usuarios para el tipo:", userType);
-      const usuarios = await getAllUsers(userType);
-      console.log("Usuarios obtenidos:", usuarios);
-      setUserData(usuarios);
+      const response = await fetch(`/api/datos?userType=${userType}`);
+      if (!response.ok) {
+        throw new Error('Error al obtener los usuarios');
+      }
+      const data = await response.json();
+      setUserData(data);
     } catch (error) {
-      console.error("Error al obtener los usuarios:", error);
+      console.error('Error al obtener los usuarios:', error);
     }
   }
+
+  
 
   function handleUserTypeChange(e) {
     setUserType(e.target.value);
@@ -30,7 +33,7 @@ export function Tables() {
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       <div className="flex items-center mb-4">
-        <Typography variant="body" className="mr-4">
+        <Typography variant="h4" className="mr-4">
           Mostrar usuarios tipo:
         </Typography>
         <select

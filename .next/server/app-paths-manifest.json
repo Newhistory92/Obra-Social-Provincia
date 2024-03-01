@@ -1,4 +1,5 @@
 {
-  "/page/select-user/page": "app/page/select-user/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/not-found": "app/not-found.js",
+  "/api/datos/route": "app/api/datos/route.js",
+  "/page/dashboard/admin/page": "app/page/dashboard/admin/page.js"
 }

@@ -3,7 +3,7 @@ import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
   
-    publicRoutes:["/","/api/handlerafiliado"]
+    publicRoutes:["/","/api/handlerafiliado","api/datos"]
 });
 
 export const config = {
