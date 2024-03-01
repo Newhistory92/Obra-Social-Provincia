@@ -1,8 +1,4 @@
 
-
-
-
-
 {
   "compilerOptions": {
     "target": "es6", // or a more recent ecmascript version

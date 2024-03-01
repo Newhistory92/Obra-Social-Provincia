@@ -18,7 +18,7 @@ const MyTeam = () => {
             </div>
             <div className="ms-3 ">
               <h5 className="mb-1">Dianna Smiley</h5>
-              <p className="text-muted mb-0 fs-5 text-muted">
+              <p className="text-muted mb-0 fs-5 ">
                 UI / UX Designer
               </p>
             </div>
@@ -44,7 +44,7 @@ const MyTeam = () => {
             </div>
             <div className="ms-3 ">
               <h5 className="mb-1">Anne Brewer</h5>
-              <p className="text-muted mb-0 fs-5 text-muted">
+              <p className="text-muted mb-0 fs-5 ">
                 Senior UX Designer
               </p>
             </div>

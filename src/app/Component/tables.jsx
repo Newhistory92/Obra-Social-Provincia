@@ -1,30 +1,31 @@
-import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardBody, Typography, Avatar, Chip } from "@material-tailwind/react";
+import React, { useState, useEffect } from 'react';
+import { Card, CardHeader, CardBody, Typography, Avatar } from "@material-tailwind/react";
 import { getAllUsers } from "@/app/conec_bd/datos";
 
 export function Tables() {
-  const [userType, setUserType] = useState('Operador'); // Inicializar con 'Operador' por defecto
-  const [userData, setUserData] = useState([]); // Estado para almacenar los datos de usuarios
+  const [userType, setUserType] = useState('Operador');
+  const [userData, setUserData] = useState([]);
 
-  // Obtener los datos de usuarios al cargar el componente
   useEffect(() => {
     obtenerUsuarios();
   }, []);
 
-  // Obtener los datos de usuarios según el tipo seleccionado
   async function obtenerUsuarios() {
     try {
-      const usuarios = await getAllUsers(userType); // Llamar a la función con el tipo de usuario actual
+      console.log("Obteniendo usuarios para el tipo:", userType);
+      const usuarios = await getAllUsers(userType);
+      console.log("Usuarios obtenidos:", usuarios);
       setUserData(usuarios);
     } catch (error) {
       console.error("Error al obtener los usuarios:", error);
     }
   }
 
-  // Función para manejar el cambio de tipo de usuario
   function handleUserTypeChange(e) {
-    setUserType(e.target.value); // Actualizar el estado con el nuevo tipo de usuario seleccionado
+    setUserType(e.target.value);
   }
+
+  console.log("userData en el estado:", userData);
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -45,7 +46,7 @@ export function Tables() {
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
           <Typography variant="h6" color="white">
-            Usuarios Table
+            Usuarios
           </Typography>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">

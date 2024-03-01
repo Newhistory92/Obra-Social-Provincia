@@ -22,18 +22,17 @@ model Afiliado {
 }
 
 model Operador {
-  id           String   @id
-  name         String   @db.VarChar(50)
-  email        String   @db.VarChar(200)
-  password     String   @db.VarChar(200)
-  imageUrl     String   @db.VarChar(800)
-  phone        String   @db.VarChar(13)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  dataTime     DateTime
-  area         String   @db.VarChar(150)
-  numeroOperador String @db.VarChar(5)
-  privilegios  Json
+  id             String   @id
+  name           String   @db.VarChar(50)
+  email          String   @db.VarChar(200)
+  password       String   @db.VarChar(200)
+  imageUrl       String   @db.VarChar(800)
+  phone          String   @db.VarChar(13)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  dataTime       DateTime
+  numeroOperador String   @db.VarChar(5)
+  roles          Rol[]    @relation("RolOperador")
 }
 
 model Prestador {
@@ -49,4 +48,11 @@ model Prestador {
   matricula    String   @db.VarChar(5)
   especialidad String   @db.VarChar(150)
   puntuacion   Int
+}
+
+
+model Rol {
+  id       String    @id
+  tipo     String  
+  operador Operador? @relation("RolOperador", fields: [id], references: [id])
 }
