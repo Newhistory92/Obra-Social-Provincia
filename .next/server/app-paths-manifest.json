@@ -1,5 +1,3 @@
 {
-  "/not-found": "app/not-found.js",
-  "/api/datos/route": "app/api/datos/route.js",
   "/page/dashboard/admin/page": "app/page/dashboard/admin/page.js"
 }

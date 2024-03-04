@@ -21,19 +21,6 @@ model Afiliado {
   updatedAt   DateTime @updatedAt
 }
 
-model Operador {
-  id             String   @id
-  name           String   @db.VarChar(50)
-  email          String   @db.VarChar(200)
-  password       String   @db.VarChar(200)
-  imageUrl       String   @db.VarChar(800)
-  phone          String   @db.VarChar(13)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  dataTime       DateTime
-  numeroOperador String   @db.VarChar(5)
-  roles          Rol[]    @relation("RolOperador")
-}
 
 model Prestador {
   id           String   @id
@@ -51,8 +38,22 @@ model Prestador {
 }
 
 
-model Rol {
-  id       String    @id
-  tipo     String  
-  operador Operador? @relation("RolOperador", fields: [id], references: [id])
+model Operador {
+  id             String   @id
+  name           String   @db.VarChar(50)
+  email          String   @db.VarChar(200)
+  password       String   @db.VarChar(200)
+  imageUrl       String   @db.VarChar(800)
+  phone          String   @db.VarChar(13)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  dataTime       DateTime
+  numeroOperador String   @db.VarChar(5)
+  // roles          Rol[]    @relation("RolOperador")
+  role           String   @default("user")
 }
+// model Rol {
+//   id       String    @id
+//   tipo     String  
+//   operador Operador? @relation("RolOperador", fields: [id], references: [id])
+// }
