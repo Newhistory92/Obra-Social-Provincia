@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ProgressBar, Col, Row, Card, Table, Image } from 'react-bootstrap';
 
 // import required data files
-import ActiveProjectsData from "data/dashboard/ActiveProjectsData";
+
 
 const ActiveProjects = () => {
     return (

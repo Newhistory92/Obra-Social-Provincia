@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ClerkProvider } from '@clerk/nextjs'
+import { dark,neobrutalism } from '@clerk/themes';
 // import  Providers from "../../store/provider";
 
 
@@ -19,7 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider 
+    appearance={{
+      baseTheme: dark
+      
+    }}>
       <html lang="en">
         {/* <Providers> */}
         <body className={`${inter.className} bg-cover bg-center bg-fixed`}>

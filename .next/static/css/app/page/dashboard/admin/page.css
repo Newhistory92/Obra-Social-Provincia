@@ -40330,8 +40330,7 @@ textarea.form-control-lg {
   overflow-y: auto;
 }
 .navbar-vertical .nav-scroller {
-  height: 100% !important;
-  overflow-y: auto;
+  height: 130px;
 }
 .navbar-vertical .navbar-brand {
   padding: 1rem 1.5rem 1.5rem;
@@ -40339,7 +40338,7 @@ textarea.form-control-lg {
   display: block;
 }
 .navbar-vertical .navbar-brand img {
-  height: 1.875rem;
+  max-height: 100%;
 }
 .navbar-vertical .navbar-heading {
   color: #454f5b;

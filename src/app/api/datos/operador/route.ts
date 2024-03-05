@@ -19,7 +19,6 @@ export async function GET() {
 export async function PUT(request: NextRequest) {
     try {
         // Parsear el cuerpo de la solicitud para obtener los datos a actualizar
-    
         const body = await request.json();
         const role = body.role;
          const id = body.id

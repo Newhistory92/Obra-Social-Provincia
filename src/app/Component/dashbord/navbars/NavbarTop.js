@@ -1,4 +1,4 @@
-// import node module libraries
+
 import { Menu } from 'react-feather';
 import Link from 'next/link';
 import {
@@ -6,8 +6,6 @@ import {
 	Navbar,
 	Form
 } from 'react-bootstrap';
-
-// import sub components
 import QuickMenu from '../QuickMenu';
 
 const NavbarTop = (props) => {

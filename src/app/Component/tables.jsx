@@ -97,13 +97,13 @@ export function Tables() {
               </tr>
             </thead>
             <tbody>
-              {userData.map(({ name, email, imageUrl, phone, dni, matricula, numeroOperador,  roles}, key) => {
+              {userData.map(({ id,name, email, imageUrl, phone, dni, matricula, numeroOperador,  roles}, key) => {
                 const className = `py-3 px-5 ${
                   key === userData.length - 1 ? "" : "border-b border-blue-gray-50"
                 }`;
 
                 return (
-                  <tr key={name}>
+                  <tr key={id}>
                     <td className={className}>
                       <div className="flex items-center gap-4">
                         <Avatar src={imageUrl} alt={name} size="sm" variant="rounded"

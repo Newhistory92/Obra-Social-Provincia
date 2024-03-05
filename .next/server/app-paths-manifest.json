@@ -1,3 +1,5 @@
 {
-  "/page/dashboard/admin/page": "app/page/dashboard/admin/page.js"
+  "/not-found": "app/not-found.js",
+  "/page/dashboard/admin/page": "app/page/dashboard/admin/page.js",
+  "/api/datos/operador/route": "app/api/datos/operador/route.js"
 }
