@@ -1,10 +1,5 @@
 {
   "pages": {
-    "/page/perfile/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page/perfile/page.js"
-    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -14,8 +9,34 @@
     "/page/dashboard/admin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/page/dashboard/admin/page.css",
       "static/chunks/app/page/dashboard/admin/page.js"
+    ],
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/page.css",
+      "static/chunks/app/page.js"
+    ],
+    "/page/dashboard/afiliado/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/page/dashboard/afiliado/page.css",
+      "static/chunks/app/page/dashboard/afiliado/page.js"
+    ],
+    "/sign-in/[[...sign-in]]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/sign-in/[[...sign-in]]/page.js"
+    ],
+    "/page/select-user/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page/select-user/page.js"
+    ],
+    "/sign-up/[[...sign-up]]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/sign-up/[[...sign-up]]/page.js"
     ],
     "/not-found": [
       "static/chunks/webpack.js",

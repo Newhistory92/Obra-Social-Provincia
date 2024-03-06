@@ -16,7 +16,7 @@ const DashboardAfiliado: React.FC = () => {
  
   if (!user) return null;
 
-
+ console.log(user, isLoaded)
 
 
   const openChatBot = () => {

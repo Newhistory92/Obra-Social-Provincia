@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ClerkProvider } from '@clerk/nextjs'
 import { dark,neobrutalism } from '@clerk/themes';
 // import  Providers from "../../store/provider";
-
+import "./styles/theme.scss"
 
 const inter = Inter({ subsets: ["latin"] });
 

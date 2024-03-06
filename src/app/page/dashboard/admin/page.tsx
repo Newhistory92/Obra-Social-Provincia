@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react';
-import '../../../styles/theme.scss'
+
 import NavbarVertical from '../../../Component/dashbord/navbars/NavbarVertical';
 import NavbarTop from '../../../Component/dashbord/navbars/NavbarTop';
 import Tables from "../../../Component/tables"
