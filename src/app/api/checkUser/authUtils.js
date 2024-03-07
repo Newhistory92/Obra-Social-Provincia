@@ -1,5 +1,5 @@
 import { prisma } from "@/app/conec_bd/prismabd";
-import { NextResponse } from "next/server";
+
 
 
 

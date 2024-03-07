@@ -69,50 +69,55 @@ const Prestadores = () => {
 
     return (
         <Card className="h-100">
-            <Card.Header className="bg-white py-4">
-                <h4 className="mb-0">Prestadores</h4>
-            </Card.Header>
-            <Table responsive className="text-nowrap">
-                <thead className="table-light">
-                    <tr>
-                        <th>Name</th>
-                        <th>Especialidad</th>
-                        <th>Teléfono</th>
-                        <th>Direccion</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {prestadores.map(({ id,name, imageUrl, phone,phonesec, especialidad, direccion,}, key) => {
-                        return (
-                            <tr key={id}>
-                                <td className="align-middle">
-                                    <div className="d-flex align-items-center">
-                                        <div>
-                                            <Image src={imageUrl} alt="" className="avatar-md avatar rounded-circle" />
-                                        </div>
-                                        <div className="ms-3 lh-1">
-                                            <h5 className=" mb-1">{name}</h5>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td className="align-middle">{especialidad}</td>
-                                <td className="align-middle">{phone}</td>
-                                <td className="align-middle">{phonesec}</td>
-                                <td className="align-middle">{direccion}</td>
-                                <td className="align-middle">
-                                    <ActionMenu />
-                                </td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </Table>
+          <Card.Header className="bg-white py-4">
+            <h4 className="mb-0">Prestadores</h4>
+          </Card.Header>
+          <Table responsive className="text-nowrap">
+            <thead className="table-light">
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th> 
+                <th>Especialidad</th>
+                <th>Teléfono</th>
+                <th>Direccion</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {prestadores.map(({ id, name, apellido, imageUrl, phone, phonesec, especialidad, direccion }, key) => {
+                return (
+                  <tr key={id}>
+                    <td className="align-middle ms-3 lh-1">
+                           <div>{name}</div>
+                      <div className="d-flex align-items-center">
+                        
+                        <div>
+                          <Image src={imageUrl} alt="" className="avatar-md avatar rounded-circle" />
+                        </div>
+                       
+                      </div>
+                    </td>
+                    <td className="align-middle">{apellido}</td>
+                    <td className="align-middle">{especialidad}</td>
+                    <td className="align-middle">{phone}</td>
+                    <td className="align-middle">{phonesec}</td>
+                    <td className="align-middle">{direccion}</td>
+                    <td className="align-middle">
+                      <ActionMenu />
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </Table>
         </Card>
-    )
+      )
+      
 }
 
 export default Prestadores;
+
+
 
 
 

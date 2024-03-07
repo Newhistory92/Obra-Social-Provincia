@@ -10,50 +10,89 @@ datasource db {
 }
 
 model Afiliado {
-  id          String   @id
-  name        String   @db.VarChar(50)
-  email       String   @db.VarChar(200)
-  password    String   @db.VarChar(200)
-  imageUrl    String   @db.VarChar(800)
-  dni         String   @db.VarChar(8)
-  phone       String   @db.VarChar(13)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          String    @id
+  name        String    @db.VarChar(50)
+  email       String    @db.VarChar(200)
+  password    String    @db.VarChar(200)
+  imageUrl    String    @db.VarChar(800)
+  dni         String    @db.VarChar(8)
+  phone       String    @db.VarChar(13)
+  dataTime    DateTime
+  role        String    @default("user") // Nuevo campo de rol
+  denuncias   Denuncia[]
+  opiniones   Opinion[]
+  address     Address?  @relation(fields: [addressId], references: [id])
+  addressId  String?
 }
-
 
 model Prestador {
   id           String   @id
-  name         String   @db.VarChar(50)
+  name         String   @db.VarChar(20)
+  apellido     String   @db.VarChar(20)
   email        String   @db.VarChar(200)
   password     String   @db.VarChar(200)
   phone        String   @db.VarChar(13)
+  phoneopc     String?   @db.VarChar(13)
   imageUrl     String   @db.VarChar(800)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
   dataTime     DateTime
   matricula    String   @db.VarChar(5)
   especialidad String   @db.VarChar(150)
-  puntuacion   Int
+  puntuacion   Int?
+  role         String   @default("provider") // Nuevo campo de rol
+  address     Address?  @relation(fields: [addressId], references: [id])
+  addressId    String?
 }
-
 
 model Operador {
-  id             String   @id
-  name           String   @db.VarChar(50)
-  email          String   @db.VarChar(200)
-  password       String   @db.VarChar(200)
-  imageUrl       String   @db.VarChar(800)
-  phone          String   @db.VarChar(13)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id             String     @id
+  name           String     @db.VarChar(50)
+  email          String     @db.VarChar(200)
+  password       String     @db.VarChar(200)
+  imageUrl       String     @db.VarChar(800)
+  phone          String     @db.VarChar(13)
   dataTime       DateTime
-  numeroOperador String   @db.VarChar(5)
-  // roles          Rol[]    @relation("RolOperador")
-  role           String   @default("user")
+  numeroOperador String     @db.VarChar(5)
+  role           String     @default("employee") // Nuevo campo de rol
+  publicacion    Publicacion[]
+  address        Address?  @relation(fields: [addressId], references: [id])
+  addressId      String?
 }
-// model Rol {
-//   id       String    @id
-//   tipo     String  
-//   operador Operador? @relation("RolOperador", fields: [id], references: [id])
-// }
+
+model Publicacion {
+  id          String    @id
+  titulo      String
+  contenido   String
+  autor       Operador  @relation(fields: [autorId], references: [id])
+  autorId     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Opinion {
+  id          String    @id
+  contenido   String
+  autor       Afiliado  @relation(fields: [autorId], references: [id])
+  autorId     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Denuncia {
+  id          String    @id
+  motivo      String
+  autor       Afiliado  @relation(fields: [autorId], references: [id])
+  autorId     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Address {
+  id         String     @id @default(uuid())
+  street     String?
+  locality   String?
+  city       String?
+  state      String?
+  afiliado   Afiliado[]
+  prestador  Prestador[]
+  operador   Operador[]
+}

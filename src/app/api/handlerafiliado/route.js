@@ -11,11 +11,13 @@ export async function POST(request) {
         const dni = body.dni;
         const email = user.emailAddresses[0].emailAddress;
         const userId = user.id;
+        const dataTime =  new Date().toISOString();
 
         // Verificar si el usuario ya está autenticado en alguna tabla
-        const isAuthenticated = await checkUserAuthentication(userId);
-        if (isAuthenticated) {
-            return NextResponse.json({ status: 400, message: `El usuario ya está asociado a un Afiliado.` });
+        const isAuthenticated = await checkUserAuthentication(userId, 'afiliado');
+        console.log(isAuthenticated.status,isAuthenticated.message )
+        if (isAuthenticated === false) {
+            return NextResponse.json({ status: 404, message: isAuthenticated.message });
         }
 
         // Verificar si el DNI ya está asociado a un usuario en la base de datos
@@ -51,7 +53,10 @@ export async function POST(request) {
                 imageUrl: imageUrl,
                 phone: phoneNumbers[0].phoneNumber,
                 password: passwordValue,
-                dni: dni
+                dni: dni,
+                dataTime: dataTime,
+                role: "user",
+                addressId:null
             }
         });
         
@@ -64,84 +69,6 @@ export async function POST(request) {
     }
 }
 
-// export async function POST(request) {
-//     try {
-//         const user = await currentUser();
-//         const body = await request.json();
-//         const dni = body.dni;
-//         const email = user.emailAddresses[0].emailAddress;
-//         const userId = user.id;
-    
-//         // Verificar si el DNI ya está asociado a un usuario en la base de datos
-//         const existingUserWithDNI = await prisma.afiliado.findFirst({
-//             where: {
-//                 dni: dni
-//             }
-//         });
-
-//         if (existingUserWithDNI) {
-//             // Verificar si el usuario ya existe en la base de datos por su ID
-//             const existingUserWithId = await prisma.afiliado.findFirst({
-//                 where: {
-//                     id: userId
-//                 }
-//             });
-
-//             if (existingUserWithId && existingUserWithId.id === existingUserWithDNI.id) {
-//                 return NextResponse.json({ status: 200, message: "El Afiliado se confirma correctamente." });
-//             }
-//         }
-
-//         // Si el DNI no está asociado al usuario o no coincide con el ID, continuar con la lógica anterior
-
-//         if (existingUserWithDNI) {
-//             return NextResponse.json({ status: 400, message: `El DNI N°: ${existingUserWithDNI.dni} ya está asociado a un Afiliado`});
-//         }
-
-//         // Verificar si el usuario ya existe en la base de datos por su email
-//         const existingUserWithEmail = await prisma.afiliado.findFirst({
-//             where: {
-//                 email: email
-//             }
-//         });
-
-//         if (existingUserWithEmail) {
-//             return NextResponse.json({ status: 400, message: `El Correo Electronico  ${existingUserWithEmail.email} ya está asociado a un Afiliado` });
-//         }
-
-//         // Verificar si el usuario ya existe en la base de datos por su ID
-//         const existingUserWithId = await prisma.afiliado.findFirst({
-//             where: {
-//                 id: userId
-//             }
-//         });
-
-//         if (existingUserWithId) {
-//             return NextResponse.json({ status: 400, message: `El Afiliado ${existingUserWithId.name} ya existe en la base de datos.` });
-//         }
-
-//         // Insertar el nuevo usuario en la base de datos
-//         const { firstName, lastName, emailAddresses, imageUrl, phoneNumbers, passwordEnabled } = user;
-//         const passwordValue = passwordEnabled ? 'true' : 'false'; // Convertir el booleano a string
-//         const newAfiliado = await prisma.afiliado.create({
-//             data: {
-//                 id: userId,
-//                 name: `${firstName} ${lastName}`,
-//                 email: emailAddresses[0].emailAddress,
-//                 imageUrl: imageUrl,
-//                 phone: phoneNumbers[0].phoneNumber,
-//                 password: passwordValue,
-//                 dni: dni
-//             }
-//         });
-        
-//         console.log("Perfil de usuario creado correctamente:", newAfiliado);
-
-//         return NextResponse.json({ status: 200, message: "Perfil del Afiliado fue creado con éxito." });
-//     } catch (error) {
-//         return NextResponse.json({ status: 500, message: `Error al crear el perfil del Afiliado: ${error.message}` });
-//     }
-// }
 
 
 export async function GET(request) {

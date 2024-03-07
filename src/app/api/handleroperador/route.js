@@ -11,13 +11,14 @@ export async function POST(request) {
         const numeroOperador = body.numeroOperador;
         const email = user.emailAddresses[0].emailAddress;
         const userId = user.id;
+        const dataTime =  new Date().toISOString();
 
         // Verificar si el usuario ya está autenticado en alguna tabla
-        const isAuthenticated = await checkUserAuthentication(userId);
-        if (isAuthenticated) {
-            return NextResponse.json({ status: 400, message: `El usuario ya está asociado a una cuenta existente.` });
+        const isAuthenticated = await checkUserAuthentication(userId, 'operador');
+        console.log(isAuthenticated.status,isAuthenticated.message )
+        if (isAuthenticated === false) {
+            return NextResponse.json({ status: 404, message: isAuthenticated.message });
         }
-
         // Verificar si el DNI ya está asociado a un usuario en la base de datos
         const existingUserWithOPer = await prisma.operador.findFirst({
             where: {
@@ -51,7 +52,10 @@ export async function POST(request) {
                 imageUrl: imageUrl,
                 phone: phoneNumbers[0].phoneNumber,
                 password: passwordValue,
-                numeroOperador: numeroOperador
+                numeroOperador: numeroOperador,
+                dataTime: dataTime,
+                role: "employee",
+                addressId:null
             }
         });
         
