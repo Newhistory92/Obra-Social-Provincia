@@ -86,7 +86,13 @@ const Navbar = ({ onLogoClick }: { onLogoClick: OnLogoClick }) => {
                 Contenido de MEDICAMENTO
               </TabPanel>
               <TabPanel value="expediente">
-                Contenido de EXPEDIENTE
+                <iframe
+                  src="https://sj.sanjuan.gob.ar/?uid=CUMV-VIEW-ExpedientesComponent"
+                  title="Expediente"
+                  width="100%"
+                  height="600"
+                  frameBorder="0"
+                ></iframe>
               </TabPanel>
               <TabPanel value="menu">
                 <Menu />
