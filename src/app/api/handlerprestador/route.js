@@ -85,7 +85,8 @@ export async function POST(request) {
                 puntuacion: null,
                 phoneopc:null,
                 role: "provider",
-                addressId:null
+                addressId:null,
+                tipo: "No Fidelizado"
           
             }
         });
