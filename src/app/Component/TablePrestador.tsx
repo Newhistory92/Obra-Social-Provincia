@@ -165,13 +165,13 @@ const Prestadores = () => {
       {selectedPrestador && (
         <Modal show={true} onHide={handleCloseModal}>
           <Modal.Header closeButton>
-            <Modal.Title>{selectedPrestador.name} {selectedPrestador.apellido}</Modal.Title>
+            <Modal.Title>Prestador de Obra Social Provincia</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <PrestadorCard {...selectedPrestador} />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseModal}>Cerrar</Button>
+            <Button color="secondary" variant="secondary" onClick={handleCloseModal}>Cerrar</Button>
           </Modal.Footer>
         </Modal>
       )}

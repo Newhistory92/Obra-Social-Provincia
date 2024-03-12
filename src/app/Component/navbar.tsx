@@ -29,7 +29,7 @@ const Navbar = ({ onLogoClick }: { onLogoClick: OnLogoClick }) => {
     if (isSignedIn) {
       return (
         <Stack direction="row" spacing={2}>
-          <Link href="/page/dashboard/afiliado" passHref>
+          <Link href="/page/dashboard" passHref>
             <Button variant="outlined" className={`icon text-2.8rem text-aliceblue cursor-pointer mr-5 ${styles.button}`}>
               Panel
             </Button>

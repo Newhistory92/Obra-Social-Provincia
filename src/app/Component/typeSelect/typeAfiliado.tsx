@@ -26,8 +26,8 @@ const TypeAfiliado = () => {
         if (response.ok) {
           if (data.status === 200) {
             // El usuario está en la tabla Afiliado, redirigir al dashboard de Afiliado
-            window.location.href = '/page/dashboard/afiliado';
-            console.log("redirige al /dashboard/afiliado")
+            window.location.href = '/page/dashboard';
+            console.log("redirige al /dashboard")
           } else if (data.status === 401) {
             // El usuario no está autenticado, redirigir al inicio de sesión
             window.location.href = '/page/signin';
@@ -75,7 +75,7 @@ const TypeAfiliado = () => {
       console.log(responseData)
 
        if ( responseData.status === 200){
-        window.location.href = '/page/dashboard/afiliado';
+        window.location.href = '/page/dashboard';
        toast.success(responseData.message);
       }
        else{ (responseData.status === 400)

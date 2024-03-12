@@ -27,7 +27,7 @@ const TypeOperador = () => {
           if (response.ok) {
             if (data.status === 200) {
               // El usuario está en la tabla Operador, redirigir al dashboard de Operador
-              window.location.href = '/page/dashboard/operador';
+              window.location.href = '/page/dashboard';
               console.log("redirige al /dashboard/operador")
             } else if (data.status === 401) {
               // El usuario no está autenticado, redirigir al inicio de sesión
@@ -77,7 +77,7 @@ const TypeOperador = () => {
         console.log(responseData)
   
          if (responseData.status === 200) {
-          window.location.href = '/page/dashboard/operador';
+          window.location.href = '/page/dashboard';
           toast.success(responseData.message);
         } else if (responseData.status === 400) {
           setErrorMessage(responseData.message); 

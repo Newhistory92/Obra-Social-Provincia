@@ -26,7 +26,7 @@ const TypePrestador = () => {
         if (response.ok) {
           if (data.status === 200) {
             // El usuario está en la tabla Afiliado, redirigir al dashboard de Afiliado
-            window.location.href = '/page/dashboard/prestador';
+            window.location.href = '/page/dashboard';
             console.log("redirige al /dashboard/prestador")
           } else if (data.status === 401) {
             // El usuario no está autenticado, redirigir al inicio de sesión
@@ -75,7 +75,7 @@ const TypePrestador = () => {
       const responseData = await response.json();
 
       if (responseData.status === 200) {
-        window.location.href = '/page/dashboard/prestador';
+        window.location.href = '/page/dashboard';
         toast.success(responseData.message);
       } else if (responseData.status === 400) {
         setErrorMessage(responseData.status);
