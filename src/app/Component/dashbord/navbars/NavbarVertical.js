@@ -1,5 +1,4 @@
 import * as React from 'react';
-import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
@@ -22,42 +21,39 @@ export default function VerticalNavbar() {
   };
 
   return (
-    <div className='navbar-vertical navbar'>
+    <div className='navbar-vertical'>
       <List style={{ maxHeight: "100vh", width: '100%', maxWidth: 360 }} component="nav">
-        <div className="nav-scroller ml-5">
+        <div className="nav-scroller ml-5 navbar-brand">
           <Image src={Logo} alt="" width={90} height={60} />
         </div>
         <div className="navbar-heading nav-item">
           {user ? `Bienvenido ${user.fullName}` : ""}
         </div>
-        <ListSubheader
-          className="navbar-heading nav-item"
-          component="div"
-          id="vertical-nav-subheader"
-          sx={{ borderBottom: '1px solid #ccc' }} // Aquí aplicamos un borde inferior como ejemplo de estilo
-        >
-          MENU
-        </ListSubheader>
-        <ListItemButton onClick={handleClick}>
-          <ListItemText primary="Datos Personales" />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText className="nav-link" primary="Perfil" />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText className="nav-link" primary="Configuración" />
-            </ListItemButton>
-          </List>
-        </Collapse>
+        <div className="slimScrollDiv">
+          <div className="navbar-heading navbar navbar-brand">
+            MENU
+          </div>
+          <ListItemButton className="nav-item  navbar" onClick={handleClick}>
+            <ListItemText className="nav-link ms-5" primary="Datos Personales" />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText className="nav-link" primary="Perfil" />
+              </ListItemButton>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText className="nav-link" primary="Configuración" />
+              </ListItemButton>
+            </List>
+          </Collapse>
+        </div>
       </List>
     </div>
   );
