@@ -10,7 +10,7 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import Logo from "../../../../../public/logoshare.png";
 import Image from 'next/image';
 import { useUser } from '@clerk/nextjs';
-
+import Link from 'next/link';
 
 export default function VerticalNavbar() {
   const { user } = useUser();
@@ -45,6 +45,7 @@ export default function VerticalNavbar() {
                 </ListItemIcon>
                 <ListItemText className="nav-link" primary="Perfil" />
               </ListItemButton>
+                <Link  href={'/page/perfil'}/>
               <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <StarBorder />

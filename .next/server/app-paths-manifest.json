@@ -1,5 +1,8 @@
 {
+  "/not-found": "app/not-found.js",
+  "/page": "app/page.js",
+  "/page/select-user/page": "app/page/select-user/page.js",
+  "/page/dashboard/page": "app/page/dashboard/page.js",
   "/sign-in/[[...sign-in]]/page": "app/sign-in/[[...sign-in]]/page.js",
-  "/api/datos/operador/route": "app/api/datos/operador/route.js",
-  "/page/dashboard/admin/page": "app/page/dashboard/admin/page.js"
+  "/api/handlerprestador/route": "app/api/handlerprestador/route.js"
 }

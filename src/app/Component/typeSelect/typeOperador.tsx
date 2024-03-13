@@ -5,15 +5,18 @@ import { Typography, Input, Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import operadoresData from '../../../operador.json';
 import Link from 'next/link';
-
+import {useAppSelector,useAppDispatch} from "../../hooks/StoreHook"
+import { setCurrentUser, setSelectedUser, setLoading, setErrorMessage } from "../../reducers/userSlice"
 const TypeOperador = () => {
 
   const [numeroOperador, setNumeroOperador] = useState('');
-  const [selectedUser, setSelectedUser] = useState<{ name: string; operador: string; } | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Inicializar errorMessage como una cadena vacía
+  const dispatch = useAppDispatch();
+  const { currentUser, loading, errorMessage } = useAppSelector((state) => state.user); // Asegúrate de que 'user' sea el nombre correcto del slice
+console.log(currentUser, loading, errorMessage)
 
   useEffect(() => {
+    dispatch(setLoading(true)); // Establecer carga en true al montar el componente
+
     const verifyUser = async () => {
         try {
           const response = await fetch('/api/handleroperador', {
@@ -27,20 +30,21 @@ const TypeOperador = () => {
           if (response.ok) {
             if (data.status === 200) {
               // El usuario está en la tabla Operador, redirigir al dashboard de Operador
+              dispatch(setCurrentUser(data.user));
               window.location.href = '/page/dashboard';
               console.log("redirige al /dashboard/operador")
             } else if (data.status === 401) {
               // El usuario no está autenticado, redirigir al inicio de sesión
               window.location.href = '/page/signin';
             }else if (data.status === 402) {
-              setLoading(false);
+              dispatch(setLoading(false));
             }
           } else {
-            setLoading(false);
+            dispatch(setLoading(false));
           }
         } catch (error) {
           console.error('Error al verificar el usuario:', error);
-          setLoading(false);
+          dispatch(setLoading(false));
         }
       };
   
@@ -52,15 +56,15 @@ const TypeOperador = () => {
     const sanitizedValue = event.target.value.replace(/\D/g, '').slice(0, 8);
     setNumeroOperador(sanitizedValue);
     const user = operadoresData.find(operador => operador.operador === sanitizedValue);
-    setSelectedUser(user || null);
-    setErrorMessage(null)
+    dispatch(setCurrentUser(user)); // Establecer el usuario seleccionado en el estado global
+    dispatch(setErrorMessage(null)); // Limpiar el mensaje de error
   };
 
   const handleConfirm = async () => {
     try {
         setLoading(true);
   
-        if (!selectedUser) {
+        if (!currentUser) {
           toast.error('Seleccione un operador antes de confirmar');
           return;
         }
@@ -80,7 +84,7 @@ const TypeOperador = () => {
           window.location.href = '/page/dashboard';
           toast.success(responseData.message);
         } else if (responseData.status === 400) {
-          setErrorMessage(responseData.message); 
+          dispatch(setErrorMessage(responseData.status));
           toast.error(responseData.message);
          }
          
@@ -88,12 +92,12 @@ const TypeOperador = () => {
         console.error('Error al confirmar el operador:', error);
         toast.error('Ocurrió un error al confirmar el operador');
       } finally {
-        setLoading(false);
+        dispatch(setLoading(false));
       }
     };
 
   const handlePrev = () => {
-    setErrorMessage(null); // Limpiar el mensaje de error
+    dispatch(setErrorMessage(null));
   };
 
   if (loading) {
@@ -112,9 +116,9 @@ const TypeOperador = () => {
         className="mt-2 border-t border-blue-gray-200 focus:border-t focus:border-gray-900"
       />
 
-      {selectedUser && (
+      {currentUser && (
         <div className="mt-4">
-          <Typography>Nombre: {selectedUser.name}</Typography>
+          <Typography>Nombre: {currentUser.name}</Typography>
           {errorMessage && (
             <div>
               <Link href="/">

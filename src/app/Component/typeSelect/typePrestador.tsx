@@ -4,15 +4,15 @@ import { Typography, Input, Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import prestadoresData from '../../../prestor.json';
 import Link from 'next/link';
-
+import { useAppSelector, useAppDispatch } from "../../hooks/StoreHook";
+import { setCurrentUser, setLoading, setErrorMessage } from "../../reducers/userSlice";
 
 const TypePrestador = () => {
   const [matricula, setMatricula] = useState('');
-  const [selectedPrestador, setSelectedPrestador] = useState<{ id: string; name: string; especialidad: string; matricula: string; } | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
-
+  const dispatch = useAppDispatch();
+  const { currentUser, loading, errorMessage } = useAppSelector((state) => state.user);
   useEffect(() => {
+    dispatch(setLoading(true)); // Establecer carga en true al montar el componente
     const verifyUser = async () => {
       try {
         const response = await fetch('/api/handlerprestador', {
@@ -26,20 +26,23 @@ const TypePrestador = () => {
         if (response.ok) {
           if (data.status === 200) {
             // El usuario está en la tabla Afiliado, redirigir al dashboard de Afiliado
-            window.location.href = '/page/dashboard';
+            dispatch(setCurrentUser(data.users));
+            console.log('Estado global actualizado:', currentUser);
+         
+            // window.location.href = '/page/dashboard';
             console.log("redirige al /dashboard/prestador")
           } else if (data.status === 401) {
             // El usuario no está autenticado, redirigir al inicio de sesión
             window.location.href = '/page/signin';
           }else if (data.status === 402) {
-            setLoading(false);
+            dispatch(setLoading(false)); 
           }
         } else {
-          setLoading(false);
+          dispatch(setLoading(false)); 
         }
       } catch (error) {
         console.error('Error al verificar el usuario:', error);
-        setLoading(false);
+        dispatch(setLoading(false)); 
       }
     };
 
@@ -51,15 +54,15 @@ const TypePrestador = () => {
     const sanitizedValue = event.target.value.replace(/\D/g, '').slice(0, 8);
     setMatricula(sanitizedValue);
     const prestador = prestadoresData.find(prestador => prestador.matricula === sanitizedValue);
-    setSelectedPrestador(prestador || null);
-    setErrorMessage(null);
+    dispatch(setCurrentUser(user)); // Establecer el usuario seleccionado en el estado global
+    dispatch(setErrorMessage(null)); 
   };
 
   const handleConfirm = async () => {
     try {
       setLoading(true);
 
-      if (!selectedPrestador) {
+      if (!currentUser) {
         toast.error('Seleccione un prestador antes de confirmar');
         return;
       }
@@ -69,7 +72,7 @@ const TypePrestador = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ matricula: selectedPrestador.matricula, especialidad: selectedPrestador.especialidad }),
+        body: JSON.stringify({ matricula: currentUser.matricula, especialidad: currentUser.especialidad }),
       });
 
       const responseData = await response.json();
@@ -78,7 +81,7 @@ const TypePrestador = () => {
         window.location.href = '/page/dashboard';
         toast.success(responseData.message);
       } else if (responseData.status === 400) {
-        setErrorMessage(responseData.status);
+        dispatch(setErrorMessage(responseData.status));
         toast.error(responseData.message);
         console.log(responseData.message)
       }
@@ -87,11 +90,11 @@ const TypePrestador = () => {
       console.error('Error al confirmar el prestador:', error);
       toast.error('Ocurrió un error al confirmar el prestador');
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
   const handlePrev = () => {
-    setErrorMessage(null);
+    dispatch(setErrorMessage(null)); 
   };
 
   if (loading) {
@@ -109,12 +112,12 @@ const TypePrestador = () => {
         className="mt-2 border-t border-blue-gray-200 focus:border-t focus:border-gray-900"
       />
 
-      {selectedPrestador && (
+      {currentUser && (
         <div className="mt-4">
-          <Typography>Nombre: {selectedPrestador.name}</Typography>
-          <Typography>Especialidad: {selectedPrestador.especialidad}</Typography>
+          <Typography>Nombre: {currentUser.name}</Typography>
+          <Typography>Especialidad: {currentUser.especialidad}</Typography>
           <Link href="/">
-          {errorMessage === 400 && (
+          {errorMessage === "400" && (
             <Button
               variant="contained"
               onClick={handlePrev}

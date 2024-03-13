@@ -38,10 +38,11 @@ model Prestador {
   matricula    String   @db.VarChar(5)
   especialidad String   @db.VarChar(150)
   puntuacion   Int?
-  descripcion  String   @db.VarChar(600)
+  descripcion  String?   @db.VarChar(600)
   role         String   @default("provider") // Nuevo campo de rol
   address     Address?  @relation(fields: [addressId], references: [id])
-  addressId    String?  @default("No Fidelizado")
+  addressId    String? 
+  tipo         String   @db.VarChar(10)
 }
 
 model Operador {
