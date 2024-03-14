@@ -2,30 +2,26 @@
 import { Col, Row, Container } from 'react-bootstrap';
 import {useAppSelector,useAppDispatch} from "../../hooks/StoreHook"
 import { setCurrentUser} from "../../reducers/userSlice"
+import { useDispatch, useSelector } from "react-redux";
 // import widget as custom components
 import  PageHeading  from '../../widgets/PageHeading'
-
+import {UserInfo} from "../../reducers/userSlice"
 // import sub components
 import ProfileHeader from './ProfileHeader'
-
+import SimpleCard from "../cards/card"
 
 
 const Profile = () => {
-  const Profile = () => {
-    const currentUser = useAppSelector(state => state.user.currentUser);
   
-    // Verificar si currentUser no es null antes de acceder a sus propiedades
-    const imageUrl = currentUser ? currentUser.imageUrl : '';
-    const name = currentUser ? currentUser.name : '';
-    const apellido = currentUser ? currentUser.apellido : '';
-    const email = currentUser ? currentUser.email : '';
-  
-    console.log("Datos del usuario:", imageUrl, name, apellido, email);
-  
-    // Resto del componente
-  };
-  
+  const currentUser = useAppSelector(state => state.user.currentUser);
+console.log(currentUser)
+  // Verificar si currentUser no es null antes de acceder a sus propiedades
+  const imageUrl = currentUser ? currentUser.imageUrl : '';
+  const name = currentUser ? currentUser.name : '';
+  const apellido = currentUser ? currentUser.apellido : '';
+  const email = currentUser ? currentUser.email : '';
 
+  console.log("Datos del usuario:", imageUrl, name, apellido, email);
 
 
 
@@ -35,19 +31,14 @@ const Profile = () => {
       <PageHeading heading="Overview"/>
 
       {/* Profile Header  */}
-      <ProfileHeader
-        imageUrl={imageUrl}
-        name={name}
-        apellido={apellido}
-        email={email}
-      />
+      <ProfileHeader imageUrl={ imageUrl} name={name} apellido={apellido} email={email}/>
 
       {/* content */}
       <div className="py-6">
         <Row>
 
           {/* About Me */}
-          {/* <AboutMe /> */}
+          <SimpleCard />
 
           {/* Projects Contributions */}
           {/* <ProjectsContributions /> */}

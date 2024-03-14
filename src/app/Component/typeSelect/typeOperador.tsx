@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import operadoresData from '../../../operador.json';
 import Link from 'next/link';
 import {useAppSelector,useAppDispatch} from "../../hooks/StoreHook"
-import { setCurrentUser, setSelectedUser, setLoading, setErrorMessage } from "../../reducers/userSlice"
+import { setCurrentUser,  setLoading, setErrorMessage } from "../../reducers/userSlice"
 const TypeOperador = () => {
 
   const [numeroOperador, setNumeroOperador] = useState('');
@@ -74,7 +74,7 @@ console.log(currentUser, loading, errorMessage)
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ numeroOperador: selectedUser.operador }),
+          body: JSON.stringify({ numeroOperador: currentUser.operador }),
         });
   
         const responseData = await response.json();

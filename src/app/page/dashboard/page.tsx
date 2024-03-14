@@ -26,8 +26,7 @@ const DefaultDashboardLayout: React.FC<Props> = ({ children }) => {
     <div id="db-wrapper" className={`${showMenu ? '' : 'toggled'}`}>
       <div className="navbar-vertical navbar">
         <NavbarVertical
-          showMenu={showMenu}
-          onClick={() => setShowMenu(!showMenu)}
+        
           onProfileClick={handleProfileClick} // Pasar la función para manejar el clic del perfil
         />
       </div>
@@ -43,7 +42,7 @@ const DefaultDashboardLayout: React.FC<Props> = ({ children }) => {
         {children}
         <div className='px-6 border-top py-3'>
           {profileActive && <Profile />} {/* Renderizar el perfil solo si profileActive es true */}
-          <Prestadores/>
+          {/* <Prestadores/> */}
         </div>
       </div>
     </div>

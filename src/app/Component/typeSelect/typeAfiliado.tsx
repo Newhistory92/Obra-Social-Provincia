@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import afiliadosData from '../../../afiliados.json';
 import Link from 'next/link';
 import {useAppSelector,useAppDispatch} from "../../hooks/StoreHook"
-import { setCurrentUser, setSelectedUser, setLoading, setErrorMessage } from "../../reducers/userSlice"
+import { setCurrentUser, setLoading, setErrorMessage } from "../../reducers/userSlice"
 
 const TypeAfiliado = () => {
   const dispatch = useAppDispatch();

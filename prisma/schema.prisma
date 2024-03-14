@@ -23,6 +23,7 @@ model Afiliado {
   opiniones   Opinion[]
   address     Address?  @relation(fields: [addressId], references: [id])
   addressId  String?
+  dependencia String?
 }
 
 model Prestador {
