@@ -54,7 +54,7 @@ const TypePrestador = () => {
     const sanitizedValue = event.target.value.replace(/\D/g, '').slice(0, 8);
     setMatricula(sanitizedValue);
     const prestador = prestadoresData.find(prestador => prestador.matricula === sanitizedValue);
-    dispatch(setCurrentUser(user)); // Establecer el usuario seleccionado en el estado global
+    dispatch(setCurrentUser(prestador)); // Establecer el usuario seleccionado en el estado global
     dispatch(setErrorMessage(null)); 
   };
 

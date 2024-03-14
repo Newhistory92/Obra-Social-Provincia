@@ -11,8 +11,20 @@ import ProfileHeader from './ProfileHeader'
 
 
 const Profile = () => {
-  const { imageUrl, name, apellido, email } = useAppSelector(state => state.user.currentUser);
-  console.log("Datos del usuario:", imageUrl, name, apellido, email);
+  const Profile = () => {
+    const currentUser = useAppSelector(state => state.user.currentUser);
+  
+    // Verificar si currentUser no es null antes de acceder a sus propiedades
+    const imageUrl = currentUser ? currentUser.imageUrl : '';
+    const name = currentUser ? currentUser.name : '';
+    const apellido = currentUser ? currentUser.apellido : '';
+    const email = currentUser ? currentUser.email : '';
+  
+    console.log("Datos del usuario:", imageUrl, name, apellido, email);
+  
+    // Resto del componente
+  };
+  
 
 
 

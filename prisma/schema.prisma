@@ -32,7 +32,7 @@ model Prestador {
   email        String   @db.VarChar(200)
   password     String   @db.VarChar(200)
   phone        String   @db.VarChar(13)
-  phoneopc     String?   @db.VarChar(13)
+  phoneopc     String?  @db.VarChar(13)
   imageUrl     String   @db.VarChar(800)
   dataTime     DateTime
   matricula    String   @db.VarChar(5)
