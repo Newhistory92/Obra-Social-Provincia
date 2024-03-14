@@ -23,7 +23,7 @@ module.exports = require("next/dist/compiled/next-server/app-route.runtime.dev.j
 
 /***/ }),
 
-/***/ "next/dist/compiled/@vercel/og/index.node.js":
+/***/ "next/dist/compiled/@vercel/og/index.node.js?ba75":
 /*!**************************************************************!*\
   !*** external "next/dist/compiled/@vercel/og/index.node.js" ***!
   \**************************************************************/

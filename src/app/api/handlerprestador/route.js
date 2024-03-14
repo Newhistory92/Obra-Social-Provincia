@@ -86,7 +86,9 @@ export async function POST(request) {
                 phoneopc:null,
                 role: "provider",
                 addressId:null,
-                tipo: "No Fidelizado"
+                tipo: "Fidelizado",
+                descripcion:null,
+             
           
             }
         });
@@ -114,19 +116,26 @@ export async function GET(request) {
         const userId = user.id;
 
         // Verificar si el ID del usuario está en la base de datos
-       
         const isAuthenticatedAndInDatabase = await checkUserAuthentication(userId, 'prestador');
         if (isAuthenticatedAndInDatabase.status === 200) {
-            console.log(isAuthenticatedAndInDatabase.status)
-            return NextResponse.json({ status: 200, message: isAuthenticatedAndInDatabase.message });
+            // Obtener toda la información del usuario desde la base de datos
+            const users = await prisma.prestador.findMany();
+
+            // Verificar si se encontró la información del usuario
+            if (!users) {
+                return NextResponse.json({ status: 404, message: "Usuario no encontrado en la base de datos." });
+            }
+
+            // Devolver toda la información del usuario
+            return NextResponse.json({ status: 200, users });
         } else {
-        } 
-            (isAuthenticatedAndInDatabase.status === 400)
             return NextResponse.json ({ status: 402, message: isAuthenticatedAndInDatabase.message });
+        }
     } catch (error) {
         console.error("Error al verificar la autenticación del usuario:", error);
         return NextResponse.json({ status: 500, message: `Error al verificar la autenticación del usuario: ${error.message}` });
     }
 }
+
 
 
