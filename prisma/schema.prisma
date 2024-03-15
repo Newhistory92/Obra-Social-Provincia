@@ -11,7 +11,8 @@ datasource db {
 
 model Afiliado {
   id          String    @id
-  name        String    @db.VarChar(50)
+  name        String    @db.VarChar(20)
+  apellido     String   @db.VarChar(20)
   email       String    @db.VarChar(200)
   password    String    @db.VarChar(200)
   imageUrl    String    @db.VarChar(800)
@@ -48,7 +49,8 @@ model Prestador {
 
 model Operador {
   id             String     @id
-  name           String     @db.VarChar(50)
+  name           String     @db.VarChar(20)
+  apellido       String     @db.VarChar(20)
   email          String     @db.VarChar(200)
   password       String     @db.VarChar(200)
   imageUrl       String     @db.VarChar(800)

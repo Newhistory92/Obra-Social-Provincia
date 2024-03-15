@@ -7,7 +7,7 @@ interface UserState {
 }
 
 export interface UserInfo {
-  operador: any;
+  
   id: string;
   name: string;
   apellido?: string;
@@ -23,6 +23,8 @@ export interface UserInfo {
   addressId: string;
   especialidad?: string;
   dependencia?: string;
+  tipo:string
+  descripcion:string
 }
 
 export interface UserWithId extends UserInfo {

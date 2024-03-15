@@ -9,6 +9,7 @@ interface ProfileHeaderProps {
 }
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ imageUrl, name, apellido,email }) => {
+
     
     return (
         <Row className="align-items-center shadow-lg">

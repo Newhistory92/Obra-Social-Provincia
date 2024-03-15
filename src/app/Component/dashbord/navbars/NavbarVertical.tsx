@@ -10,7 +10,7 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import Logo from "../../../../../public/logoshare.png";
 import Image from 'next/image';
 import { useUser } from '@clerk/nextjs';
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 interface Props {
   onProfileClick: () => void;
@@ -44,9 +44,9 @@ const NavbarVertical: React.FC<Props> = ({ onProfileClick }) => {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItemButton onClick={onProfileClick} sx={{ pl: 4 }}>
-                <ListItemIcon>
+                <AccountCircleIcon>
                   <StarBorder />
-                </ListItemIcon>
+                </AccountCircleIcon>
                 <ListItemText className="nav-link" primary="Perfil" />
               </ListItemButton >
               {/* <Link  href={'/page/perfil'}/> */}
