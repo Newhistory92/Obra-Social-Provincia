@@ -38,7 +38,9 @@ model Prestador {
   imageUrl     String   @db.VarChar(800)
   dataTime     DateTime
   matricula    String   @db.VarChar(5)
-  especialidad String   @db.VarChar(150)
+  especialidad String   @db.VarChar(100)
+  especialidad2 String   @db.VarChar(100)
+  especialidad3 String   @db.VarChar(100)
   puntuacion   Int?
   descripcion  String?   @db.VarChar(600)
   role         String   @default("provider") // Nuevo campo de rol

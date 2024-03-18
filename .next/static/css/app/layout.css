@@ -947,9 +947,6 @@ video {
 .w-9 {
   width: 2.25rem;
 }
-.w-96 {
-  width: 24rem;
-}
 .w-\[110px\] {
   width: 110px;
 }
@@ -2424,6 +2421,9 @@ video {
 .no-underline {
   text-decoration-line: none;
 }
+.underline-offset-4 {
+  text-underline-offset: 4px;
+}
 .antialiased {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2634,6 +2634,9 @@ video {
 }
 .outline-0 {
   outline-width: 0px;
+}
+.ring-offset-white {
+  --tw-ring-offset-color: #ffffff;
 }
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -3842,6 +3845,10 @@ body {
   background-color: rgb(255 235 59 / 0.1);
 }
 
+.hover\:bg-red-500\/90:hover {
+  background-color: rgb(244 67 54 / 0.9);
+}
+
 .hover\:bg-opacity-80:hover {
   --tw-bg-opacity: 0.8;
 }
@@ -3859,6 +3866,10 @@ body {
 .hover\:text-light-blue-500:hover {
   --tw-text-opacity: 1;
   color: rgb(3 169 244 / var(--tw-text-opacity));
+}
+
+.hover\:underline:hover {
+  text-decoration-line: underline;
 }
 
 .hover\:opacity-75:hover {
@@ -4262,6 +4273,21 @@ body {
 
 .focus\:placeholder\:opacity-100:focus::placeholder {
   opacity: 1;
+}
+
+.focus-visible\:outline-none:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus-visible\:ring-2:focus-visible {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus-visible\:ring-offset-2:focus-visible {
+  --tw-ring-offset-width: 2px;
 }
 
 .active\:scale-100:active {
@@ -5293,6 +5319,15 @@ body {
 .peer:disabled:placeholder-shown ~ .peer-disabled\:peer-placeholder-shown\:text-blue-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(96 125 139 / var(--tw-text-opacity));
+}
+
+:is(.dark .dark\:bg-red-900) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(183 28 28 / var(--tw-bg-opacity));
+}
+
+:is(.dark .dark\:hover\:bg-red-900\/90:hover) {
+  background-color: rgb(183 28 28 / 0.9);
 }
 
 @media (min-width: 540px) {

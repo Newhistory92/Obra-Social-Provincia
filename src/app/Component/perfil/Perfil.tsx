@@ -37,6 +37,8 @@ console.log(currentUser )
             role={currentUser[0].role} 
             addressId={currentUser[0].addressId} 
             especialidad={currentUser[0].especialidad} 
+            especialidad2={currentUser[0].especialidad}
+            especialidad3={currentUser[0].especialidad}
             dependencia={currentUser[0].dependencia} 
             tipo={currentUser[0].tipo} 
             descripcion={currentUser[0].descripcion} 

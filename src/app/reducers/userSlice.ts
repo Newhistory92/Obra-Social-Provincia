@@ -22,6 +22,8 @@ export interface UserInfo {
   address: string;
   addressId: string;
   especialidad?: string;
+  especialidad2?:string;
+  especialidad3?:string;
   dependencia?: string;
   tipo:string
   descripcion:string

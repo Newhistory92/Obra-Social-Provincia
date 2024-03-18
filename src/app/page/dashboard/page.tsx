@@ -42,7 +42,7 @@ const DefaultDashboardLayout: React.FC<Props> = ({ children }) => {
         {children}
         <div className='px-6 border-top py-3'>
           {profileActive && <Profile />} {/* Renderizar el perfil solo si profileActive es true */}
-          {/* <Prestadores/> */}
+          <Prestadores/>
         </div>
       </div>
     </div>

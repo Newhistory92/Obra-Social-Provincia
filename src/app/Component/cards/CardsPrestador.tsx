@@ -6,6 +6,7 @@ import AddIcCallSharpIcon from '@mui/icons-material/AddIcCallSharp';
 import StarPurple500SharpIcon from '@mui/icons-material/StarPurple500Sharp';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import DialogSelect from '../DialogSelect';
 interface PrestadorProps {
     id: string;
     imageUrl: string;
@@ -15,6 +16,8 @@ interface PrestadorProps {
     phone: string;
     phoneopc: string;
     especialidad: string;
+    especialidad2:string;
+    especialidad3:string;
     address: string;
     puntuacion: Number;
     tipo: string;
@@ -22,7 +25,7 @@ interface PrestadorProps {
     // ubicacion: string; // Esta es la información de la ubicación que se usará para mostrar el minimapa
 }
 
-const PrestadorCard: React.FC<PrestadorProps> = ({ id, imageUrl, name, apellido, descripcion, phone, phoneopc, address, puntuacion, especialidad, tipo,email }) => {
+const PrestadorCard: React.FC<PrestadorProps> = ({ id, imageUrl, name, apellido, descripcion, phone, phoneopc, address, puntuacion, especialidad,especialidad2,especialidad3, tipo,email }) => {
     const [showModal, setShowModal] = useState(false);
     const handleShowModal = () => setShowModal(true);
 
