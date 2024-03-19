@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./ButtomMap";
-import { IoMdArrowRoundBack } from "react-icons/io";
 import { Loader } from "@googlemaps/js-api-loader";
 
 interface MapComponentProps {
@@ -25,8 +24,7 @@ function MapComponent(props: MapComponentProps) {
         libraries: ["places"],
       });
 
-      const { google } = await loader.load();
-      const { Map } = google.maps;
+      const { Map } = await loader.importLibrary("maps");
 
       // Obtener la geoposición actual
       if (navigator.geolocation) {
@@ -91,6 +89,7 @@ function MapComponent(props: MapComponentProps) {
         map,
         title: place.formatted_address,
       });
+   
 
       // Guardar la posición seleccionada en el estado
       setSelectedPos(location!.toJSON());
@@ -104,9 +103,11 @@ function MapComponent(props: MapComponentProps) {
   };
 
   return (
-    <div className="flex flex-col">
-      <Button onClick={props.closeMapModal} variant={"ghost"}>
-        <IoMdArrowRoundBack />
+    <div className="flex flex-col rounded bg-gray-800 border-r-1 border-gray-800 ">
+      <Button onClick={props.closeMapModal} variant={"default"}>
+      <svg className="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+</svg>
       </Button>
       <div style={{ height: "600px" }} ref={mapRef} />
       <div className="p-2 mx-auto">
@@ -117,10 +118,10 @@ function MapComponent(props: MapComponentProps) {
           ref={inputRef}
         />
         <button
-          className="bg-pink rounded mx-4 p-3 text-white text-sm"
+          className= "rounded mx-4 text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium  text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2 mb-2"
           onClick={handleSearch}
         >
-          Seleccionar
+          Confirmar
         </button>
       </div>
     </div>

@@ -1,4 +1,6 @@
 import { Card, CardBody, CardFooter, Typography, Button} from "@material-tailwind/react";
+import { useEffect } from 'react';
+import axios from 'axios';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
@@ -11,6 +13,7 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 import StarPurple500SharpIcon from '@mui/icons-material/StarPurple500Sharp';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
 import PlaceIcon from '@mui/icons-material/Place';
 import { UserProfile } from "@clerk/nextjs";
 import DialogSelect from '../DialogSelect';
@@ -18,6 +21,7 @@ import MapComponent from "../MapComponent"
 import  {getFormattedAddress} from "../../api/Maps/MapApi"
 
 interface UserCardProps {
+  id:string,
   role: string;
   dependencia?: string;
   dni?: string;
@@ -35,6 +39,7 @@ interface UserCardProps {
 }
 
 const UserCard: React.FC<UserCardProps> = ({
+  id,
   role,
   dependencia,
   dni,
@@ -56,23 +61,56 @@ const UserCard: React.FC<UserCardProps> = ({
   const [from, setFrom] = React.useState<string | null>(null);
   const [ciudadOrigen, setCiudadOrigen] =  React.useState<string | null>(null);
   const [paisOrigen, setPaisOrigen] =  React.useState<string | null>(null);
+  const [addressInfo, setAddressInfo] = React.useState<{ address: string | null, coordinates: google.maps.LatLngLiteral | null }>({ address: null, coordinates: null });
+  const [hasChanges, setHasChanges] = React.useState(false);
+console.log(addressInfo)
 
 
-
+useEffect(() => {
+  if (hasChanges) {
+    // Lógica para realizar el PUT a '/api/handlerprestador'
+    const postData = {
+      // Datos a enviar en el cuerpo del PUT
+      // Ejemplo:
+      id,
+      especialidad2Seleccionada,
+      especialidad3Seleccionada,
+      from,
+      ciudadOrigen,
+      paisOrigen,
+      addressInfo,
+    };
+  console.log(postData)
+    axios.put('/api/handlerprestador', postData)
+      .then((response) => {
+        // Manejar la respuesta si es necesario
+        console.log('PUT request successful:', response.data);
+        // Restablecer el estado de hasChanges
+        setHasChanges(false);
+      })
+      .catch((error) => {
+        // Manejar errores si es necesario
+        console.error('Error en el PUT request:', error);
+      });
+  }
+}, [hasChanges]); // Este efecto se ejecuta cuando el estado hasChanges cambia
 
 
   const handleEspecialidadSelect = (especialidad: string) => {
     console.log("Especialidad seleccionada:", especialidad);
     if (especialidad2Seleccionada === null) {
         setEspecialidad2Seleccionada(especialidad);
+        setHasChanges(true)
     } else if (especialidad3Seleccionada === null) {
         setEspecialidad3Seleccionada(especialidad);
+        setHasChanges(true)
     }
 };
 const [checked, setChecked] = React.useState(false);
 
 const handleChangePhone = (event: React.ChangeEvent<HTMLInputElement>) => {
   setChecked(event.target.checked);
+  setHasChanges(true)
 };
 
 const fromHandler = () => {
@@ -80,17 +118,31 @@ const fromHandler = () => {
 };
 const closeModal = async (fromSelected: google.maps.LatLngLiteral) => {
   setFromModalOpen(false);
-  const fromLocation = await getFormattedAddress(fromSelected);
-  const fromArray = fromLocation.split(',');
-  const extractCity = (str:string) => str.replace(/[\d\s\W]+/g, '').trim();
-  const city = extractCity(fromArray[1]);
-  setCiudadOrigen(city);
-  setPaisOrigen(fromArray[fromArray.length -1]);
-  setFrom(fromArray[0]);
+  const locationInfo = await getFormattedAddress(fromSelected);
+
+  if (typeof locationInfo === 'string') {
+    console.error("Error al obtener la dirección:", locationInfo);
+    // Manejar el error
+  } else {
+    setAddressInfo({ address: locationInfo.results, coordinates: locationInfo.coordinates });
+    const fromArray = locationInfo.results.split(',');
+    const extractCity = (str: string) => str.replace(/[\d\s\W]+/g, '').trim();
+    const city = extractCity(fromArray[1]);
+    setCiudadOrigen(city);
+    setPaisOrigen(fromArray[fromArray.length - 1]);
+    setFrom(fromArray[0]);
+    setHasChanges(true)
+  }
 };
 
 const closeMapModal = () => {
   setFromModalOpen(false);
+
+};
+
+
+const handleLocalStateChange = () => {
+  setHasChanges(true);
 };
   
 
@@ -157,10 +209,11 @@ const closeMapModal = () => {
                   </div>
                   <Typography><PlaceIcon/>
                  
-                  Address: {address}
+                  Address: {from} {ciudadOrigen}{paisOrigen}
                   
-                  <div>
-      <button onClick={fromHandler}>Seleccionar dirección</button>
+                  <div className="mt-5">
+      <button className= "rounded  text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium  text-sm px-2 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2 mb-2"
+       onClick={fromHandler}> < EditLocationAltIcon className="mx-2"/>Seleccionar dirección</button>
 
       {fromModalOpen && (
         <div>
@@ -187,7 +240,10 @@ const closeMapModal = () => {
           </div>
         </CardBody>
         <CardFooter className="pt-0">
-          <Button>Edit</Button>
+        <Button
+    className={hasChanges ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 hover:bg-gray-500"}
+    onClick={handleLocalStateChange}
+        >Confiirmar Cambios</Button>
         </CardFooter>
       </Card>
     </>

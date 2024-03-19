@@ -29,6 +29,7 @@ console.log(currentUser )
         <Row>
           {/* About Me */}
           <UserCard 
+             id={currentUser[0].id} 
             numeroOperador={currentUser[0].numeroOperador} 
             dni={currentUser[0].dni} 
             matricula={currentUser[0].matricula} 

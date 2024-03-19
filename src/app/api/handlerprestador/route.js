@@ -81,6 +81,8 @@ export async function POST(request) {
                 password: passwordValue,
                 matricula: matricula,
                 especialidad: especialidad,
+                especialidad2:null,
+                especialidad3:null,
                 dataTime: dataTime,
                 puntuacion: null,
                 phoneopc:null,
@@ -139,3 +141,26 @@ export async function GET(request) {
 
 
 
+export async function PUT(request) {
+ 
+      try {
+        const { id } = request.query; // Suponiendo que tienes un parámetro de ruta para el ID del prestador
+  
+        // Datos a actualizar
+        const dataToUpdate = req.body;
+  
+        // Actualizar el registro del prestador en la base de datos
+        const updatedPrestador = await prisma.prestador.update({
+          where: { id: Number(id) },
+          data: dataToUpdate,
+        });
+  
+        // Responder con el prestador actualizado
+        res.status(200).json(updatedPrestador);
+      } catch (error) {
+        // Manejar errores
+        console.error('Error al actualizar el prestador:', error);
+        res.status(500).json({ error: 'Error al actualizar el prestador' });
+      }
+    } 
+  
