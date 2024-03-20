@@ -20,7 +20,7 @@ export async function POST(request) {
         const especialidad = body.especialidad;
         const email = user.emailAddresses[0].emailAddress;
         const userId = user.id;
-        const dataTime =  new Date().toISOString();
+         const dataTime =  new Date().toISOString();
         
         console.log(" dataTime:", dataTime);
         console.log("Matrícula:", matricula);
@@ -83,20 +83,23 @@ export async function POST(request) {
                 especialidad: especialidad,
                 especialidad2:null,
                 especialidad3:null,
-                dataTime: dataTime,
+                dataTime:dataTime,
+                UpdatedDate:new Date(),
                 puntuacion: null,
                 phoneopc:null,
                 role: "provider",
-                addressId:null,
                 tipo: "Fidelizado",
                 descripcion:null,
+                address:null,
+                coordinatesLat:null,
+                coordinatesLon:null,
              
           
             }
         });
         console.log("Perfil de usuario creado correctamente:", newPrestador);
 
-        return NextResponse.json({ status: 200, message: "Perfil del Prestador fue creado con éxito." });
+        return NextResponse.json({ status: 200, message: "Perfil del Prestador fue creado con éxito.",newPrestador });
     } catch (error) {
         console.error("Error al crear el perfil del Prestador:", error);
         return NextResponse.json({ status: 500, message: `Error al crear el perfil del Prestador: ${error.message}` });
@@ -140,27 +143,55 @@ export async function GET(request) {
 }
 
 
-
 export async function PUT(request) {
- 
-      try {
-        const { id } = request.query; // Suponiendo que tienes un parámetro de ruta para el ID del prestador
-  
-        // Datos a actualizar
-        const dataToUpdate = req.body;
-  
-        // Actualizar el registro del prestador en la base de datos
-        const updatedPrestador = await prisma.prestador.update({
-          where: { id: Number(id) },
-          data: dataToUpdate,
-        });
-  
-        // Responder con el prestador actualizado
-        res.status(200).json(updatedPrestador);
-      } catch (error) {
-        // Manejar errores
-        console.error('Error al actualizar el prestador:', error);
-        res.status(500).json({ error: 'Error al actualizar el prestador' });
+    try {
+      const body = await request.json();
+      const userId = body.id;
+      console.log("id body", userId) // Accedemos al ID del cuerpo de la solicitud
+      // Datos a actualizar
+      const dataToUpdate = body; // Definimos dataToUpdate con el cuerpo de la solicitud
+       console.log(dataToUpdate)
+      // Verificar y asignar valores de coordenadas
+      let coordinatesLat = null;
+      let coordinatesLon = null;
+      if (dataToUpdate.addressInfo && dataToUpdate.addressInfo.coordinates) {
+        coordinatesLat = dataToUpdate.addressInfo.coordinates.lat;
+        coordinatesLon = dataToUpdate.addressInfo.coordinates.lng;
       }
-    } 
+  
+      // Definir los datos de actualización con campos que tienen valores definidos en la solicitud
+      const updateData = {};
+      if (dataToUpdate.especialidad2Seleccionada !== null) {
+        updateData.especialidad2 = dataToUpdate.especialidad2Seleccionada;
+      }
+      if (dataToUpdate.especialidad3Seleccionada !== null) {
+        updateData.especialidad3 = dataToUpdate.especialidad3Seleccionada;
+      }
+      if (dataToUpdate.addressInfo && dataToUpdate.addressInfo.address !== null) {
+        updateData.address = dataToUpdate.addressInfo.address;
+      }
+      if (coordinatesLat !== null) {
+        updateData.coordinatesLat = coordinatesLat;
+      }
+      if (coordinatesLon !== null) {
+        updateData.coordinatesLon = coordinatesLon;
+      }
+  
+      // Actualizar el registro del prestador en la base de datos
+      const updatedPrestador = await prisma.prestador.update({
+        where: { id: userId },
+        data: updateData, // Usamos el objeto updateData que contiene solo los campos que tienen valores definidos
+      });
+  
+      // Responder con el prestador actualizado
+      return NextResponse.json({ status: 200, message: "Perfil del Prestador fue actualizado con éxito.",updatedPrestador });
+    } catch (error) {
+      // Manejar errores
+      console.error('Error al actualizar el prestador:', error);
+      return NextResponse.json({ status: 500, message: `Error al actualizar el prestador: ${error.message}` });
+    }
+  }
+  
+  
+  
   

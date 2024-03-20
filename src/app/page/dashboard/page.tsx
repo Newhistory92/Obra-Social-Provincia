@@ -5,7 +5,7 @@ import NavbarVertical from '../../Component/dashbord/navbars/NavbarVertical';
 import NavbarTop from '../../Component/dashbord/navbars/NavbarTop';
 import Prestadores from "../../Component/TablePrestador";
 import Profile from "../../Component/perfil/Perfil";
-
+import { useAppSelector } from "../../hooks/StoreHook"
 interface Props {
   children: React.ReactNode;
 }
@@ -17,7 +17,8 @@ const DefaultDashboardLayout: React.FC<Props> = ({ children }) => {
   const ToggleMenu = () => {
     setShowMenu(!showMenu);
   };
-
+  const currentUser = useAppSelector(state => state.user.currentUser);
+  // console.log(currentUser )
   const handleProfileClick = () => {
     setProfileActive(!profileActive); // Cambiar el estado de profileActive
   };

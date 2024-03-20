@@ -6,7 +6,7 @@ import AddIcCallSharpIcon from '@mui/icons-material/AddIcCallSharp';
 import StarPurple500SharpIcon from '@mui/icons-material/StarPurple500Sharp';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
-import DialogSelect from '../DialogSelect';
+
 interface PrestadorProps {
     id: string;
     imageUrl: string;
@@ -48,7 +48,7 @@ const PrestadorCard: React.FC<PrestadorProps> = ({ id, imageUrl, name, apellido,
                                 <p className="mb-0">{phone}{phoneopc}</p>
                             </Col>
                             <Col xs={12} className="mb-5">
-                                <h6 className="text-uppercase fs-5 ls-2"> <AddLocationIcon/>Location</h6>
+                                <h6 className="text-uppercase fs-5 ls-2"> <AddLocationIcon/>Direccion</h6>
                                 <p className="mb-0">{address}</p>
                                 {/* Aquí deberías agregar el componente del minimapa utilizando la información de la ubicación */}
                             </Col>

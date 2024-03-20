@@ -9,6 +9,10 @@ const Profile = () => {
   const currentUser = useAppSelector(state => state.user.currentUser);
 console.log(currentUser )
   // Verificar si currentUser es null antes de acceder a sus propiedades
+  if (!currentUser) {
+    // Si userData no está definido, mostrar un mensaje de carga o error, o redirigir al usuario, según sea necesario
+    return <div>Loading...</div>;
+  }
 
   return (
     <Container fluid className="p-6">
@@ -18,10 +22,10 @@ console.log(currentUser )
       {/* Profile Header  */}
       {/* Pasar los datos del usuario al componente ProfileHeader */}
       <ProfileHeader 
-        imageUrl={currentUser[0].imageUrl} 
-        name={currentUser[0].name} 
-        apellido={currentUser[0].apellido} 
-        email={currentUser[0].email} 
+        imageUrl={currentUser.imageUrl} 
+        name={currentUser.name} 
+        apellido={currentUser.apellido} 
+        email={currentUser.email} 
       />
 
       {/* content */}
@@ -29,20 +33,20 @@ console.log(currentUser )
         <Row>
           {/* About Me */}
           <UserCard 
-             id={currentUser[0].id} 
-            numeroOperador={currentUser[0].numeroOperador} 
-            dni={currentUser[0].dni} 
-            matricula={currentUser[0].matricula} 
-            phone={currentUser[0].phone} 
-            phoneopc={currentUser[0].phoneopc} 
-            role={currentUser[0].role} 
-            addressId={currentUser[0].addressId} 
-            especialidad={currentUser[0].especialidad} 
-            especialidad2={currentUser[0].especialidad}
-            especialidad3={currentUser[0].especialidad}
-            dependencia={currentUser[0].dependencia} 
-            tipo={currentUser[0].tipo} 
-            descripcion={currentUser[0].descripcion} 
+             id={currentUser.id} 
+            numeroOperador={currentUser.numeroOperador} 
+            dni={currentUser.dni} 
+            matricula={currentUser.matricula} 
+            phone={currentUser.phone} 
+            phoneopc={currentUser.phoneopc} 
+            role={currentUser.role} 
+            address={currentUser.address} 
+            especialidad={currentUser.especialidad} 
+            especialidad2={currentUser.especialidad2}
+            especialidad3={currentUser.especialidad3}
+            dependencia={currentUser.dependencia} 
+            tipo={currentUser.tipo} 
+            descripcion={currentUser.descripcion} 
           />
 
           {/* Projects Contributions */}

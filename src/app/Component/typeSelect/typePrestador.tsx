@@ -10,6 +10,7 @@ import { setCurrentUser, setLoading, setErrorMessage } from "../../reducers/user
 const TypePrestador = () => {
   const [matricula, setMatricula] = useState('');
   const dispatch = useAppDispatch();
+
   const { currentUser, loading, errorMessage } = useAppSelector((state) => state.user);
   useEffect(() => {
     dispatch(setLoading(true)); // Establecer carga en true al montar el componente
@@ -29,7 +30,7 @@ const TypePrestador = () => {
             dispatch(setCurrentUser(data.users));
             console.log('Estado global actualizado:', currentUser);
          
-            // window.location.href = '/page/dashboard';
+             window.location.href = '/page/dashboard';
             console.log("redirige al /dashboard/prestador")
           } else if (data.status === 401) {
             // El usuario no está autenticado, redirigir al inicio de sesión
@@ -59,40 +60,44 @@ const TypePrestador = () => {
   };
 
   const handleConfirm = async () => {
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      if (!currentUser) {
-        toast.error('Seleccione un prestador antes de confirmar');
-        return;
-      }
-
-      const response = await fetch('/api/handlerprestador', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ matricula: currentUser.matricula, especialidad: currentUser.especialidad }),
-      });
-
-      const responseData = await response.json();
-
-      if (responseData.status === 200) {
-        window.location.href = '/page/dashboard';
-        toast.success(responseData.message);
-      } else if (responseData.status === 400) {
-        dispatch(setErrorMessage(responseData.status));
-        toast.error(responseData.message);
-        console.log(responseData.message)
-      }
-
-    } catch (error) {
-      console.error('Error al confirmar el prestador:', error);
-      toast.error('Ocurrió un error al confirmar el prestador');
-    } finally {
-      dispatch(setLoading(false));
+    if (!currentUser) {
+      toast.error('Seleccione un prestador antes de confirmar');
+      return;
     }
-  };
+
+    const response = await fetch('/api/handlerprestador', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ matricula: currentUser.matricula, especialidad: currentUser.especialidad }),
+    });
+
+    const responseData = await response.json();
+ console.log("respuesta del back",responseData)
+    if (responseData.status === 200) {
+      // Actualizar el estado global con los datos del prestador
+      dispatch(setCurrentUser(responseData.newPrestador));
+      console.log(responseData.prestador)
+      // Redirigir al dashboard
+       window.location.href = '/page/dashboard';
+      toast.success(responseData.message);
+    } else if (responseData.status === 400) {
+      dispatch(setErrorMessage(responseData.status));
+      toast.error(responseData.message);
+      console.log(responseData.message)
+    }
+
+  } catch (error) {
+    console.error('Error al confirmar el prestador:', error);
+    toast.error('Ocurrió un error al confirmar el prestador');
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
   const handlePrev = () => {
     dispatch(setErrorMessage(null)); 
   };

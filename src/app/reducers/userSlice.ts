@@ -20,7 +20,7 @@ export interface UserInfo {
   numeroOperador?: string;
   role: string;
   address: string;
-  addressId: string;
+ 
   especialidad?: string;
   especialidad2?:string;
   especialidad3?:string;

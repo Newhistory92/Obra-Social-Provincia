@@ -14,11 +14,11 @@ type myLocation = {
       const response = await fetch(apiUrl);
  
       const data = await response.json();
-      console.log("Data received:", data);
+      // console.log("Data received:", data);
       const results = data.results[0].formatted_address;
       const coordinates = data.results[0].geometry.location;
       if (results && results.length > 0) {
-        console.log("Address found:", results, coordinates);
+        // console.log("Address found:", results, coordinates);
         return {results, coordinates}
       } else {
 

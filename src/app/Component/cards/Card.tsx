@@ -19,6 +19,8 @@ import { UserProfile } from "@clerk/nextjs";
 import DialogSelect from '../DialogSelect';
 import MapComponent from "../MapComponent"
 import  {getFormattedAddress} from "../../api/Maps/MapApi"
+import { setCurrentUser, setLoading, setErrorMessage } from "../../reducers/userSlice";
+import { useAppDispatch } from "../../hooks/StoreHook";
 
 interface UserCardProps {
   id:string,
@@ -55,6 +57,8 @@ const UserCard: React.FC<UserCardProps> = ({
   numeroOperador,
   address,
 }) => {
+  const dispatch = useAppDispatch();
+
   const [especialidad2Seleccionada, setEspecialidad2Seleccionada] = React.useState<string | null>(null);
   const [especialidad3Seleccionada, setEspecialidad3Seleccionada] = React.useState<string | null>(null);
   const [fromModalOpen, setFromModalOpen] =  React.useState(false);
@@ -63,15 +67,13 @@ const UserCard: React.FC<UserCardProps> = ({
   const [paisOrigen, setPaisOrigen] =  React.useState<string | null>(null);
   const [addressInfo, setAddressInfo] = React.useState<{ address: string | null, coordinates: google.maps.LatLngLiteral | null }>({ address: null, coordinates: null });
   const [hasChanges, setHasChanges] = React.useState(false);
-console.log(addressInfo)
+// console.log(addressInfo)
 
 
-useEffect(() => {
-  if (hasChanges) {
-    // Lógica para realizar el PUT a '/api/handlerprestador'
+const handleConfirmChanges = async () => {
+  dispatch(setLoading(true))
+  try {
     const postData = {
-      // Datos a enviar en el cuerpo del PUT
-      // Ejemplo:
       id,
       especialidad2Seleccionada,
       especialidad3Seleccionada,
@@ -80,21 +82,26 @@ useEffect(() => {
       paisOrigen,
       addressInfo,
     };
-  console.log(postData)
-    axios.put('/api/handlerprestador', postData)
-      .then((response) => {
-        // Manejar la respuesta si es necesario
-        console.log('PUT request successful:', response.data);
-        // Restablecer el estado de hasChanges
-        setHasChanges(false);
-      })
-      .catch((error) => {
-        // Manejar errores si es necesario
-        console.error('Error en el PUT request:', error);
-      });
-  }
-}, [hasChanges]); // Este efecto se ejecuta cuando el estado hasChanges cambia
+    console.log("datos actualizados", postData);
 
+    const response = await axios.put('/api/handlerprestador', postData);
+
+    if (response.status === 200) {
+      // Si la respuesta es exitosa, puedes realizar las acciones necesarias, como mostrar un mensaje de éxito.
+      console.log('PUT request successful:', response.data);
+      dispatch(setCurrentUser(response.data.updatedPrestador));
+      setHasChanges(false);
+    } else {
+      // Manejar errores si la respuesta no es exitosa
+      console.error('Error en el PUT request:', response.data);
+      dispatch(setLoading(false))
+    }
+  } catch (error) {
+    // Manejar errores si hay una excepción
+    console.error('Error en el PUT request:', error);
+     dispatch(setLoading(false))
+  }
+};
 
   const handleEspecialidadSelect = (especialidad: string) => {
     console.log("Especialidad seleccionada:", especialidad);
@@ -141,9 +148,7 @@ const closeMapModal = () => {
 };
 
 
-const handleLocalStateChange = () => {
-  setHasChanges(true);
-};
+
   
 
   return (
@@ -199,10 +204,15 @@ const handleLocalStateChange = () => {
                     </div>
                     <div>
                       <Typography> <MedicalInformationIcon/>Especialidad: {especialidad}</Typography>
-                      <Typography> <MedicalInformationIcon/>Especialidad:<DialogSelect onOk={(especialidad: string) => handleEspecialidadSelect(especialidad)} />
-                       {especialidad2Seleccionada}</Typography>
-                      <Typography> <MedicalInformationIcon/>Especialidad:<DialogSelect onOk={(especialidad: string) => handleEspecialidadSelect(especialidad)}/>
-                       {especialidad3Seleccionada}</Typography>
+                      <Typography> <MedicalInformationIcon/>Especialidad: {especialidad2}</Typography>
+                      <Typography>
+                      <DialogSelect onOk={(especialidad: string) => handleEspecialidadSelect(especialidad)} />
+                      {especialidad2Seleccionada}</Typography>
+                      <Typography> <MedicalInformationIcon/>Especialidad: {especialidad3}</Typography>
+                      <Typography>
+                      <DialogSelect onOk={(especialidad: string) => handleEspecialidadSelect(especialidad)} />
+                      {especialidad3Seleccionada}</Typography>
+                  
                       
                       <Typography><CheckCircleIcon />Estado: {tipo}</Typography>
                     </div>
@@ -242,7 +252,8 @@ const handleLocalStateChange = () => {
         <CardFooter className="pt-0">
         <Button
     className={hasChanges ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 hover:bg-gray-500"}
-    onClick={handleLocalStateChange}
+    onClick={ handleConfirmChanges}
+    disabled={!hasChanges}
         >Confiirmar Cambios</Button>
         </CardFooter>
       </Card>
