@@ -47,6 +47,7 @@ console.log(currentUser )
             dependencia={currentUser.dependencia} 
             tipo={currentUser.tipo} 
             descripcion={currentUser.descripcion} 
+            checkedphone={currentUser.checkedphone}
           />
 
           {/* Projects Contributions */}

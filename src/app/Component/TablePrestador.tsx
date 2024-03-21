@@ -4,6 +4,7 @@ import MedicalInformationOutlinedIcon from '@mui/icons-material/MedicalInformati
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import AddLocationOutlinedIcon from '@mui/icons-material/AddLocationOutlined';
 import AddTaskSharpIcon from '@mui/icons-material/AddTaskSharp';
+import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import Filters from "./Filters";
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
@@ -22,9 +23,14 @@ interface Prestador {
   phoneopc: string;
   address: string;
   especialidad:string,
+  especialidad2:string,
+  especialidad3:string,
   tipo: string,
   puntuacion:Number,
-  email:string
+  email:string,
+  checkedphone:boolean,
+  coordinatesLat:Number, 
+  coordinatesLon: Number,
 }
 
 const Prestadores = () => {
@@ -136,14 +142,16 @@ const Prestadores = () => {
               </td>
             </tr>
           ) : (
-            filteredData.map(({ id, name, apellido, imageUrl, phone, phoneopc, especialidad, address, tipo,  email ,puntuacion,  descripcion}) => (
+            filteredData.map(({ id, name, apellido, imageUrl, phone, phoneopc, especialidad, address, tipo,  email ,puntuacion,  descripcion,checkedphone,especialidad2,especialidad3,coordinatesLat, 
+              coordinatesLon}) => (
               <tr key={id}>
                 <td>
                   <Stack direction="row" spacing={1}>
                     <Chip
                       onClick={() => handleClick({
                         id, name, apellido, imageUrl, phone, phoneopc, especialidad, address, tipo,
-                        descripcion, puntuacion, email,
+                        descripcion, puntuacion, email,checkedphone,especialidad2,especialidad3,coordinatesLat, 
+                        coordinatesLon
                       })}
                       avatar={<Avatar alt="Prestador" src={imageUrl} />}
                       label="Info.."
@@ -153,10 +161,19 @@ const Prestadores = () => {
                 </td>
                 <td className="align-middle">{name}</td>
                 <td className="align-middle">{apellido}</td>
-                <td className="align-middle "><MedicalInformationOutlinedIcon className="mr-2 mb-1" />{especialidad}</td>
-                <td className="align-middle"><LocalPhoneOutlinedIcon className="mr-2 " />{phone}{phoneopc}</td>
+                <td className="align-middle "><MedicalInformationOutlinedIcon className="mr-2 mb-1" />{especialidad} <ChevronRightOutlinedIcon fontSize="small"/> {especialidad2}<ChevronRightOutlinedIcon fontSize="small"/> {especialidad3}</td>
+                <td className="align-middle">
+               {checkedphone && (
+                                  <>
+               <LocalPhoneOutlinedIcon className="mr-2" />{phone}<ChevronRightOutlinedIcon fontSize="small"/>
+                                  </>)}
+                {phoneopc && (
+                                   <>
+              <LocalPhoneOutlinedIcon className="mr-2" /> {phoneopc}
+                                  </>   )}
+                </td>
                 <td className="align-middle"><AddLocationOutlinedIcon className="mr-2 mb-1" />{address}</td>
-                <td className="align-middle">{tipo === "Fidelizado" && <AddTaskSharpIcon className="mr-2 mb-1" />}{tipo}</td> {/* Mostrar el icono si el tipo es "Fidelizado" */}
+                <td className="align-middle">{tipo === "FIDELIZADO" && <AddTaskSharpIcon className="mr-2 mb-1" />}{tipo}</td> {/* Mostrar el icono si el tipo es "Fidelizado" */}
               </tr>
             ))
           )}

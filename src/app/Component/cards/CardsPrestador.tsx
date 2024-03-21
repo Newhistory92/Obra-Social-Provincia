@@ -7,25 +7,31 @@ import StarPurple500SharpIcon from '@mui/icons-material/StarPurple500Sharp';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 
+//import MapPrestador from '../MapPrestador';
+
 interface PrestadorProps {
-    id: string;
+    id:string,
     imageUrl: string;
     name: string;
     apellido: string;
     descripcion: string;
     phone: string;
     phoneopc: string;
-    especialidad: string;
-    especialidad2:string;
-    especialidad3:string;
     address: string;
-    puntuacion: Number;
-    tipo: string;
-    email:string
-    // ubicacion: string; // Esta es la información de la ubicación que se usará para mostrar el minimapa
+    especialidad:string,
+    especialidad2:string,
+    especialidad3:string,
+    tipo: string,
+    puntuacion:Number,
+    email:string,
+    checkedphone:boolean,
+    coordinatesLat:Number, 
+    coordinatesLon: Number,
 }
 
-const PrestadorCard: React.FC<PrestadorProps> = ({ id, imageUrl, name, apellido, descripcion, phone, phoneopc, address, puntuacion, especialidad,especialidad2,especialidad3, tipo,email }) => {
+const PrestadorCard: React.FC<PrestadorProps> = ({  id, name, apellido, imageUrl, phone, phoneopc, especialidad, address, tipo,
+    descripcion, puntuacion, email,checkedphone,especialidad2,especialidad3,coordinatesLat, 
+    coordinatesLon }) => {
     const [showModal, setShowModal] = useState(false);
     const handleShowModal = () => setShowModal(true);
 
@@ -38,19 +44,22 @@ const PrestadorCard: React.FC<PrestadorProps> = ({ id, imageUrl, name, apellido,
                     <Card.Body>
                         {/* Card title */}
                         <div className=" mb-6">
-                        <ProfileHeader imageUrl={imageUrl} name={name} apellido={apellido} email={email} />
+                        <ProfileHeader imageUrl={imageUrl} name={name} apellido={apellido} />
                         </div>
                         <span className="text-uppercase fw-medium text-dark fs-5 ls-2">Un Poco Sobre Mi</span>
                         <p className="mt-2 mb-6">{descripcion}</p>
                         <Row>
                             <Col xs={12} className="mb-5">
-                                <h6 className="text-uppercase fs-5 ls-2 ">< AddIcCallSharpIcon/>Teléfono</h6>
-                                <p className="mb-0">{phone}{phoneopc}</p>
+                                <h6 className="text-uppercase fs-5 ls-2"> <MedicalInformationIcon/>Especialidad</h6>
+                                <p >{especialidad}</p><p>{especialidad2}</p> <p>{especialidad3}</p>
                             </Col>
-                            <Col xs={12} className="mb-5">
-                                <h6 className="text-uppercase fs-5 ls-2"> <AddLocationIcon/>Direccion</h6>
-                                <p className="mb-0">{address}</p>
-                                {/* Aquí deberías agregar el componente del minimapa utilizando la información de la ubicación */}
+                            {checkedphone && (
+                           <Col xs={12} className="mb-5">
+                           <h6 className="text-uppercase fs-5 ls-2 ">< AddIcCallSharpIcon/>Teléfono</h6>
+                            <p className="mb-0">{phone}</p>
+                           </Col>)}
+                           <Col>
+                           <p className="">{phoneopc}</p>
                             </Col>
                             <Col xs={12} className="mb-5">
                                 <h6 className="text-uppercase fs-5 ls-2">< StarPurple500SharpIcon/>Puntuación</h6>
@@ -62,8 +71,11 @@ const PrestadorCard: React.FC<PrestadorProps> = ({ id, imageUrl, name, apellido,
                                 <p className="mb-0">{tipo}</p>
                             </Col>
                             <Col xs={12} className="mb-5">
-                                <h6 className="text-uppercase fs-5 ls-2"> <MedicalInformationIcon/>Especialidad</h6>
-                                <p className="mb-0">{especialidad}</p>
+                                <h6 className="text-uppercase fs-5 ls-2"> <AddLocationIcon/>Direccion</h6>
+                                <p className="mb-0">{address}</p>
+                                {/* <MapPrestador coordinatesLat={coordinatesLat as number} coordinatesLon={coordinatesLon as number} /> */}
+
+
                             </Col>
                         </Row>
                     </Card.Body>

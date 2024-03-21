@@ -20,9 +20,9 @@ export async function POST(request) {
         const especialidad = body.especialidad;
         const email = user.emailAddresses[0].emailAddress;
         const userId = user.id;
-         const dataTime =  new Date().toISOString();
+       
         
-        console.log(" dataTime:", dataTime);
+        
         console.log("Matrícula:", matricula);
         console.log("Especialidad:", especialidad);
         console.log("Correo electrónico:", email);
@@ -83,16 +83,14 @@ export async function POST(request) {
                 especialidad: especialidad,
                 especialidad2:null,
                 especialidad3:null,
-                dataTime:dataTime,
-                UpdatedDate:new Date(),
                 puntuacion: null,
                 phoneopc:null,
-                role: "provider",
-                tipo: "Fidelizado",
                 descripcion:null,
                 address:null,
                 coordinatesLat:null,
                 coordinatesLon:null,
+                checkedphone:false,
+                prestador:null
              
           
             }
@@ -166,6 +164,15 @@ export async function PUT(request) {
       }
       if (dataToUpdate.especialidad3Seleccionada !== null) {
         updateData.especialidad3 = dataToUpdate.especialidad3Seleccionada;
+      }
+      if (dataToUpdate.telefonoPublico !== null) {
+        updateData.phoneopc = dataToUpdate.telefonoPublico;
+      }
+      if (dataToUpdate.checked !== null) {
+        updateData.checkedphone = dataToUpdate.checked;
+      }
+      if (dataToUpdate.description !== null) {
+        updateData.descripcion = dataToUpdate.description;
       }
       if (dataToUpdate.addressInfo && dataToUpdate.addressInfo.address !== null) {
         updateData.address = dataToUpdate.addressInfo.address;

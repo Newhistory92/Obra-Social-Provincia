@@ -1,5 +1,4 @@
 import { Card, CardBody, CardFooter, Typography, Button} from "@material-tailwind/react";
-import { useEffect } from 'react';
 import axios from 'axios';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -15,12 +14,19 @@ import StarPurple500SharpIcon from '@mui/icons-material/StarPurple500Sharp';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
 import PlaceIcon from '@mui/icons-material/Place';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import { UserProfile } from "@clerk/nextjs";
 import DialogSelect from '../DialogSelect';
 import MapComponent from "../MapComponent"
 import  {getFormattedAddress} from "../../api/Maps/MapApi"
 import { setCurrentUser, setLoading, setErrorMessage } from "../../reducers/userSlice";
 import { useAppDispatch } from "../../hooks/StoreHook";
+import Description from "../perfil/Description";
+import { ToastContainer, toast } from 'react-toastify';
+import tiposprestador from "../../../TipoPrestador.json"
+import { Fab } from '@mui/material';
+import NavigationIcon from '@mui/icons-material/Navigation';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface UserCardProps {
   id:string,
@@ -38,7 +44,10 @@ interface UserCardProps {
   tipo?: string;
   numeroOperador?: string;
   address?: string;
+  checkedphone:boolean,
+  prestador:string
 }
+
 
 const UserCard: React.FC<UserCardProps> = ({
   id,
@@ -56,6 +65,8 @@ const UserCard: React.FC<UserCardProps> = ({
   tipo,
   numeroOperador,
   address,
+  checkedphone,
+  prestador
 }) => {
   const dispatch = useAppDispatch();
 
@@ -68,7 +79,15 @@ const UserCard: React.FC<UserCardProps> = ({
   const [addressInfo, setAddressInfo] = React.useState<{ address: string | null, coordinates: google.maps.LatLngLiteral | null }>({ address: null, coordinates: null });
   const [hasChanges, setHasChanges] = React.useState(false);
 // console.log(addressInfo)
+const [checked, setChecked] = React.useState(checkedphone);
+const [telefonoPublico, setTelefonoPublico] = React.useState<string | null>(null);
+const [description, setDescription] =React.useState<string | null>(null);
+const [selectedPrestador, setSelectedPrestador] = React.useState<string | null>(null);
 
+  // Función para manejar la selección de un tipo de prestador en el acordeón
+  const handlePrestadorSelect = (prestador: string) => {
+    setSelectedPrestador(prestador);
+  };
 
 const handleConfirmChanges = async () => {
   dispatch(setLoading(true))
@@ -81,6 +100,9 @@ const handleConfirmChanges = async () => {
       ciudadOrigen,
       paisOrigen,
       addressInfo,
+      telefonoPublico,
+      checked,
+      description
     };
     console.log("datos actualizados", postData);
 
@@ -90,6 +112,7 @@ const handleConfirmChanges = async () => {
       // Si la respuesta es exitosa, puedes realizar las acciones necesarias, como mostrar un mensaje de éxito.
       console.log('PUT request successful:', response.data);
       dispatch(setCurrentUser(response.data.updatedPrestador));
+      toast.success("Datos Cofirmados con Existo ");
       setHasChanges(false);
     } else {
       // Manejar errores si la respuesta no es exitosa
@@ -98,6 +121,7 @@ const handleConfirmChanges = async () => {
     }
   } catch (error) {
     // Manejar errores si hay una excepción
+    toast.error("Ocurrio un problema, Comunicate con Nosotros");
     console.error('Error en el PUT request:', error);
      dispatch(setLoading(false))
   }
@@ -113,7 +137,6 @@ const handleConfirmChanges = async () => {
         setHasChanges(true)
     }
 };
-const [checked, setChecked] = React.useState(false);
 
 const handleChangePhone = (event: React.ChangeEvent<HTMLInputElement>) => {
   setChecked(event.target.checked);
@@ -147,9 +170,23 @@ const closeMapModal = () => {
 
 };
 
+const handleTelefonoPublicoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setTelefonoPublico(event.target.value);
+  setHasChanges(true);
+};
+const handleCancelChanges = () => {
+  setEspecialidad2Seleccionada(null);
+  setEspecialidad3Seleccionada(null);
+  setHasChanges(false);
+};
+const handleDescriptionSave = (newDescription: string) => {
+  setDescription(newDescription);
+  setHasChanges(true);
+};
 
-
-  
+const handleNavigate = () => {
+  // Implementa la funcionalidad de navegación aquí
+};
 
   return (
     <>
@@ -160,7 +197,9 @@ const closeMapModal = () => {
               <Typography variant="h3" color="blue-gray" textGradient className="mb-2">
                 Descripción
               </Typography>
-              <Typography variant="h6">{descripcion}</Typography>
+            
+              <Description initialDescription={descripcion || ''} onSave={handleDescriptionSave}   />
+              <Typography variant="h6">{description}</Typography>
             </div>
             <div>
               {role === "user" && (
@@ -174,10 +213,13 @@ const closeMapModal = () => {
                   <Typography>Address: {address}</Typography>
                 </>
               )}
-              {role === "provider" && (
+              {role === "PROVIDER" && (
                 <>
                   <Typography variant="h4" color="blue-gray" className="mb-2">
-                    Información del Prestador
+                    Información del Prestador<Fab variant="extended" className="ms-2" onClick={handleNavigate}>
+            <NavigationIcon sx={{ mr: 1 }} />
+            Tipo
+          </Fab>
                   </Typography>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -193,25 +235,28 @@ const closeMapModal = () => {
                        </Typography>
                       </FormGroup>
                       <Typography><PhoneAndroidIcon/>Telefono Publico: {phoneopc}
-                      <Box  component="form"
-                      sx={{'& > :not(style)': { m: 1, width: '15ch' },}}
-                      noValidate
-                      autoComplete="off">
-                         <TextField id="standard-basic" label="N° de Telefono" variant="standard" />
-                      </Box>
+                      <Box component="form" sx={{ '& > :not(style)': { m: 1, width: '15ch' }, }} noValidate autoComplete="off">
+                    <TextField id="standard-basic" label="N° de Telefono" variant="standard" onChange={handleTelefonoPublicoChange} />
+                  </Box>
                       </Typography>
                       <Typography>< StarPurple500SharpIcon/>Puntuación: {puntuacion}</Typography>
                     </div>
                     <div>
                       <Typography> <MedicalInformationIcon/>Especialidad: {especialidad}</Typography>
+
                       <Typography> <MedicalInformationIcon/>Especialidad: {especialidad2}</Typography>
                       <Typography>
+                        
                       <DialogSelect onOk={(especialidad: string) => handleEspecialidadSelect(especialidad)} />
-                      {especialidad2Seleccionada}</Typography>
+                      {especialidad2Seleccionada} <button> <DeleteOutlinedIcon  onClick={handleCancelChanges}
+                         /> </button> </Typography>
+
                       <Typography> <MedicalInformationIcon/>Especialidad: {especialidad3}</Typography>
                       <Typography>
+
                       <DialogSelect onOk={(especialidad: string) => handleEspecialidadSelect(especialidad)} />
-                      {especialidad3Seleccionada}</Typography>
+                      {especialidad3Seleccionada} <button> <DeleteOutlinedIcon  onClick={handleCancelChanges}
+                         /> </button> </Typography>
                   
                       
                       <Typography><CheckCircleIcon />Estado: {tipo}</Typography>
@@ -223,7 +268,7 @@ const closeMapModal = () => {
                   
                   <div className="mt-5">
       <button className= "rounded  text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium  text-sm px-2 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2 mb-2"
-       onClick={fromHandler}> < EditLocationAltIcon className="mx-2"/>Seleccionar dirección</button>
+       onClick={fromHandler}> < EditLocationAltIcon className="mr-1"/>Seleccionar dirección</button>
 
       {fromModalOpen && (
         <div>
@@ -257,6 +302,7 @@ const closeMapModal = () => {
         >Confiirmar Cambios</Button>
         </CardFooter>
       </Card>
+      <ToastContainer />
     </>
   );
 };

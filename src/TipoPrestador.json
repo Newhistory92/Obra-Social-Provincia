@@ -1,0 +1,14 @@
+[
+    { "id": 1, "tipo": "Dr" },
+    { "id": 2, "tipo": "Dra" },
+    { "id": 3, "tipo": "Lic" },
+    { "id": 4, "tipo": "Geriatrico" },
+    { "id": 5, "tipo": "Centro" },
+    { "id": 6, "tipo": "Dai" },
+    { "id": 7, "tipo": "Cuidador" },
+    { "id": 8, "tipo": "Medico" },
+    { "id": 9, "tipo": "Enfermero" },
+    { "id": 10, "tipo": "Cochería" }
+  ]
+  
+  

@@ -5,7 +5,7 @@ interface ProfileHeaderProps {
     imageUrl: string;
     name: string;
     apellido: string;
-    email:string
+    email?:string
 }
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ imageUrl, name, apellido,email }) => {
