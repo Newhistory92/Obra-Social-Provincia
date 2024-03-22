@@ -3,25 +3,45 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import StarBorder from '@mui/icons-material/StarBorder';
 import Logo from "../../../../../public/logoshare.png";
 import Image from 'next/image';
 import { useUser } from '@clerk/nextjs';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 interface Props {
   onProfileClick: () => void;
+  onSettingClick: () => void;
 }
 
-const NavbarVertical: React.FC<Props> = ({ onProfileClick }) => {
+const NavbarVertical: React.FC<Props> = ({ onProfileClick, onSettingClick }) => {
   const { user } = useUser();
   const [open, setOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+  const handleProfileClick = () => {
+    if (profileOpen) {
+      setProfileOpen(false);
+    } else {
+      onProfileClick();
+    }
+    setOpen(false);
+  };
+
+  const handleSettingClick = () => {
+    if (profileOpen) {
+      setProfileOpen(false);
+      onSettingClick();
+    } else {
+      onSettingClick();
+    }
+    setOpen(false);
   };
 
   return (
@@ -43,17 +63,13 @@ const NavbarVertical: React.FC<Props> = ({ onProfileClick }) => {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton onClick={onProfileClick} sx={{ pl: 4 }}>
-                <AccountCircleIcon>
-                  <StarBorder />
-                </AccountCircleIcon>
+              <ListItemButton onClick={handleProfileClick} sx={{ pl: 4 }}>
+                <AccountCircleIcon/>
                 <ListItemText className="nav-link" primary="Perfil" />
-              </ListItemButton >
-              {/* <Link  href={'/page/perfil'}/> */}
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
+              </ListItemButton>
+              
+              <ListItemButton onClick={handleSettingClick} sx={{ pl: 4 }}>
+                <SettingsIcon/>
                 <ListItemText className="nav-link" primary="Configuración" />
               </ListItemButton>
             </List>
@@ -65,6 +81,7 @@ const NavbarVertical: React.FC<Props> = ({ onProfileClick }) => {
 }
 
 export default NavbarVertical;
+
 
 
 

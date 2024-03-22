@@ -1,42 +1,59 @@
 "use client"
-import React, { useState } from 'react';
-import { Typography, Select, MenuItem, SelectChangeEvent } from '@mui/material';
+import React from 'react';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import TypeAfiliado from '../../Component/typeSelect/typeAfiliado';
 import TypePrestador from '../../Component/typeSelect/typePrestador';
 import TypeOperador from '@/app/Component/typeSelect/typeOperador';
-
-
-
+import Image from 'next/image';
+import fondo from "../../../../public/fondo.jpeg" 
 const SelectUser = () => {
-  const [selectedType, setSelectedType] = useState('');
+  const [selectedType, setSelectedType] = React.useState('');
 
-  const handleTypeChange = (event: SelectChangeEvent<string>) => {
+  const handleTypeChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setSelectedType(event.target.value);
   };
 
   return (
-    <div className="w-80 max-w-screen-lg mx-auto p-8 bg-white rounded-lg shadow-md">
-      <Typography className="text-lg item font-normal text-center">Seleccione el tipo de usuario:</Typography>
-      <Select
-        value={selectedType}
-        onChange={handleTypeChange}
-        variant="outlined"
-        className="mt-2 border-t border-blue-gray-200 focus:border-t focus:border-gray-900  w-full h-10">
-        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="">Seleccionar...</MenuItem>
-        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="AFILIADO">Afiliado</MenuItem>
-        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="PRESTADOR">Prestador</MenuItem>
-        <MenuItem className="mb-3 font-medium mt-5 border-t border-blue-gray-200 focus:border-t focus:border-gray-900" value="OPERADOR">Operador</MenuItem>
-  
-      </Select>
-      {selectedType === 'AFILIADO' && <TypeAfiliado />}
-      {selectedType === 'PRESTADOR' && <TypePrestador />}
-      {selectedType === 'OPERADOR' && <TypeOperador />}
- 
+    <div className="relative w-screen h-screen">
+      <Image
+        src={fondo}
+        alt="Fondo"
+        layout="fill"
+        objectFit="cover"
+      />
+      <div className="absolute top-0 left-0 right-0 flex justify-center">
+      <div className="w-80 max-w-screen-lg flex-col flex mx-auto p-8 bg-gray-800 bg-opacity-50 border-r-1 rounded shadow-md">
+          {/* Contenido del formulario */}
+          <FormControl className="mt" variant="standard" sx={{ m: 1, minWidth: 150 }}>
+            <InputLabel className="text-white" id="user-type-label">Tipo de Usuario</InputLabel>
+            <Select
+              labelId="user-type-label"
+              id="user-type-select"
+              value={selectedType}
+              onChange={handleTypeChange}
+              label="Tipo de Usuario"
+              className="mt-3 border-t border-blue-gray-200 focus:border-t  focus:border-gray-900  w-full h-10"
+            >
+              <MenuItem value="">
+                <em>Seleccionar...</em>
+              </MenuItem>
+              <MenuItem  value="AFILIADO">Afiliado</MenuItem>
+              <MenuItem value="PRESTADOR">Prestador</MenuItem>
+              <MenuItem value="OPERADOR">Operador</MenuItem>
+            </Select>
+          </FormControl>
+          {/* Condicionalmente renderizar componentes según el tipo seleccionado */}
+          {selectedType === 'AFILIADO' && <TypeAfiliado />}
+          {selectedType === 'PRESTADOR' && <TypePrestador />}
+          {selectedType === 'OPERADOR' && <TypeOperador />}
+        </div>
+      </div>
     </div>
   );
 };
 
 export default SelectUser;
+
 
 
 

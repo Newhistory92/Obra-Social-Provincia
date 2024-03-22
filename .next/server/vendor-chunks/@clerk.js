@@ -590,6 +590,28 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "(ssr)/./node_modules/@clerk/nextjs/dist/esm/client-boundary/controlComponents.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@clerk/nextjs/dist/esm/client-boundary/controlComponents.js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   AuthenticateWithRedirectCallback: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.AuthenticateWithRedirectCallback),\n/* harmony export */   ClerkLoaded: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.ClerkLoaded),\n/* harmony export */   ClerkLoading: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.ClerkLoading),\n/* harmony export */   MultisessionAppSupport: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.MultisessionAppSupport),\n/* harmony export */   Protect: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.Protect),\n/* harmony export */   RedirectToCreateOrganization: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.RedirectToCreateOrganization),\n/* harmony export */   RedirectToOrganizationProfile: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.RedirectToOrganizationProfile),\n/* harmony export */   RedirectToSignIn: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.RedirectToSignIn),\n/* harmony export */   RedirectToSignUp: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.RedirectToSignUp),\n/* harmony export */   RedirectToUserProfile: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.RedirectToUserProfile),\n/* harmony export */   SignedIn: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.SignedIn),\n/* harmony export */   SignedOut: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.SignedOut)\n/* harmony export */ });\n/* harmony import */ var _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @clerk/clerk-react */ \"(ssr)/./node_modules/@clerk/clerk-react/dist/esm/index.js\");\n\"use client\";\n\n\n//# sourceMappingURL=controlComponents.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvQGNsZXJrL25leHRqcy9kaXN0L2VzbS9jbGllbnQtYm91bmRhcnkvY29udHJvbENvbXBvbmVudHMuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0FBYzRCO0FBYzFCO0FBQ0YiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9vc3AvLi9ub2RlX21vZHVsZXMvQGNsZXJrL25leHRqcy9kaXN0L2VzbS9jbGllbnQtYm91bmRhcnkvY29udHJvbENvbXBvbmVudHMuanM/OGIwMCJdLCJzb3VyY2VzQ29udGVudCI6WyJcInVzZSBjbGllbnRcIjtcbmltcG9ydCB7XG4gIENsZXJrTG9hZGVkLFxuICBDbGVya0xvYWRpbmcsXG4gIFNpZ25lZE91dCxcbiAgU2lnbmVkSW4sXG4gIFByb3RlY3QsXG4gIFJlZGlyZWN0VG9TaWduSW4sXG4gIFJlZGlyZWN0VG9TaWduVXAsXG4gIFJlZGlyZWN0VG9Vc2VyUHJvZmlsZSxcbiAgQXV0aGVudGljYXRlV2l0aFJlZGlyZWN0Q2FsbGJhY2ssXG4gIE11bHRpc2Vzc2lvbkFwcFN1cHBvcnQsXG4gIFJlZGlyZWN0VG9DcmVhdGVPcmdhbml6YXRpb24sXG4gIFJlZGlyZWN0VG9Pcmdhbml6YXRpb25Qcm9maWxlXG59IGZyb20gXCJAY2xlcmsvY2xlcmstcmVhY3RcIjtcbmV4cG9ydCB7XG4gIEF1dGhlbnRpY2F0ZVdpdGhSZWRpcmVjdENhbGxiYWNrLFxuICBDbGVya0xvYWRlZCxcbiAgQ2xlcmtMb2FkaW5nLFxuICBNdWx0aXNlc3Npb25BcHBTdXBwb3J0LFxuICBQcm90ZWN0LFxuICBSZWRpcmVjdFRvQ3JlYXRlT3JnYW5pemF0aW9uLFxuICBSZWRpcmVjdFRvT3JnYW5pemF0aW9uUHJvZmlsZSxcbiAgUmVkaXJlY3RUb1NpZ25JbixcbiAgUmVkaXJlY3RUb1NpZ25VcCxcbiAgUmVkaXJlY3RUb1VzZXJQcm9maWxlLFxuICBTaWduZWRJbixcbiAgU2lnbmVkT3V0XG59O1xuLy8jIHNvdXJjZU1hcHBpbmdVUkw9Y29udHJvbENvbXBvbmVudHMuanMubWFwIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/@clerk/nextjs/dist/esm/client-boundary/controlComponents.js\n");
+
+/***/ }),
+
+/***/ "(ssr)/./node_modules/@clerk/nextjs/dist/esm/client-boundary/hooks.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@clerk/nextjs/dist/esm/client-boundary/hooks.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   EmailLinkErrorCode: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.EmailLinkErrorCode),\n/* harmony export */   MagicLinkErrorCode: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.MagicLinkErrorCode),\n/* harmony export */   WithClerk: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.WithClerk),\n/* harmony export */   WithSession: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.WithSession),\n/* harmony export */   WithUser: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.WithUser),\n/* harmony export */   isClerkAPIResponseError: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.isClerkAPIResponseError),\n/* harmony export */   isEmailLinkError: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.isEmailLinkError),\n/* harmony export */   isKnownError: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.isKnownError),\n/* harmony export */   isMagicLinkError: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.isMagicLinkError),\n/* harmony export */   isMetamaskError: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.isMetamaskError),\n/* harmony export */   useAuth: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useAuth),\n/* harmony export */   useClerk: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useClerk),\n/* harmony export */   useEmailLink: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useEmailLink),\n/* harmony export */   useMagicLink: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useMagicLink),\n/* harmony export */   useOrganization: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useOrganization),\n/* harmony export */   useOrganizationList: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useOrganizationList),\n/* harmony export */   useOrganizations: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useOrganizations),\n/* harmony export */   useSession: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useSession),\n/* harmony export */   useSessionList: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useSessionList),\n/* harmony export */   useSignIn: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useSignIn),\n/* harmony export */   useSignUp: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useSignUp),\n/* harmony export */   useUser: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.useUser),\n/* harmony export */   withClerk: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.withClerk),\n/* harmony export */   withSession: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.withSession),\n/* harmony export */   withUser: () => (/* reexport safe */ _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__.withUser)\n/* harmony export */ });\n/* harmony import */ var _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @clerk/clerk-react */ \"(ssr)/./node_modules/@clerk/clerk-react/dist/esm/index.js\");\n\"use client\";\n\n\n\n//# sourceMappingURL=hooks.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvQGNsZXJrL25leHRqcy9kaXN0L2VzbS9jbGllbnQtYm91bmRhcnkvaG9va3MuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTtBQW9CNEI7QUFTQTtBQTJCMUI7QUFDRiIsInNvdXJjZXMiOlsid2VicGFjazovL29zcC8uL25vZGVfbW9kdWxlcy9AY2xlcmsvbmV4dGpzL2Rpc3QvZXNtL2NsaWVudC1ib3VuZGFyeS9ob29rcy5qcz9lNTFlIl0sInNvdXJjZXNDb250ZW50IjpbIlwidXNlIGNsaWVudFwiO1xuaW1wb3J0IHtcbiAgdXNlVXNlcixcbiAgdXNlQXV0aCxcbiAgdXNlU2Vzc2lvbixcbiAgdXNlQ2xlcmssXG4gIHVzZVNpZ25JbixcbiAgdXNlU2lnblVwLFxuICB1c2VTZXNzaW9uTGlzdCxcbiAgdXNlT3JnYW5pemF0aW9uLFxuICB1c2VPcmdhbml6YXRpb25MaXN0LFxuICB1c2VPcmdhbml6YXRpb25zLFxuICB1c2VFbWFpbExpbmssXG4gIHVzZU1hZ2ljTGluayxcbiAgd2l0aFVzZXIsXG4gIHdpdGhTZXNzaW9uLFxuICB3aXRoQ2xlcmssXG4gIFdpdGhVc2VyLFxuICBXaXRoU2Vzc2lvbixcbiAgV2l0aENsZXJrXG59IGZyb20gXCJAY2xlcmsvY2xlcmstcmVhY3RcIjtcbmltcG9ydCB7XG4gIGlzQ2xlcmtBUElSZXNwb25zZUVycm9yLFxuICBFbWFpbExpbmtFcnJvckNvZGUsXG4gIE1hZ2ljTGlua0Vycm9yQ29kZSxcbiAgaXNLbm93bkVycm9yLFxuICBpc01ldGFtYXNrRXJyb3IsXG4gIGlzRW1haWxMaW5rRXJyb3IsXG4gIGlzTWFnaWNMaW5rRXJyb3Jcbn0gZnJvbSBcIkBjbGVyay9jbGVyay1yZWFjdFwiO1xuZXhwb3J0IHtcbiAgRW1haWxMaW5rRXJyb3JDb2RlLFxuICBNYWdpY0xpbmtFcnJvckNvZGUsXG4gIFdpdGhDbGVyayxcbiAgV2l0aFNlc3Npb24sXG4gIFdpdGhVc2VyLFxuICBpc0NsZXJrQVBJUmVzcG9uc2VFcnJvcixcbiAgaXNFbWFpbExpbmtFcnJvcixcbiAgaXNLbm93bkVycm9yLFxuICBpc01hZ2ljTGlua0Vycm9yLFxuICBpc01ldGFtYXNrRXJyb3IsXG4gIHVzZUF1dGgsXG4gIHVzZUNsZXJrLFxuICB1c2VFbWFpbExpbmssXG4gIHVzZU1hZ2ljTGluayxcbiAgdXNlT3JnYW5pemF0aW9uLFxuICB1c2VPcmdhbml6YXRpb25MaXN0LFxuICB1c2VPcmdhbml6YXRpb25zLFxuICB1c2VTZXNzaW9uLFxuICB1c2VTZXNzaW9uTGlzdCxcbiAgdXNlU2lnbkluLFxuICB1c2VTaWduVXAsXG4gIHVzZVVzZXIsXG4gIHdpdGhDbGVyayxcbiAgd2l0aFNlc3Npb24sXG4gIHdpdGhVc2VyXG59O1xuLy8jIHNvdXJjZU1hcHBpbmdVUkw9aG9va3MuanMubWFwIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/@clerk/nextjs/dist/esm/client-boundary/hooks.js\n");
+
+/***/ }),
+
 /***/ "(ssr)/./node_modules/@clerk/nextjs/dist/esm/client-boundary/uiComponents.js":
 /*!*****************************************************************************!*\
   !*** ./node_modules/@clerk/nextjs/dist/esm/client-boundary/uiComponents.js ***!
@@ -961,6 +983,66 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
 
 "use strict";
 eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.shadesOfPurple = void 0;\nconst createTheme_1 = __webpack_require__(/*! ../createTheme */ \"(ssr)/./node_modules/@clerk/themes/dist/themes/src/createTheme.js\");\nconst dark_1 = __webpack_require__(/*! ./dark */ \"(ssr)/./node_modules/@clerk/themes/dist/themes/src/themes/dark.js\");\nexports.shadesOfPurple = (0, createTheme_1.unstable_createTheme)({\n    baseTheme: dark_1.dark,\n    variables: {\n        colorBackground: '#3f3c77',\n        colorPrimary: '#f8d80d',\n        colorTextOnPrimaryBackground: '#38375f',\n        colorInputText: '#a1fdfe',\n        colorShimmer: 'rgba(161,253,254,0.36)',\n        shadowShimmer: '1px 1px 2px rgba(0,0,0,0.36)',\n    },\n});\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvQGNsZXJrL3RoZW1lcy9kaXN0L3RoZW1lcy9zcmMvdGhlbWVzL3NoYWRlc09mUHVycGxlLmpzIiwibWFwcGluZ3MiOiJBQUFhO0FBQ2IsOENBQTZDLEVBQUUsYUFBYSxFQUFDO0FBQzdELHNCQUFzQjtBQUN0QixzQkFBc0IsbUJBQU8sQ0FBQyx5RkFBZ0I7QUFDOUMsZUFBZSxtQkFBTyxDQUFDLGlGQUFRO0FBQy9CLHNCQUFzQjtBQUN0QjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsS0FBSztBQUNMLENBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9vc3AvLi9ub2RlX21vZHVsZXMvQGNsZXJrL3RoZW1lcy9kaXN0L3RoZW1lcy9zcmMvdGhlbWVzL3NoYWRlc09mUHVycGxlLmpzP2VjNjYiXSwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCI7XG5PYmplY3QuZGVmaW5lUHJvcGVydHkoZXhwb3J0cywgXCJfX2VzTW9kdWxlXCIsIHsgdmFsdWU6IHRydWUgfSk7XG5leHBvcnRzLnNoYWRlc09mUHVycGxlID0gdm9pZCAwO1xuY29uc3QgY3JlYXRlVGhlbWVfMSA9IHJlcXVpcmUoXCIuLi9jcmVhdGVUaGVtZVwiKTtcbmNvbnN0IGRhcmtfMSA9IHJlcXVpcmUoXCIuL2RhcmtcIik7XG5leHBvcnRzLnNoYWRlc09mUHVycGxlID0gKDAsIGNyZWF0ZVRoZW1lXzEudW5zdGFibGVfY3JlYXRlVGhlbWUpKHtcbiAgICBiYXNlVGhlbWU6IGRhcmtfMS5kYXJrLFxuICAgIHZhcmlhYmxlczoge1xuICAgICAgICBjb2xvckJhY2tncm91bmQ6ICcjM2YzYzc3JyxcbiAgICAgICAgY29sb3JQcmltYXJ5OiAnI2Y4ZDgwZCcsXG4gICAgICAgIGNvbG9yVGV4dE9uUHJpbWFyeUJhY2tncm91bmQ6ICcjMzgzNzVmJyxcbiAgICAgICAgY29sb3JJbnB1dFRleHQ6ICcjYTFmZGZlJyxcbiAgICAgICAgY29sb3JTaGltbWVyOiAncmdiYSgxNjEsMjUzLDI1NCwwLjM2KScsXG4gICAgICAgIHNoYWRvd1NoaW1tZXI6ICcxcHggMXB4IDJweCByZ2JhKDAsMCwwLDAuMzYpJyxcbiAgICB9LFxufSk7XG4iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/@clerk/themes/dist/themes/src/themes/shadesOfPurple.js\n");
+
+/***/ }),
+
+/***/ "(rsc)/./node_modules/@clerk/nextjs/dist/esm/client-boundary/uiComponents.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@clerk/nextjs/dist/esm/client-boundary/uiComponents.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CreateOrganization: () => (/* binding */ e0),
+/* harmony export */   OrganizationList: () => (/* binding */ e1),
+/* harmony export */   OrganizationProfile: () => (/* binding */ e2),
+/* harmony export */   OrganizationSwitcher: () => (/* binding */ e3),
+/* harmony export */   SignIn: () => (/* binding */ e4),
+/* harmony export */   SignInButton: () => (/* binding */ e5),
+/* harmony export */   SignInWithMetamaskButton: () => (/* binding */ e6),
+/* harmony export */   SignOutButton: () => (/* binding */ e7),
+/* harmony export */   SignUp: () => (/* binding */ e8),
+/* harmony export */   SignUpButton: () => (/* binding */ e9),
+/* harmony export */   UserButton: () => (/* binding */ e10),
+/* harmony export */   UserProfile: () => (/* binding */ e11)
+/* harmony export */ });
+/* harmony import */ var next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/build/webpack/loaders/next-flight-loader/module-proxy */ "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-loader/module-proxy.js");
+
+const proxy = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`C:\Users\Emiliano\Documents\Obra-Social-Provincia\node_modules\@clerk\nextjs\dist\esm\client-boundary\uiComponents.js`)
+
+// Accessing the __esModule property and exporting $$typeof are required here.
+// The __esModule getter forces the proxy target to create the default export
+// and the $$typeof value is for rendering logic to determine if the module
+// is a client boundary.
+const { __esModule, $$typeof } = proxy;
+const __default__ = proxy.default;
+
+const e0 = proxy["CreateOrganization"];
+
+const e1 = proxy["OrganizationList"];
+
+const e2 = proxy["OrganizationProfile"];
+
+const e3 = proxy["OrganizationSwitcher"];
+
+const e4 = proxy["SignIn"];
+
+const e5 = proxy["SignInButton"];
+
+const e6 = proxy["SignInWithMetamaskButton"];
+
+const e7 = proxy["SignOutButton"];
+
+const e8 = proxy["SignUp"];
+
+const e9 = proxy["SignUpButton"];
+
+const e10 = proxy["UserButton"];
+
+const e11 = proxy["UserProfile"];
+
 
 /***/ }),
 

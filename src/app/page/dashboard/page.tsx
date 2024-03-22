@@ -6,6 +6,7 @@ import NavbarTop from '../../Component/dashbord/navbars/NavbarTop';
 import Prestadores from "../../Component/TablePrestador";
 import Profile from "../../Component/perfil/Perfil";
 import { useAppSelector } from "../../hooks/StoreHook"
+import { UserProfile } from '@clerk/nextjs';
 interface Props {
   children: React.ReactNode;
 }
@@ -13,21 +14,32 @@ interface Props {
 const DefaultDashboardLayout: React.FC<Props> = ({ children }) => {
   const [showMenu, setShowMenu] = useState<boolean>(true);
   const [profileActive, setProfileActive] = useState(false);
-
+  const [settingActive, setSettingActive] = useState(false);
+  const currentUser = useAppSelector(state => state.user.currentUser);
+  // console.log(currentUser )
+  const userRole = currentUser?.role;
+  
   const ToggleMenu = () => {
     setShowMenu(!showMenu);
   };
-  const currentUser = useAppSelector(state => state.user.currentUser);
-  // console.log(currentUser )
   const handleProfileClick = () => {
-    setProfileActive(!profileActive); // Cambiar el estado de profileActive
+    setProfileActive(!profileActive);
+    if (settingActive) {
+      setSettingActive(false);
+    }
   };
 
+  const handleSettingClick = () => {
+    setSettingActive(!settingActive);
+    if (profileActive) {
+      setProfileActive(false);
+    }
+  };
   return (
     <div id="db-wrapper" className={`${showMenu ? '' : 'toggled'}`}>
       <div className="navbar-vertical navbar">
         <NavbarVertical
-        
+         onSettingClick={handleSettingClick}
           onProfileClick={handleProfileClick} // Pasar la función para manejar el clic del perfil
         />
       </div>
@@ -43,7 +55,8 @@ const DefaultDashboardLayout: React.FC<Props> = ({ children }) => {
         {children}
         <div className='px-6 border-top py-3'>
           {profileActive && <Profile />} {/* Renderizar el perfil solo si profileActive es true */}
-          <Prestadores/>
+          {settingActive && <UserProfile />} 
+          {userRole === 'USER' && <Prestadores />} 
         </div>
       </div>
     </div>

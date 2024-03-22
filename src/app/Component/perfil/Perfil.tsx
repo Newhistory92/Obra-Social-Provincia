@@ -5,12 +5,10 @@ import ProfileHeader from './ProfileHeader';
 import  UserCard from "../cards/Card";
 
 const Profile = () => {
-  // Obtener los datos del usuario del estado global utilizando useAppSelector
   const currentUser = useAppSelector(state => state.user.currentUser);
-console.log(currentUser )
-  // Verificar si currentUser es null antes de acceder a sus propiedades
+// console.log(currentUser )
+
   if (!currentUser) {
-    // Si userData no está definido, mostrar un mensaje de carga o error, o redirigir al usuario, según sea necesario
     return <div>Loading...</div>;
   }
 
@@ -33,22 +31,21 @@ console.log(currentUser )
         <Row>
           {/* About Me */}
           <UserCard 
-             id={currentUser.id} 
-            numeroOperador={currentUser.numeroOperador} 
-            dni={currentUser.dni} 
-            matricula={currentUser.matricula} 
-            phone={currentUser.phone} 
-            phoneopc={currentUser.phoneopc} 
-            role={currentUser.role} 
-            address={currentUser.address} 
-            especialidad={currentUser.especialidad} 
+            id={currentUser.id}
+            numeroOperador={currentUser.numeroOperador}
+            dni={currentUser.dni}
+            matricula={currentUser.matricula}
+            phone={currentUser.phone}
+            phoneopc={currentUser.phoneopc}
+            role={currentUser.role}
+            address={currentUser.address}
+            especialidad={currentUser.especialidad}
             especialidad2={currentUser.especialidad2}
             especialidad3={currentUser.especialidad3}
-            dependencia={currentUser.dependencia} 
-            tipo={currentUser.tipo} 
-            descripcion={currentUser.descripcion} 
-            checkedphone={currentUser.checkedphone}
-          />
+            dependencia={currentUser.dependencia}
+            tipo={currentUser.tipo}
+            descripcion={currentUser.descripcion}
+            checkedphone={currentUser.checkedphone} prestador={''}          />
 
           {/* Projects Contributions */}
           {/* <ProjectsContributions /> */}
