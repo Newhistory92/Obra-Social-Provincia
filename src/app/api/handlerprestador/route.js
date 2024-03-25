@@ -90,7 +90,7 @@ export async function POST(request) {
                 coordinatesLat:null,
                 coordinatesLon:null,
                 checkedphone:false,
-                prestador:null
+             
              
           
             }

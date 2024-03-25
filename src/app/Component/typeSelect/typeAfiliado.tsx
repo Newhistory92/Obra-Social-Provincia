@@ -102,7 +102,7 @@ console.log(currentUser, loading, errorMessage)
   }
 
   return (
-    <div className=" max-w-screen-lg flex-col flex mx-auto p-8 bg-gray-700 rounded  shadow-md">
+    <div className=" max-w-screen-lg flex-col flex mx-auto p-8 bg-gray-700 rounded  shadow-md px-4">
       <Typography className="text-white" variant="h6">Tipo de usuario: Afiliado</Typography>
       <label className="text-white">Ingrese Nº de DNI:</label>
       <Input
@@ -118,14 +118,14 @@ console.log(currentUser, loading, errorMessage)
           <Typography className="text-white">Dependencia: {currentUser.dependencia}</Typography>
           <Link href="/">
             {errorMessage === "400" && (
-              <Button variant="contained" onClick={handlePrev} className="mt-2">
+              <Button variant="contained" onClick={handlePrev}  className="mt-2 ms-6">
                 Inicio
               </Button>
             )}
           </Link>
           {!errorMessage && (
             <Button
-             variant="contained" onClick={handleConfirm} className="mt-2" disabled={loading}>
+             variant="contained" onClick={handleConfirm}  className="mt-2 ms-6" disabled={loading}>
               Confirmar
             </Button>
           )}

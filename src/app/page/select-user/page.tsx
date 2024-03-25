@@ -22,7 +22,7 @@ const SelectUser = () => {
         objectFit="cover"
       />
       <div className="absolute top-0 left-0 right-0 flex justify-center">
-      <div className="w-80 max-w-screen-lg flex-col flex mx-auto p-8 bg-gray-800 bg-opacity-50 border-r-1 rounded shadow-md">
+      <div className="w-80 max-w-screen-lg flex-col flex mx-auto p-8 bg-gray-800 bg-opacity-50 border-r-1 rounded shadow-lg">
           {/* Contenido del formulario */}
           <FormControl className="mt" variant="standard" sx={{ m: 1, minWidth: 150 }}>
             <InputLabel className="text-white" id="user-type-label">Tipo de Usuario</InputLabel>

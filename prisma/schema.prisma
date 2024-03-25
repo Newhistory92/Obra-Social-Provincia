@@ -18,15 +18,15 @@ model Afiliado {
   imageUrl    String    @db.VarChar(800)
   dni         String    @db.VarChar(8)
   phone       String    @db.VarChar(13)
-    createdAt    DateTime   @default(now())
-  role        Role   @default(USER) 
+    createdAt    DateTime?   @default(now())
+  role        Role?   @default(USER) 
   denuncias   Denuncia[]
   opiniones   Opinion[]
   address     String?    @db.VarChar(200)
   coordinatesLat Int? 
   coordinatesLon Int?
   dependencia String?
-  UpdatedDate DateTime  @updatedAt
+  UpdatedDate DateTime?  @updatedAt
 }
 
 model Prestador {
@@ -39,17 +39,16 @@ model Prestador {
   checkedphone Boolean? @default(false)
   phoneopc     String?  @db.VarChar(13)
   imageUrl     String   @db.VarChar(800)
-  createdAt    DateTime   @default(now())
-  UpdatedDate  DateTime  @updatedAt
+  createdAt    DateTime?   @default(now())
+  UpdatedDate  DateTime?  @updatedAt
   matricula    String   @db.VarChar(5)
-  prestador    String   @db.VarChar(13)
   especialidad String   @db.VarChar(100)
   especialidad2 String?  @db.VarChar(100)
   especialidad3 String ? @db.VarChar(100)
   puntuacion   Int?
   descripcion  String?  @db.VarChar(600)
-  role         Role     @default( PROVIDER)
-  tipo         Tipo     @default( FIDELIZADO)
+  role         Role?     @default( PROVIDER)
+  tipo         Tipo?     @default( FIDELIZADO)
   address      String?  @db.VarChar(200)
   coordinatesLat Int? 
   coordinatesLon Int?
@@ -63,10 +62,10 @@ model Operador {
   password       String     @db.VarChar(200)
   imageUrl       String     @db.VarChar(800)
   phone          String     @db.VarChar(13)
-  createdAt      DateTime   @default(now())
-  UpdatedDate    DateTime   @updatedAt
+  createdAt      DateTime?   @default(now())
+  UpdatedDate    DateTime?   @updatedAt
   numeroOperador String     @db.VarChar(5)
-  role           Role       @default( EMPLOYEE) 
+  role           Role?       @default( EMPLOYEE) 
   publicacion    Publicacion[]
   address        String?    @db.VarChar(200)
   coordinatesLat Int? 

@@ -12,7 +12,7 @@ exports.id = "app/page/dashboard/page";
 exports.ids = ["app/page/dashboard/page"];
 exports.modules = {
 
-/***/ "./action-async-storage.external":
+/***/ "./action-async-storage.external?9022":
 /*!****************************************************************************!*\
   !*** external "next/dist/client/components/action-async-storage.external" ***!
   \****************************************************************************/
@@ -23,7 +23,7 @@ module.exports = require("next/dist/client/components/action-async-storage.exter
 
 /***/ }),
 
-/***/ "./request-async-storage.external":
+/***/ "./request-async-storage.external?93d0":
 /*!*****************************************************************************!*\
   !*** external "next/dist/client/components/request-async-storage.external" ***!
   \*****************************************************************************/
@@ -34,7 +34,7 @@ module.exports = require("next/dist/client/components/request-async-storage.exte
 
 /***/ }),
 
-/***/ "./static-generation-async-storage.external":
+/***/ "./static-generation-async-storage.external?d822":
 /*!***************************************************************************************!*\
   !*** external "next/dist/client/components/static-generation-async-storage.external" ***!
   \***************************************************************************************/
@@ -67,7 +67,7 @@ module.exports = require("next/dist/compiled/next-server/app-page-experimental.r
 
 /***/ }),
 
-/***/ "../../client/components/action-async-storage.external":
+/***/ "./action-async-storage.external?8652":
 /*!**********************************************************************************!*\
   !*** external "next/dist\\client\\components\\action-async-storage.external.js" ***!
   \**********************************************************************************/
@@ -78,7 +78,7 @@ module.exports = require("next/dist\\client\\components\\action-async-storage.ex
 
 /***/ }),
 
-/***/ "../../client/components/request-async-storage.external":
+/***/ "./request-async-storage.external?0211":
 /*!***********************************************************************************!*\
   !*** external "next/dist\\client\\components\\request-async-storage.external.js" ***!
   \***********************************************************************************/
@@ -89,7 +89,7 @@ module.exports = require("next/dist\\client\\components\\request-async-storage.e
 
 /***/ }),
 
-/***/ "../../client/components/static-generation-async-storage.external":
+/***/ "./static-generation-async-storage.external?137c":
 /*!*********************************************************************************************!*\
   !*** external "next/dist\\client\\components\\static-generation-async-storage.external.js" ***!
   \*********************************************************************************************/
@@ -833,7 +833,7 @@ module.exports = JSON.parse('{"especialidades":[{"id":1,"nombre":"Cardiología"}
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@swc","vendor-chunks/node-fetch-native","vendor-chunks/@clerk","vendor-chunks/@peculiar","vendor-chunks/asn1js","vendor-chunks/@reduxjs","vendor-chunks/webcrypto-core","vendor-chunks/swr","vendor-chunks/redux-persist","vendor-chunks/react-redux","vendor-chunks/immer","vendor-chunks/redux","vendor-chunks/reselect","vendor-chunks/react-toastify","vendor-chunks/path-to-regexp","vendor-chunks/use-sync-external-store","vendor-chunks/pvtsutils","vendor-chunks/pvutils","vendor-chunks/tslib","vendor-chunks/cookie","vendor-chunks/deepmerge","vendor-chunks/no-case","vendor-chunks/map-obj","vendor-chunks/lower-case","vendor-chunks/snakecase-keys","vendor-chunks/redux-thunk","vendor-chunks/snake-case","vendor-chunks/dot-case","vendor-chunks/@mui","vendor-chunks/@floating-ui","vendor-chunks/@emotion","vendor-chunks/react-transition-group","vendor-chunks/@popperjs","vendor-chunks/prop-types","vendor-chunks/stylis","vendor-chunks/dom-helpers","vendor-chunks/react-is","vendor-chunks/@babel","vendor-chunks/hoist-non-react-statics","vendor-chunks/object-assign","vendor-chunks/clsx","vendor-chunks/react-bootstrap","vendor-chunks/@restart","vendor-chunks/classnames","vendor-chunks/@material-tailwind","vendor-chunks/@motionone","vendor-chunks/axios","vendor-chunks/tailwind-merge","vendor-chunks/asynckit","vendor-chunks/framer-motion","vendor-chunks/uncontrollable","vendor-chunks/debug","vendor-chunks/class-variance-authority","vendor-chunks/@radix-ui","vendor-chunks/prop-types-extra","vendor-chunks/mime-db","vendor-chunks/follow-redirects","vendor-chunks/simplebar-react","vendor-chunks/simplebar-core","vendor-chunks/@googlemaps","vendor-chunks/warning","vendor-chunks/tabbable","vendor-chunks/supports-color","vendor-chunks/style-value-types","vendor-chunks/react-responsive","vendor-chunks/react-lifecycles-compat","vendor-chunks/react-feather","vendor-chunks/proxy-from-env","vendor-chunks/popmotion","vendor-chunks/ms","vendor-chunks/mime-types","vendor-chunks/material-ripple-effects","vendor-chunks/lodash","vendor-chunks/invariant","vendor-chunks/hey-listen","vendor-chunks/has-flag","vendor-chunks/framesync","vendor-chunks/dequal","vendor-chunks/delayed-stream","vendor-chunks/combined-stream","vendor-chunks/can-use-dom","vendor-chunks/aria-hidden","vendor-chunks/@react-aria"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage%2Fdashboard%2Fpage&page=%2Fpage%2Fdashboard%2Fpage&appPaths=%2Fpage%2Fdashboard%2Fpage&pagePath=private-next-app-dir%2Fpage%2Fdashboard%2Fpage.tsx&appDir=C%3A%5CUsers%5CEmiliano%5CDocuments%5CObra-Social-Provincia%5Csrc%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5CEmiliano%5CDocuments%5CObra-Social-Provincia&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/node-fetch-native","vendor-chunks/@mui","vendor-chunks/@material-tailwind","vendor-chunks/@clerk","vendor-chunks/@motionone","vendor-chunks/react-bootstrap","vendor-chunks/axios","vendor-chunks/@restart","vendor-chunks/dom-helpers","vendor-chunks/@peculiar","vendor-chunks/redux-persist","vendor-chunks/@emotion","vendor-chunks/tailwind-merge","vendor-chunks/react-transition-group","vendor-chunks/@babel","vendor-chunks/asynckit","vendor-chunks/stylis","vendor-chunks/@floating-ui","vendor-chunks/@swc","vendor-chunks/prop-types","vendor-chunks/framer-motion","vendor-chunks/use-sync-external-store","vendor-chunks/uncontrollable","vendor-chunks/debug","vendor-chunks/swr","vendor-chunks/class-variance-authority","vendor-chunks/@radix-ui","vendor-chunks/redux","vendor-chunks/webcrypto-core","vendor-chunks/react-is","vendor-chunks/prop-types-extra","vendor-chunks/react-toastify","vendor-chunks/mime-db","vendor-chunks/follow-redirects","vendor-chunks/clsx","vendor-chunks/reselect","vendor-chunks/redux-thunk","vendor-chunks/react-redux","vendor-chunks/immer","vendor-chunks/@reduxjs","vendor-chunks/simplebar-react","vendor-chunks/simplebar-core","vendor-chunks/classnames","vendor-chunks/@googlemaps","vendor-chunks/warning","vendor-chunks/tslib","vendor-chunks/tabbable","vendor-chunks/supports-color","vendor-chunks/style-value-types","vendor-chunks/snakecase-keys","vendor-chunks/snake-case","vendor-chunks/react-responsive","vendor-chunks/react-lifecycles-compat","vendor-chunks/react-feather","vendor-chunks/pvutils","vendor-chunks/pvtsutils","vendor-chunks/proxy-from-env","vendor-chunks/popmotion","vendor-chunks/path-to-regexp","vendor-chunks/object-assign","vendor-chunks/no-case","vendor-chunks/ms","vendor-chunks/mime-types","vendor-chunks/material-ripple-effects","vendor-chunks/map-obj","vendor-chunks/lower-case","vendor-chunks/lodash","vendor-chunks/invariant","vendor-chunks/hoist-non-react-statics","vendor-chunks/hey-listen","vendor-chunks/has-flag","vendor-chunks/framesync","vendor-chunks/dot-case","vendor-chunks/dequal","vendor-chunks/delayed-stream","vendor-chunks/deepmerge","vendor-chunks/cookie","vendor-chunks/combined-stream","vendor-chunks/can-use-dom","vendor-chunks/asn1js","vendor-chunks/aria-hidden","vendor-chunks/@react-aria","vendor-chunks/@popperjs"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage%2Fdashboard%2Fpage&page=%2Fpage%2Fdashboard%2Fpage&appPaths=%2Fpage%2Fdashboard%2Fpage&pagePath=private-next-app-dir%2Fpage%2Fdashboard%2Fpage.tsx&appDir=C%3A%5CUsers%5CEmiliano%5CDocuments%5CObra-Social-Provincia%5Csrc%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5CEmiliano%5CDocuments%5CObra-Social-Provincia&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
 module.exports = __webpack_exports__;
 
 })();

@@ -106,9 +106,9 @@ console.log(currentUser, loading, errorMessage)
 
 
   return (
-    <div className="w-80 max-w-screen-lg mx-auto p-8 bg-white rounded-lg shadow-md">
-      <Typography variant="h6">Tipo de usuario: Operador</Typography>
-      <label>Ingrese Número de Operador:</label>
+    <div className=" max-w-screen-lg flex-col flex mx-auto p-8 bg-gray-700 rounded  shadow-md px-4">
+      <Typography className="text-white" variant="h6">Tipo de usuario: Operador</Typography>
+      <label className="text-white" >Ingrese Número de Operador:</label>
       <Input
         type="text"
         value={numeroOperador}
@@ -118,14 +118,14 @@ console.log(currentUser, loading, errorMessage)
 
       {currentUser && (
         <div className="mt-4">
-          <Typography>Nombre: {currentUser.name}</Typography>
+          <Typography className="text-white">Nombre: {currentUser.name}</Typography>
           {errorMessage && (
             <div>
               <Link href="/">
                 <Button
                   variant="contained"
                   onClick={handlePrev}
-                  className="mt-2"
+                  className="mt-2 ms-6"
                 >
                   Inicio
                 </Button>
@@ -136,7 +136,7 @@ console.log(currentUser, loading, errorMessage)
               <Button
               variant="contained"
               onClick={handleConfirm}
-              className="mt-2"
+              className="mt-2 ms-6"
               disabled={loading} // Deshabilitar el botón si está en proceso de carga
               >
               Confirmar

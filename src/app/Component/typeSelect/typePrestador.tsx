@@ -107,9 +107,9 @@ const TypePrestador = () => {
   }
 
   return (
-    <div className="w-80 max-w-screen-lg mx-auto p-8 bg-white rounded-lg shadow-md">
-      <Typography variant="h6">Tipo de usuario: Prestador</Typography>
-      <label>Ingrese Nº de Matrícula:</label>
+    <div className=" max-w-screen-lg flex-col flex mx-auto p-8 bg-gray-700 rounded  shadow-md  px-4">
+      <Typography className="text-white" variant="h6">Tipo de usuario: Prestador</Typography>
+      <label className="text-white">Ingrese Nº de Matrícula:</label>
       <Input
         type="text"
         value={matricula}
@@ -119,14 +119,14 @@ const TypePrestador = () => {
 
       {currentUser && (
         <div className="mt-4">
-          <Typography>Nombre: {currentUser.name}</Typography>
-          <Typography>Especialidad: {currentUser.especialidad}</Typography>
+          <Typography className="text-white">Nombre: {currentUser.name}</Typography>
+          <Typography className="text-white">Especialidad: {currentUser.especialidad}</Typography>
           <Link href="/">
           {errorMessage === "400" && (
             <Button
               variant="contained"
               onClick={handlePrev}
-              className="mt-2"
+              className="mt-2 ms-6"
               
             >
               Inicio
@@ -136,7 +136,7 @@ const TypePrestador = () => {
             <Button
               variant="contained"
               onClick={handleConfirm}
-              className="mt-2"
+              className="mt-2 ms-6"
               disabled={loading}
             >
               Confirmar
