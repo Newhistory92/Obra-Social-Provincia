@@ -9,9 +9,10 @@ export async function POST(request) {
         const user = await currentUser();
         const body = await request.json();
         const dni = body.dni;
+        const dependencia = body.dependencia;
         const email = user.emailAddresses[0].emailAddress;
         const userId = user.id;
-        const dataTime =  new Date().toISOString();
+    
 
         // Verificar si el usuario ya está autenticado en alguna tabla
         const isAuthenticated = await checkUserAuthentication(userId, 'afiliado');
@@ -48,95 +49,63 @@ export async function POST(request) {
         const newAfiliado = await prisma.afiliado.create({
             data: {
                 id: userId,
-                name: `${firstName} ${lastName}`,
+                name: `${firstName}`,
+                apellido: `${lastName}`,
                 email: emailAddresses[0].emailAddress,
                 imageUrl: imageUrl,
                 phone: phoneNumbers[0].phoneNumber,
                 password: passwordValue,
                 dni: dni,
-                dataTime: dataTime,
-                role: "user",
-                addressId:null
+                dependencia:dependencia,
+                address:null,
+                coordinatesLat:null,
+                coordinatesLon:null,
             }
         });
         
         console.log("Perfil de usuario creado correctamente:", newAfiliado);
 
-        return NextResponse.json({ status: 200, message: "Perfil del Afiliado fue creado con éxito." });
+        return NextResponse.json({ status: 200, message: "Perfil del Afiliado fue creado con éxito.", newAfiliado });
     } catch (error) {
         console.error("Error al crear el perfil del Afiliado:", error);
         return NextResponse.json({ status: 500, message: `Error al crear el perfil del Afiliado: ${error.message}` });
     }
 }
 
-
-
 export async function GET(request) {
-        try {
-            const user = await currentUser();
-            if (!user) {
-                return NextResponse.json({ status: 401, message: "Afiliado no autenticado. Redirigiendo al inicio de sesión." });
-            }
-            
-            // Obtener el ID del usuario autenticado
-            const userId = user.id;
-    
-            // Verificar si el ID del usuario está en la base de datos
-            const isAuthenticatedAndInDatabase = await checkUserAuthentication(userId, 'afiliado');
-            if (isAuthenticatedAndInDatabase.status === 200) {
-                return NextResponse.json({ status: 200, message: isAuthenticatedAndInDatabase.message });
-            } else {
-                return NextResponse.json ({ status: 402, message: "Afiliado no encontrado en la base de datos." });
-            }
-        } catch (error) {
-            console.error("Error al verificar la autenticación del usuario:", error);
-            return NextResponse.json({ status: 500, message: `Error al verificar la autenticación del usuario: ${error.message}` });
+    try {
+        const user = await currentUser();
+        if (!user) {
+            return NextResponse.json({ status: 407, message: "Afiliado no autenticado. Redirigiendo al inicio de sesión." });
         }
+        
+        // Obtener el ID del usuario autenticado
+        const userId = user.id;
+
+        // Verificar si el ID del usuario está en la base de datos
+        const isAuthenticatedAndInDatabase = await checkUserAuthentication(userId, 'afiliado');
+        if (isAuthenticatedAndInDatabase.status === 200) {
+            // Obtener toda la información del usuario desde la base de datos
+            const users = await prisma.afiliado.findMany();
+
+            // Verificar si se encontró la información del usuario
+            if (!users) {
+                return NextResponse.json({ status: 404, message: "Usuario no encontrado en la base de datos." });
+            }
+
+            // Devolver toda la información del usuario
+            return NextResponse.json({ status: 200, users });
+        } else {
+            return NextResponse.json ({ status: 402, message: isAuthenticatedAndInDatabase.message });
+        }
+    } catch (error) {
+        console.error("Error al verificar la autenticación del usuario:", error);
+        return NextResponse.json({ status: 500, message: `Error al verificar la autenticación del usuario: ${error.message}` });
     }
+}
 
     
 
 
-
-
-
-// export async function GET(request) {
-//     try {
-//         const user = await currentUser();
-//         if (!user) {
-//             return NextResponse.json({ status: 401, message: "Afiliado no autenticado. Redirigiendo al inicio de sesión." });
-//         }
-        
-//         // Obtener el ID del usuario autenticado
-//         const userId = user.id;
-
-//         // Verificar si el ID del usuario está en la base de datos
-//         const isAuthenticatedAndInDatabase = await checkUserAuthentication(userId);
-//         if (!isAuthenticatedAndInDatabase) {
-//             return NextResponse.json ({ status: 402, message: "Afiliado no encontrado en la base de datos." });
-//         }
-
-//         return NextResponse.json({ status: 200,message: "El Afiliado se confirma correctamente." });
-//     } catch (error) {
-//         console.error("Error al verificar la autenticación del usuario:", error);
-//         return NextResponse.json({ status: 500, message: `Error al verificar la autenticación del usuario: ${error.message}` });
-//     }
-// }
-
-// async function checkUserAuthentication(userId) {
-//     try {
-//         // Verificar si el ID del usuario está en la base de datos
-//         const existingUserWithId = await prisma.afiliado.findFirst({
-//             where: {
-//                 id: userId
-//             }
-//         });
-
-//         return !!existingUserWithId; // Convertir a booleano
-//     } catch (error) {
-//         console.error("Error al verificar la autenticación del Afiliado:", error);
-//         return false;
-//     }
-// }
 
 

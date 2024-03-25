@@ -31,9 +31,7 @@ export interface UserInfo {
   descripcion:string
 }
 
-export interface UserWithId extends UserInfo {
-  id: string;
-}
+
 
 const initialState: UserState = {
   currentUser: null,

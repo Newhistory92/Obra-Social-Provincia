@@ -10,10 +10,13 @@ import { setCurrentUser, setLoading, setErrorMessage } from "../../reducers/user
 const TypePrestador = () => {
   const [matricula, setMatricula] = useState('');
   const dispatch = useAppDispatch();
-
   const { currentUser, loading, errorMessage } = useAppSelector((state) => state.user);
+  console.log(currentUser, loading, errorMessage)
+ 
+ 
   useEffect(() => {
-    dispatch(setLoading(true)); // Establecer carga en true al montar el componente
+    dispatch(setLoading(true)); 
+    
     const verifyUser = async () => {
       try {
         const response = await fetch('/api/handlerprestador', {

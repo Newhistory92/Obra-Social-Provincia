@@ -15,6 +15,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
 import PlaceIcon from '@mui/icons-material/Place';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import DialogSelect from '../DialogSelect';
 import MapComponent from "../MapComponent"
 import  {getFormattedAddress} from "../../api/Maps/MapApi"
@@ -41,7 +43,7 @@ interface UserCardProps {
   numeroOperador?: string;
   address?: string;
   checkedphone:boolean,
-  prestador:string
+
 }
 
 
@@ -237,7 +239,7 @@ const handleDescriptionSave = (newDescription: string) => {
               </div>
               <Typography><PlaceIcon/>Address: {from} {ciudadOrigen}{paisOrigen}</Typography>
               <div className="mt-5">
-                <button className= "rounded  text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium  text-sm px-2 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2 mb-2"
+                <button className = "rounded  text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium  text-sm px-2 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2 mb-2"
                   onClick={fromHandler}> < EditLocationAltIcon className="mr-1"/>Seleccionar dirección
                 </button>
                 {fromModalOpen && (
@@ -255,10 +257,20 @@ const handleDescriptionSave = (newDescription: string) => {
                   <Typography variant="h3" color="blue-gray" className="mb-2">
                     Información de Usuario
                   </Typography>
-                  <Typography>Dependencia: {dependencia}</Typography>
-                  <Typography>DNI: {dni}</Typography>
-                  <Typography>Phone: {phone}</Typography>
-                  <Typography>Address: {address}</Typography>
+                  <Typography><LocationCityIcon className="mr-1"/>Dependencia: {dependencia}</Typography>
+                  <Typography><RecentActorsIcon className="mr-1"/>DNI: {dni}</Typography>
+                  <Typography><AddIcCallIcon className="mr-1"/>Phone: {phone}</Typography>
+                  <Typography><PlaceIcon/>Address: {from} {ciudadOrigen}{paisOrigen}</Typography>
+                  <div className="mt-5">
+                <button className = "rounded  text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium  text-sm px-2 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2 mb-2"
+                  onClick={fromHandler}> < EditLocationAltIcon className="mr-1"/>Seleccionar dirección
+                </button>
+                {fromModalOpen && (
+                  <div>
+                    <MapComponent closeMapModal={closeMapModal} closeModal={closeModal} />
+                  </div>
+                )}
+              </div>
                 </>
               )}
               {role === "employee" && (

@@ -10,17 +10,25 @@ import Image from 'next/image';
 import { useUser } from '@clerk/nextjs';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
+import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
+import { useAppSelector } from "../../../hooks/StoreHook";
 
 interface Props {
   onProfileClick: () => void;
   onSettingClick: () => void;
+  onFamilyGroupClick: () => void;
+  onOrdenesClick: () => void; // Agregar función de click para Ordenes
 }
 
-const NavbarVertical: React.FC<Props> = ({ onProfileClick, onSettingClick }) => {
+const NavbarVertical: React.FC<Props> = ({ onProfileClick, onSettingClick, onFamilyGroupClick, onOrdenesClick }) => {
   const { user } = useUser();
   const [open, setOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-
+  const [familyGroupOpen, setFamilyGroupOpen] = useState(false);
+  const [odenes, setordenes] = useState(false);
+  const currentUser = useAppSelector(state => state.user.currentUser);
+  const userRole = currentUser?.role;
   const handleClick = () => {
     setOpen(!open);
   };
@@ -41,6 +49,25 @@ const NavbarVertical: React.FC<Props> = ({ onProfileClick, onSettingClick }) => 
     } else {
       onSettingClick();
     }
+    setOpen(false);
+  };
+
+  const handleFamilyGroupClick = () => {
+    if (familyGroupOpen) {
+      setFamilyGroupOpen(false);
+    } else {
+      onFamilyGroupClick();
+    }
+    setOpen(false);
+  };
+
+  const handleOrdenesClick = () => {
+    if(odenes){
+
+      setordenes(false); // Llamar a la función de click para Ordenes
+    }else {
+      onOrdenesClick ();
+      }
     setOpen(false);
   };
 
@@ -72,8 +99,22 @@ const NavbarVertical: React.FC<Props> = ({ onProfileClick, onSettingClick }) => 
                 <SettingsIcon/>
                 <ListItemText className="nav-link" primary="Configuración" />
               </ListItemButton>
+
+              {userRole === 'USER' && ( // Mostrar el botón del grupo familiar solo si el usuario es USER
+                <ListItemButton onClick={handleFamilyGroupClick} sx={{ pl: 4 }}>
+                  <Diversity3Icon/>
+                  <ListItemText className="nav-link" primary="Grupo Familiar" />
+                </ListItemButton>
+              )}
             </List>
           </Collapse>
+          {/* Botón de Ordenes fuera de Datos Personales */}
+          {userRole === 'USER' && (
+            <ListItemButton onClick={handleOrdenesClick} sx={{ pl: 4 }}>
+              <ContentPasteGoIcon/>
+              <ListItemText className="nav-link" primary="Ordenes" />
+            </ListItemButton>
+          )}
         </div>
       </List>
     </div>
@@ -81,6 +122,8 @@ const NavbarVertical: React.FC<Props> = ({ onProfileClick, onSettingClick }) => 
 }
 
 export default NavbarVertical;
+
+
 
 
 

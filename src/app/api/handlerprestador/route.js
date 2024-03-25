@@ -44,7 +44,7 @@ export async function POST(request) {
         console.log("Usuario existente con matrícula:", existingUserWithMatricula);
 
         if (existingUserWithMatricula) {
-            return NextResponse.json({ status: 400, message: `El DNI N°: ${existingUserWithMatricula.matricula} ya está asociado a un Prestador` });
+            return NextResponse.json({ status: 400, message: `La Matricula N°: ${existingUserWithMatricula.matricula} ya está asociado a un Prestador` });
         }
 
         // Verificar si el usuario ya existe en la base de datos por su email

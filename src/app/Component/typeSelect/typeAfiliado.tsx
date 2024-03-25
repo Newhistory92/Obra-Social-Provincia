@@ -8,10 +8,10 @@ import {useAppSelector,useAppDispatch} from "../../hooks/StoreHook"
 import { setCurrentUser, setLoading, setErrorMessage } from "../../reducers/userSlice"
 
 const TypeAfiliado = () => {
+  const [dni, setDni] = useState('');
   const dispatch = useAppDispatch();
   const { currentUser, loading, errorMessage } = useAppSelector((state) => state.user); // Asegúrate de que 'user' sea el nombre correcto del slice
 console.log(currentUser, loading, errorMessage)
-  const [dni, setDni] = useState('');
 
   useEffect(() => {
     dispatch(setLoading(true)); // Establecer carga en true al montar el componente
@@ -30,7 +30,8 @@ console.log(currentUser, loading, errorMessage)
           if (data.status === 200) {
             // El usuario está en la tabla Afiliado, redirigir al dashboard de Afiliado
             dispatch(setCurrentUser(data.user)); // Establecer el usuario actual en el estado global
-            window.location.href = '/page/dashboard';
+             window.location.href = '/page/dashboard';
+            console.log('Estado global actualizado:', currentUser);
             console.log('redirige al /dashboard');
           } else if (data.status === 401) {
             // El usuario no está autenticado, redirigir al inicio de sesión
@@ -72,13 +73,14 @@ console.log(currentUser, loading, errorMessage)
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ dni: currentUser.dni }),
+        body: JSON.stringify({ dni:currentUser.dni, dependencia:currentUser.dependencia }),
       });
 
       const responseData = await response.json();
-      console.log(responseData);
+      console.log("respuesta del back",responseData)
 
       if (responseData.status === 200) {
+        dispatch(setCurrentUser(responseData.newAfiliado));
         window.location.href = '/page/dashboard';
         toast.success(responseData.message);
       } else if (responseData.status === 400) {
