@@ -85,7 +85,7 @@ const DefaultDashboardLayout: React.FC<Props> = ({ children }) => {
           {familyGroupActive && <FamilyGroup />}
           {ordenesActive && <Ordenes />} {/* Renderizar Ordenes si está activo */}
           {(userRole === 'USER') && <Prestadores />}
-          <Ordenes />
+       
         </div>
       </div>
     </div>

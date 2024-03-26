@@ -12,7 +12,7 @@ exports.id = "app/not-found";
 exports.ids = ["app/not-found"];
 exports.modules = {
 
-/***/ "./action-async-storage.external?9022":
+/***/ "./action-async-storage.external":
 /*!****************************************************************************!*\
   !*** external "next/dist/client/components/action-async-storage.external" ***!
   \****************************************************************************/
@@ -23,7 +23,7 @@ module.exports = require("next/dist/client/components/action-async-storage.exter
 
 /***/ }),
 
-/***/ "./request-async-storage.external?93d0":
+/***/ "./request-async-storage.external":
 /*!*****************************************************************************!*\
   !*** external "next/dist/client/components/request-async-storage.external" ***!
   \*****************************************************************************/
@@ -34,7 +34,7 @@ module.exports = require("next/dist/client/components/request-async-storage.exte
 
 /***/ }),
 
-/***/ "./static-generation-async-storage.external?d822":
+/***/ "./static-generation-async-storage.external":
 /*!***************************************************************************************!*\
   !*** external "next/dist/client/components/static-generation-async-storage.external" ***!
   \***************************************************************************************/
@@ -45,7 +45,7 @@ module.exports = require("next/dist/client/components/static-generation-async-st
 
 /***/ }),
 
-/***/ "next/dist/compiled/@vercel/og/index.node.js?1873":
+/***/ "next/dist/compiled/@vercel/og/index.node.js":
 /*!**************************************************************!*\
   !*** external "next/dist/compiled/@vercel/og/index.node.js" ***!
   \**************************************************************/
@@ -67,7 +67,7 @@ module.exports = require("next/dist/compiled/next-server/app-page-experimental.r
 
 /***/ }),
 
-/***/ "./action-async-storage.external?8652":
+/***/ "../../client/components/action-async-storage.external":
 /*!**********************************************************************************!*\
   !*** external "next/dist\\client\\components\\action-async-storage.external.js" ***!
   \**********************************************************************************/
@@ -78,7 +78,7 @@ module.exports = require("next/dist\\client\\components\\action-async-storage.ex
 
 /***/ }),
 
-/***/ "./request-async-storage.external?0211":
+/***/ "../../client/components/request-async-storage.external":
 /*!***********************************************************************************!*\
   !*** external "next/dist\\client\\components\\request-async-storage.external.js" ***!
   \***********************************************************************************/
@@ -89,7 +89,7 @@ module.exports = require("next/dist\\client\\components\\request-async-storage.e
 
 /***/ }),
 
-/***/ "./static-generation-async-storage.external?137c":
+/***/ "../../client/components/static-generation-async-storage.external":
 /*!*********************************************************************************************!*\
   !*** external "next/dist\\client\\components\\static-generation-async-storage.external.js" ***!
   \*********************************************************************************************/
@@ -442,7 +442,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@swc","vendor-chunks/node-fetch-native","vendor-chunks/@clerk","vendor-chunks/@peculiar","vendor-chunks/asn1js","vendor-chunks/@reduxjs","vendor-chunks/webcrypto-core","vendor-chunks/swr","vendor-chunks/redux-persist","vendor-chunks/react-redux","vendor-chunks/immer","vendor-chunks/redux","vendor-chunks/reselect","vendor-chunks/react-toastify","vendor-chunks/path-to-regexp","vendor-chunks/use-sync-external-store","vendor-chunks/pvtsutils","vendor-chunks/pvutils","vendor-chunks/tslib","vendor-chunks/cookie","vendor-chunks/deepmerge","vendor-chunks/no-case","vendor-chunks/map-obj","vendor-chunks/lower-case","vendor-chunks/snakecase-keys","vendor-chunks/redux-thunk","vendor-chunks/snake-case","vendor-chunks/dot-case"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fnot-found&page=%2Fnot-found&appPaths=&pagePath=..%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fcomponents%2Fnot-found-error.js&appDir=C%3A%5CUsers%5CEmiliano%5CDocuments%5CObra-Social-Provincia%5Csrc%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5CEmiliano%5CDocuments%5CObra-Social-Provincia&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/node-fetch-native","vendor-chunks/@clerk","vendor-chunks/@peculiar","vendor-chunks/asn1js","vendor-chunks/@reduxjs","vendor-chunks/webcrypto-core","vendor-chunks/swr","vendor-chunks/redux-persist","vendor-chunks/react-redux","vendor-chunks/immer","vendor-chunks/redux","vendor-chunks/reselect","vendor-chunks/react-toastify","vendor-chunks/path-to-regexp","vendor-chunks/use-sync-external-store","vendor-chunks/pvtsutils","vendor-chunks/pvutils","vendor-chunks/tslib","vendor-chunks/cookie","vendor-chunks/deepmerge","vendor-chunks/@swc","vendor-chunks/no-case","vendor-chunks/map-obj","vendor-chunks/lower-case","vendor-chunks/snakecase-keys","vendor-chunks/redux-thunk","vendor-chunks/snake-case","vendor-chunks/dot-case"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fnot-found&page=%2Fnot-found&appPaths=&pagePath=..%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fcomponents%2Fnot-found-error.js&appDir=C%3A%5CUsers%5CEmiliano%5CDocuments%5CObra-Social-Provincia%5Csrc%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5CEmiliano%5CDocuments%5CObra-Social-Provincia&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
 module.exports = __webpack_exports__;
 
 })();

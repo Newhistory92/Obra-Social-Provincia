@@ -1,73 +1,52 @@
 [
-    {
-      "numeroOrden": 123456,
-      "fechaUso": "2023-07-15",
-      "nombreMedico": "Juan",
-      "apellidoMedico": "Pérez",
-      "especialidad": "Cardiología"
-    },
-    {
-      "numeroOrden": 789012345,
-      "fechaUso": "2023-08-22",
-      "nombreMedico": "María",
-      "apellidoMedico": "González",
-      "especialidad": "Pediatría"
-    },
-    {
-      "numeroOrden": 45678901,
-      "fechaUso": "2023-09-10",
-      "nombreMedico": "Carlos",
-      "apellidoMedico": "Martínez",
-      "especialidad": "Dermatología"
-    },
-    {
-      "numeroOrden": 2345678901,
-      "fechaUso": "2023-10-05",
-      "nombreMedico": "Laura",
-      "apellidoMedico": "López",
-      "especialidad": "Ginecología"
-    },
-    {
-      "numeroOrden": 8901234567,
-      "fechaUso": "2023-11-18",
-      "nombreMedico": "Pedro",
-      "apellidoMedico": "Rodríguez",
-      "especialidad": "Oftalmología"
-    },
-    {
-      "numeroOrden": 6789012345,
-      "fechaUso": "2023-12-03",
-      "nombreMedico": "Ana",
-      "apellidoMedico": "Sánchez",
-      "especialidad": "Neurología"
-    },
-    {
-      "numeroOrden": 3456789012,
-      "fechaUso": "2024-01-12",
-      "nombreMedico": "David",
-      "apellidoMedico": "Fernández",
-      "especialidad": "Ortopedia"
-    },
-    {
-      "numeroOrden": 1234567890,
-      "fechaUso": "2024-02-08",
-      "nombreMedico": "Sofía",
-      "apellidoMedico": "Hernández",
-      "especialidad": "Psiquiatría"
-    },
-    {
-      "numeroOrden": 567890123,
-      "fechaUso": "2024-03-01",
-      "nombreMedico": "Elena",
-      "apellidoMedico": "Gómez",
-      "especialidad": "Endocrinología"
-    },
-    {
-      "numeroOrden": 9012345678,
-      "fechaUso": "2024-03-20",
-      "nombreMedico": "Javier",
-      "apellidoMedico": "Alonso",
-      "especialidad": "Urología"
-    }
-  ]
-  
+  {
+    "numeroOrden": 123456,
+    "fechaUso": "15/07/2023",
+    "nombreMedico": "Juan",
+    "apellidoMedico": "Pérez",
+    "especialidad": "Cardiología",
+    "nombreAfiliado": "María García",
+    "numeroPrestador": 2345,
+    "tipoBono": "Consulta"
+  },
+  {
+    "numeroOrden": 789012345,
+    "fechaUso": "22/08/2023",
+    "nombreMedico": "María",
+    "apellidoMedico": "González",
+    "especialidad": "Pediatría",
+    "nombreAfiliado": "Pedro Martínez",
+    "numeroPrestador": 5678,
+    "tipoBono": "Farmacia"
+  },
+  {
+    "numeroOrden": 45678901,
+    "fechaUso": "10/09/2023",
+    "nombreMedico": "Carlos",
+    "apellidoMedico": "Martínez",
+    "especialidad": "Dermatología",
+    "nombreAfiliado": "Laura Rodríguez",
+    "numeroPrestador": 1234,
+    "tipoBono": "Consulta"
+  },
+  {
+    "numeroOrden": 2345678901,
+    "fechaUso": "05/10/2023",
+    "nombreMedico": "Laura",
+    "apellidoMedico": "López",
+    "especialidad": "Ginecología",
+    "nombreAfiliado": "Ana Sánchez",
+    "numeroPrestador": 7890,
+    "tipoBono": "Farmacia"
+  },
+  {
+    "numeroOrden": 8901234567,
+    "fechaUso": "18/11/2023",
+    "nombreMedico": "Pedro",
+    "apellidoMedico": "Rodríguez",
+    "especialidad": "Oftalmología",
+    "nombreAfiliado": "Diego Pérez",
+    "numeroPrestador": 4567,
+    "tipoBono": "Consulta"
+  }
+]
