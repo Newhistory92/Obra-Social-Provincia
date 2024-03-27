@@ -28,7 +28,7 @@ export function CarouselDefault({ ordenes }: Props) {
     });
   
     return (
-      <Carousel className="rounded-xl duration-700" style={{ width: '650px', height: '450px' }}>
+      <Carousel className="rounded-xl duration-700" style={{ width: '1000px', height: '600px' }}>
         {ordenesOrdenadas.map((orden, index) => (
           <div key={index} className=" grid h-full inset-0  place-items-center bg-black/75">
             <Orden

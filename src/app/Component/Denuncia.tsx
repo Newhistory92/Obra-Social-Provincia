@@ -8,7 +8,11 @@ import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import { styled } from '@mui/material/styles';
-
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
+import ReportGmailerrorredRoundedIcon from '@mui/icons-material/ReportGmailerrorredRounded';
+import SendRoundedIcon from '@mui/icons-material/SendRounded';
 interface DenunciaProps {
     closeModal: () => void;
 }
@@ -16,15 +20,64 @@ interface DenunciaProps {
 const Denuncia: React.FC<DenunciaProps> = ({ closeModal }) => {
     const [denuncia, setDenuncia] = useState('');
     const [ratingValue, setRatingValue] = useState<number | null>(3); // Valor inicial para el Rating
+    const [isSuccessToastVisible, setIsSuccessToastVisible] = useState(false);
+    const [isWarningToastVisible, setIsWarningToastVisible] = useState(false);
+    const [isErrorToastVisible, setIsErrorToastVisible] = useState(false);
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // Lógica para enviar la denuncia al backend
-        console.log('Denuncia enviada:', denuncia);
-        console.log('Valoración:', ratingValue); // Guardar valoración en el estado local
-        closeModal(); // Cerramos el modal después de enviar la denuncia
+
+        if (denuncia.trim() === '') {
+            setIsSuccessToastVisible(false);
+            setIsWarningToastVisible(true);
+            setIsErrorToastVisible(false);
+            setTimeout(() => {
+                setIsWarningToastVisible(false);
+            }, 1000);
+            return;
+        }
+
+        // Simulación de la operación PUT
+        try {
+            const response = await fetch('api/handlerafiliado', {
+                method: 'PUT',
+                body: JSON.stringify({ denuncia }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                setIsSuccessToastVisible(true);
+                setIsWarningToastVisible(false);
+                setIsErrorToastVisible(false);
+                setTimeout(() => {
+                    setIsSuccessToastVisible(false);
+                }, 1000);
+            } else {
+                setIsSuccessToastVisible(false);
+                setIsWarningToastVisible(false);
+                setIsErrorToastVisible(true);
+                setTimeout(() => {
+                    setIsErrorToastVisible(false);
+                }, 1000);
+            }
+        } catch (error) {
+            console.error('Error al realizar la operación PUT:', error);
+            setIsSuccessToastVisible(false);
+            setIsWarningToastVisible(false);
+            setIsErrorToastVisible(true);
+            setTimeout(() => {
+                setIsErrorToastVisible(false);
+            }, 1000);
+        }
     };
 
+
+
+
+
+    
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setDenuncia(event.target.value);
     };
@@ -69,6 +122,7 @@ const Denuncia: React.FC<DenunciaProps> = ({ closeModal }) => {
     }
 
     return (
+        
         <div>
             {/* Modal */}
             <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
@@ -79,8 +133,7 @@ const Denuncia: React.FC<DenunciaProps> = ({ closeModal }) => {
                         <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                             <blockquote>
                                 <p className="text-2xl font-semibold text-gray-900 dark:text-white">Cuentanos tu Experiencia con el Prestador</p>
-                            </blockquote>
-                                <div className="mb-4">
+                                <div >
                                     <label htmlFor="rating" className="block text-sm font-medium text-gray-700 mb-1">Valoración</label>
                                     <StyledRating
                                         name="rating"
@@ -91,26 +144,41 @@ const Denuncia: React.FC<DenunciaProps> = ({ closeModal }) => {
                                         onChange={(event, newValue) => {
                                             setRatingValue(newValue);
                                         }}
-                                    />
+                                        />
                                 </div>
+                            </blockquote>
                         </div>
                         {/* Cuerpo del modal */}
                         <div className="relative p-6 flex-auto">
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-4">
-                                    <label htmlFor="denuncia" className="block text-sm font-medium text-gray-700">
-                                        Cuentanos un poco
-                                    </label>
-                                    <textarea
-                                        id="denuncia"
-                                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                        rows={3}
-                                        placeholder="Escribe tu experiencia aquí..."
-                                        value={denuncia}
-                                        onChange={handleChange}
-                                        required
-                                    ></textarea>
-                                {/* RadioGroup para la valoración */}
+                                <form onSubmit={handleSubmit}>
+            <div className="w-full mb-4 border border-gray-200 rounded bg-gray-50 dark:bg-gray-600 dark:border-gray-600">
+                <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-800">
+                    <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x sm:rtl:divide-x-reverse dark:divide-gray-600">
+                        <div className="flex items-center space-x-1 rtl:space-x-reverse sm:pe-4">
+                            <button type="button" className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                            <AttachFileIcon fontSize="small"/>
+                                <span className="sr-only">Adjuntar archivo</span>
+                            </button>
+                            <button type="button" className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <InsertPhotoIcon fontSize="small"/>
+                                <span className="sr-only">Cargar imagen</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                      <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
+                            <textarea id="denuncia" 
+                            rows={8}  
+                            value={denuncia}
+                            onChange={handleChange}
+                            className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" 
+                            placeholder="Escribe tu Experiencia..."
+                            required />
+                                  </div>
+                                </div>
+                                </form>
                                 </div>
                                 <div className="flex justify-end">
                                     <button
@@ -129,6 +197,34 @@ const Denuncia: React.FC<DenunciaProps> = ({ closeModal }) => {
                                     </button>
                                 </div>
                             </form>
+                              {/* Toasts */}
+            {isSuccessToastVisible && (
+                <div id="toast-simple" className="flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow-lg dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800" 
+                 role="alert">
+                    <SendRoundedIcon className="w-5 h-5 text-blue-600 dark:text-blue-500 rotate-45"/>
+                    <div className="ps-4 text-sm font-normal">Tu Experiencia fue Enviada</div>
+                </div>
+            )}
+            {isWarningToastVisible && (
+                <div id="toast-warning" className="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-lg dark:text-gray-400 dark:bg-gray-800" role="alert">
+                    <div className="inline-flex  items-center rounded justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100  dark:bg-orange-700 dark:text-orange-200">
+                    <ErrorOutlineRoundedIcon/>
+                        <span className="sr-only">Warning icon</span>
+                    </div>
+                    <div className="ms-3 text-sm font-normal">Debes Completar el Campo !</div>
+                </div>
+            )}
+            {isErrorToastVisible && (
+                <div id="toast-danger" className="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded shadow-lg dark:text-gray-400 dark:bg-gray-800" role="alert">
+                    <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+                       <ReportGmailerrorredRoundedIcon/>
+                        <span className="sr-only">Error icon</span>
+                    </div>
+                    <div className="ms-3 text-sm font-normal">Ocurrio un Error, Disculpa los Inconvenientes.</div>
+                </div>
+            )}
+        
+    
                         </div>
                     </div>
                 </div>
@@ -141,31 +237,3 @@ const Denuncia: React.FC<DenunciaProps> = ({ closeModal }) => {
 
 export default Denuncia;
 
-
-
-
-
-// try {
-//     // Realizar la solicitud PUT a la API con la información de la denuncia
-//     const response = await fetch('api/handlerafiliado', {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({ denuncia }),
-//     });
-
-//     if (response.ok) {
-//       // Realizar alguna acción si la solicitud es exitosa
-//       setSuccess(true);
-//     } else {
-//       // Manejar errores de la solicitud
-//       setError('Error al enviar la denuncia');
-//     }
-//   } catch (error) {
-//     // Manejar errores de red u otros errores
-//     setError('Error al enviar la denuncia: ' + error.message);
-//   } finally {
-//     setLoading(false);
-//   }
-// };
